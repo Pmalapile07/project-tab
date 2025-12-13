@@ -10,8 +10,9 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #222;
-    color: #fff;
+    background: white;
+    color: black;
+    border: 2px solid black;
     padding: 0 1rem;
     height: 60px;
     position: relative;
@@ -31,7 +32,7 @@ header {
     display: block;
     height: 4px;
     background: #fff;
-    border-radius: 2px;
+    border-radius: 0;
     transition: all 0.3s ease;
 }
 
@@ -57,10 +58,10 @@ header {
     --try-btn-width: 120px; /* adjust width here */
 }
 .try-btn {
-    background: #ff4081;
+    background: #000;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 0;
     cursor: pointer;
     height: 100%;
     padding: 0 1rem;
@@ -69,7 +70,8 @@ header {
     transition: background 0.3s ease;
 }
 .try-btn:hover {
-    background: #e73370;
+    background: #fff;
+    color: #000;
 }
 </style>
 </head>
@@ -83,7 +85,7 @@ header {
             <span></span>
             <span></span>
         </div>
-        <div class="logo">Logo</div>
+        <div class="logo">gigtabi</div>
     </div>
 
     <!-- Try Me Button Right -->

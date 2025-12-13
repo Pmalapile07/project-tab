@@ -5,12 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Header Example</title>
 <style>
-/* --- Base Zoom/Scale Effect (70% zoom out) --- */
+/* --- BlackMango Font --- */
+@font-face {
+    font-family: 'BlackMango';
+    src: url('./fonts/BlackMangoRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* --- Base Zoom Effect --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
 body {
-    transform: scale(0.7);
     transform-origin: top center;
-    width: 142.857%; /* 100/0.7 = ~142.857% */
     min-height: 100vh;
+}
+
+/* Desktop/Larger Screens: 70% zoom */
+@media (min-width: 769px) {
+    body {
+        transform: scale(0.7);
+        width: 142.857%; /* 100/0.7 */
+    }
+}
+
+/* Mobile: No zoom */
+@media (max-width: 768px) {
+    body {
+        transform: scale(1);
+        width: 100%;
+    }
 }
 
 /* --- Header Styles --- */
@@ -20,12 +49,25 @@ header {
     justify-content: space-between;
     background: white;
     color: black;
-    border-bottom: 2px solid black; /* Only bottom border */
+    border-bottom: 2px solid black;
     padding: 0 1rem;
     height: 60px;
-    position: relative;
     width: 100%;
     box-sizing: border-box;
+    position: relative;
+}
+
+/* Remove any left/right margin/padding from parent elements */
+header::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100vw;
+    height: 2px;
+    background: black;
+    transform: translateX(-50%);
+    left: 50%;
 }
 
 /* --- Hamburger Menu (Black) --- */
@@ -37,12 +79,13 @@ header {
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    z-index: 2;
 }
 
 .hamburger span {
     display: block;
     height: 3px;
-    background: #000; /* Changed to black */
+    background: #000;
     border-radius: 2px;
     transition: all 0.3s ease;
     width: 100%;
@@ -50,21 +93,41 @@ header {
 
 .hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(6px, 6px);
-    background: #000; /* Black when active */
 }
 .hamburger.active span:nth-child(2) {
     opacity: 0;
 }
 .hamburger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(6px, -6px);
-    background: #000; /* Black when active */
 }
 
 /* --- Logo --- */
 .logo {
     margin-left: 1rem;
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1.8rem;
+    font-weight: normal;
+    font-family: 'BlackMango', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+/* --- Navigation Links (Sign In & Contact) --- */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-right: 1rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover {
+    opacity: 0.7;
 }
 
 /* --- Try Me Button --- */
@@ -74,13 +137,15 @@ header {
     border: 1px solid black;
     border-radius: 0;
     cursor: pointer;
-    height: 36px;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
     font-size: 1rem;
-    width: 120px;
+    height: 60px; /* Same height as header */
+    margin: 0;
     transition: background 0.3s ease, color 0.3s ease;
     white-space: nowrap;
+    box-sizing: border-box;
 }
+
 .try-btn:hover {
     background: #fff;
     color: #000;
@@ -88,69 +153,113 @@ header {
 
 /* --- Mobile Compatibility --- */
 @media (max-width: 768px) {
-    body {
-        transform: scale(1); /* Reset zoom on mobile */
+    header {
+        height: 56px;
+        padding: 0;
         width: 100%;
-        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
     }
     
-    header {
-        padding: 0 0.75rem;
-        height: 56px;
+    /* Mobile zoom effect */
+    body {
+        transform: scale(1);
+        width: 100%;
+    }
+    
+    /* Full width border bottom */
+    header::before {
+        width: 100vw;
+        transform: translateX(-50%);
+        left: 50%;
+    }
+    
+    .logo-container {
+        display: flex;
+        align-items: center;
+        padding-left: 1rem;
+        flex: 1;
     }
     
     .logo {
-        margin-left: 0.75rem;
-        font-size: 1.3rem;
+        margin-left: 0.5rem;
+        font-size: 1.5rem;
     }
     
     .hamburger {
         width: 26px;
         height: 18px;
+        margin-left: 1rem;
+    }
+    
+    /* Hide nav links on mobile */
+    .nav-links {
+        display: none;
     }
     
     .try-btn {
+        height: 56px; /* Same as mobile header height */
         width: 100px;
-        height: 34px;
         padding: 0 0.75rem;
         font-size: 0.9rem;
+        margin: 0;
+        border-left: 2px solid black;
+        border-radius: 0;
     }
 }
 
 /* --- Small Mobile Devices --- */
 @media (max-width: 480px) {
     header {
-        padding: 0 0.5rem;
         height: 52px;
     }
     
     .logo {
-        margin-left: 0.5rem;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
+        margin-left: 0.25rem;
     }
     
     .hamburger {
         width: 24px;
         height: 16px;
+        margin-left: 0.75rem;
     }
     
     .hamburger span {
         height: 2.5px;
     }
     
-    .hamburger.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
-    
-    .hamburger.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -5px);
-    }
-    
     .try-btn {
+        height: 52px;
         width: 90px;
-        height: 32px;
         padding: 0 0.5rem;
         font-size: 0.85rem;
+    }
+}
+
+/* --- Desktop/Larger Screens --- */
+@media (min-width: 769px) {
+    .nav-links {
+        display: flex; /* Show on desktop */
+    }
+    
+    .hamburger {
+        display: none; /* Hide hamburger on desktop */
+    }
+    
+    header {
+        padding: 0 2rem;
+    }
+    
+    .logo {
+        margin-left: 0;
+    }
+    
+    /* Left section: logo + nav links */
+    .left-section {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
     }
 }
 </style>
@@ -158,17 +267,23 @@ header {
 <body>
 
 <header>
-    <!-- Hamburger + Logo Left -->
-    <div style="display: flex; align-items: center;">
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="logo">gigtabi</div>
+    <!-- Hamburger (Mobile Only) -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
 
-    <!-- Try Me Button Right -->
+    <!-- Left Section: Logo + Nav Links (Desktop) -->
+    <div class="left-section">
+        <div class="logo">gigtabi</div>
+        <div class="nav-links">
+            <a href="#">Sign In</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <!-- Try Me Button -->
     <button class="try-btn">Try me</button>
 </header>
 
@@ -177,12 +292,28 @@ header {
 const hamburger = document.getElementById('hamburger');
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
+    
+    // You can add menu functionality here
+    // For example, toggle a mobile navigation menu
 });
 
-// Optional: Close menu when clicking outside on mobile
-document.addEventListener('click', (event) => {
-    if (!event.target.closest('.hamburger') && hamburger.classList.contains('active')) {
-        hamburger.classList.remove('active');
+// Optional: Adjust body width for desktop zoom
+function adjustBodyWidth() {
+    if (window.innerWidth >= 769) {
+        document.body.style.width = '142.857%';
+    } else {
+        document.body.style.width = '100%';
+    }
+}
+
+// Adjust on load and resize
+window.addEventListener('load', adjustBodyWidth);
+window.addEventListener('resize', adjustBodyWidth);
+
+// Prevent horizontal scroll
+window.addEventListener('scroll', function() {
+    if (window.innerWidth >= 769) {
+        window.scrollTo(0, window.scrollY);
     }
 });
 </script>

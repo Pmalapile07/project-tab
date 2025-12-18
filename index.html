@@ -22,15 +22,47 @@
             min-height: 100vh;
         }
 
+        /* ---------------- DARK MODE VARIABLES ---------------- */
+        :root {
+            --bg-color: #f8f9fa;
+            --header-bg: rgba(255, 254, 248, 0.95);
+            --text-color: #485240;
+            --secondary-text: #6b7a5c;
+            --button-bg: #485240;
+            --button-text: #f8f9fa;
+            --border-color: rgba(72, 82, 64, 0.1);
+            --shadow-color: rgba(72, 82, 64, 0.05);
+            --hover-bg: rgba(72, 82, 64, 0.05);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --header-bg: rgba(26, 26, 26, 0.95);
+            --text-color: #f0f0f0;
+            --secondary-text: #b0b0b0;
+            --button-bg: #f0f0f0;
+            --button-text: #1a1a1a;
+            --border-color: rgba(240, 240, 240, 0.1);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --hover-bg: rgba(240, 240, 240, 0.1);
+        }
+
+        /* Apply theme variables */
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
         /* ---------------- GLASSMORPHISM HEADER (ENHANCED) ---------------- */
         .glass-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(255, 254, 248, 0.95);
+            background: var(--header-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            color: #485240;
+            color: var(--text-color);
             height: 80px;
             padding: 0 28px;
             width: 100%;
@@ -38,7 +70,8 @@
             top: 0;
             left: 0;
             z-index: 1000;
-            box-shadow: 0 4px 30px rgba(72, 82, 64, 0.05);
+            box-shadow: 0 4px 30px var(--shadow-color);
+            transition: all 0.3s ease;
         }
 
         /* Enhanced glass effect with gradient */
@@ -57,13 +90,65 @@
             border-radius: 0;
         }
 
+        [data-theme="dark"] .glass-header::before {
+            background: linear-gradient(135deg, 
+                rgba(50, 50, 50, 0.4) 0%, 
+                rgba(30, 30, 30, 0.2) 50%, 
+                rgba(240, 240, 240, 0.05) 100%);
+        }
+
         /* ---------------- LOGO - "gigtabi" with Unbounded Font ---------------- */
         .logo {
             font-family: 'Unbounded', sans-serif;
-            font-size: 2.7rem;
+            font-size: 3.0rem; /* Increased by 10% from 2.7rem */
             font-weight: 900;
             letter-spacing: -0.5px;
-            color: #485240;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        /* ---------------- THEME TOGGLE ---------------- */
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.4rem;
+            color: var(--text-color);
+            padding: 8px;
+            margin-right: 15px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--hover-bg);
+            transform: scale(1.1);
+        }
+
+        .theme-toggle i {
+            transition: transform 0.3s ease;
+        }
+
+        /* Hide/show icons based on theme */
+        .light-icon {
+            display: block;
+        }
+
+        .dark-icon {
+            display: none;
+        }
+
+        [data-theme="dark"] .light-icon {
+            display: none;
+        }
+
+        [data-theme="dark"] .dark-icon {
+            display: block;
         }
 
         /* ---------------- DESKTOP NAVIGATION ---------------- */
@@ -84,7 +169,7 @@
 
         .desktop-nav-links a {
             text-decoration: none;
-            color: #485240;
+            color: var(--text-color);
             font-family: 'Unbounded', sans-serif;
             font-size: 0.8rem;
             font-weight: 200;
@@ -94,13 +179,13 @@
         }
 
         .desktop-nav-links a:hover {
-            color: #6b7a5c;
+            color: var(--secondary-text);
         }
 
         .desktop-account-btn {
-            background: #485240;
-            color: #f8f9fa;
-            border: 1px solid rgba(72, 82, 64, 0.2);
+            background: var(--button-bg);
+            color: var(--button-text);
+            border: 1px solid var(--border-color);
             height: 38px;
             padding: 0 18px;
             font-family: 'Unbounded', sans-serif;
@@ -118,9 +203,9 @@
         }
 
         .desktop-account-btn:hover {
-            background: rgba(72, 82, 64, 0.8);
+            background: var(--secondary-text);
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(72, 82, 64, 0.15);
+            box-shadow: 0 4px 12px var(--shadow-color);
         }
 
         /* ---------------- HAMBURGER MENU (Right Side - THIN LINES) ---------------- */
@@ -145,7 +230,7 @@
         .hamburger span {
             height: 1.5px;
             width: 100%;
-            background: #485240;
+            background: var(--text-color);
             transition: 0.3s ease;
         }
 
@@ -168,11 +253,11 @@
             left: 0;
             width: 280px;
             height: 100vh;
-            background: rgba(255, 254, 248, 0.92);
+            background: var(--header-bg);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            border-right: 1px solid rgba(72, 82, 64, 0.1);
-            box-shadow: 10px 0 40px rgba(72, 82, 64, 0.08);
+            border-right: 1px solid var(--border-color);
+            box-shadow: 10px 0 40px var(--shadow-color);
             z-index: 999;
             padding: 100px 30px 30px 30px;
             transform: translateX(-100%);
@@ -198,6 +283,13 @@
             z-index: -1;
         }
 
+        [data-theme="dark"] .mobile-nav::before {
+            background: linear-gradient(135deg, 
+                rgba(50, 50, 50, 0.7) 0%, 
+                rgba(30, 30, 30, 0.4) 50%, 
+                rgba(240, 240, 240, 0.05) 100%);
+        }
+
         .mobile-nav-links {
             display: flex;
             flex-direction: column;
@@ -206,26 +298,26 @@
 
         .mobile-nav-links a {
             text-decoration: none;
-            color: #485240;
+            color: var(--text-color);
             font-family: 'Unbounded', sans-serif;
             font-size: 0.8rem;
             font-weight: 200;
             padding: 8px 0;
-            border-bottom: 1px solid rgba(72, 82, 64, 0.08);
+            border-bottom: 1px solid var(--border-color);
             transition: all 0.3s ease;
         }
 
         .mobile-nav-links a:hover {
-            color: #6b7a5c;
+            color: var(--secondary-text);
             padding-left: 5px;
         }
 
         .mobile-nav-btn {
             margin-top: 30px;
-            background: #485240;
+            background: var(--button-bg);
             backdrop-filter: blur(10px);
-            color: #f8f9fa;
-            border: 1px solid rgba(72, 82, 64, 0.2);
+            color: var(--button-text);
+            border: 1px solid var(--border-color);
             height: 48px;
             width: 100%;
             font-family: 'Unbounded', sans-serif;
@@ -237,9 +329,10 @@
         }
 
         .mobile-nav-btn:hover {
-            background: rgba(72, 82, 64, 0.2);
+            background: var(--hover-bg);
+            color: var(--text-color);
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(72, 82, 64, 0.1);
+            box-shadow: 0 4px 15px var(--shadow-color);
         }
 
         /* Overlay for when menu is open */
@@ -266,16 +359,16 @@
             align-items: center;
             justify-content: center;
             padding: 40px 20px;
-            background: #f8f9fa;
+            background: var(--bg-color);
             text-align: center;
             font-family: 'Unbounded', sans-serif !important;
             font-weight: 600;
+            transition: background-color 0.3s ease;
         }
 
         .hero-content {
             max-width: 900px;
             width: 100%;
-
         }
 
         /* Headline - Using Unbounded font like logo */
@@ -283,23 +376,25 @@
             font-family: 'Unbounded', sans-serif !important;
             font-size: 3.6rem;
             font-weight: 800;
-            color: #485240;
+            color: var(--text-color);
             line-height: 1.1;
             margin-bottom: 24px;
             letter-spacing: -1px;
+            transition: color 0.3s ease;
         }
 
         /* Subheadline */
         .hero-subheadline {
             font-family: 'Unbounded', sans-serif;
             font-size: 1.2rem;
-            color: #6b7a5c;
+            color: var(--secondary-text);
             line-height: 1.5;
             margin-bottom: 48px;
             font-weight: 300;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            transition: color 0.3s ease;
         }
 
         /* Button Container */
@@ -313,8 +408,8 @@
 
         /* Primary CTA Button */
         .hero-primary-cta {
-            background: #485240;
-            color: #f8f9fa !important;
+            background: var(--button-bg);
+            color: var(--button-text) !important;
             border: none;
             padding: 18px 42px;
             font-family: 'Unbounded', sans-serif;
@@ -329,16 +424,16 @@
         }
 
         .hero-primary-cta:hover {
-            background: #3a4533;
+            background: var(--secondary-text);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(72, 82, 64, 0.2);
+            box-shadow: 0 8px 20px var(--shadow-color);
         }
 
         /* Secondary CTA Button */
         .hero-secondary-cta {
             background: transparent;
-            color: #485240;
-            border: 2px solid #485240;
+            color: var(--text-color);
+            border: 2px solid var(--text-color);
             padding: 18px 42px;
             font-family: 'Unbounded', sans-serif;
             font-size: 1.1rem;
@@ -352,9 +447,9 @@
         }
 
         .hero-secondary-cta:hover {
-            background: rgba(72, 82, 64, 0.05);
+            background: var(--hover-bg);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(72, 82, 64, 0.1);
+            box-shadow: 0 8px 20px var(--shadow-color);
         }
 
         /* ---------------- RESPONSIVE ---------------- */
@@ -385,7 +480,12 @@
             }
             
             .logo {
-                font-size: 1.6rem;
+                font-size: 1.8rem; /* Increased proportionally */
+            }
+            
+            .theme-toggle {
+                font-size: 1.2rem;
+                margin-right: 10px;
             }
             
             .desktop-nav {
@@ -455,7 +555,12 @@
             }
             
             .logo {
-                font-size: 1.4rem;
+                font-size: 1.6rem; /* Increased proportionally */
+            }
+            
+            .theme-toggle {
+                font-size: 1.1rem;
+                margin-right: 8px;
             }
             
             .mobile-nav {
@@ -503,12 +608,28 @@
                 <a href="#">Contact</a>
             </div>
             
-            <!-- Right side: Account button -->
-            <button class="desktop-account-btn">Account</button>
+            <!-- Right side: Theme toggle and Account button -->
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <!-- Theme Toggle Button -->
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun light-icon"></i>
+                    <i class="fas fa-moon dark-icon"></i>
+                </button>
+                
+                <!-- Account button -->
+                <button class="desktop-account-btn">Account</button>
+            </div>
         </nav>
 
-        <!-- RIGHT: Hamburger menu (visible on mobile) -->
+        <!-- RIGHT: Theme toggle (mobile) and Hamburger menu -->
         <div class="hamburger-menu">
+            <!-- Theme Toggle Button for Mobile -->
+            <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle theme">
+                <i class="fas fa-sun light-icon"></i>
+                <i class="fas fa-moon dark-icon"></i>
+            </button>
+            
+            <!-- Hamburger Menu -->
             <button class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
@@ -565,6 +686,7 @@
     </section>
 
     <script>
+        // Mobile menu functionality
         const hamburger = document.getElementById('hamburger');
         const mobileNav = document.getElementById('mobileNav');
         const menuOverlay = document.getElementById('menuOverlay');
@@ -592,4 +714,33 @@
                 menuOverlay.classList.remove('active');
             });
         });
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeToggleMobile = document.getElementById('themeToggleMobile');
+        const body = document.body;
+
+        // Check for saved theme or prefer-color-scheme
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            body.setAttribute('data-theme', 'dark');
+        }
+
+        // Toggle theme function
+        function toggleTheme() {
+            const currentTheme = body.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Add event listeners to both theme toggle buttons
+        themeToggle.addEventListener('click', toggleTheme);
+        themeToggleMobile.addEventListener('click', toggleTheme);
     </script>

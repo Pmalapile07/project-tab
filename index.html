@@ -1,210 +1,431 @@
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Header Fixed</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Gigtabi - Glass Header</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Import Unbounded font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;900&display=swap" rel="stylesheet">
+    <style>
+        /* ---------------- RESET ---------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-/* ---------------- FONT ---------------- */
-@font-face {
-    font-family: 'BlackMango';
-    src: url('./fonts/BlackMangoRegular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
 
-/* ---------------- RESET ---------------- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        /* ---------------- GLASSMORPHISM HEADER (ENHANCED) ---------------- */
+        .glass-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 254, 248, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: #485240;
+            height: 70px;
+            padding: 0 28px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(72, 82, 64, 0.05);
+        }
 
-html, body {
-    width: 100%;
-    overflow-x: hidden;
-    font-family: sans-serif;
-}
+        /* Enhanced glass effect with gradient */
+        .glass-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.4) 0%, 
+                rgba(255, 254, 248, 0.2) 50%, 
+                rgba(72, 82, 64, 0.05) 100%);
+            z-index: -1;
+            border-radius: 0;
+        }
 
-/* ---------------- PAGE CONTAINER ---------------- */
-/* THIS STOPS LEFT / RIGHT DRIFT */
-.page-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
+        /* ---------------- LOGO - "gigtabi" with Unbounded Font ---------------- */
+        .logo {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: #485240;
+        }
 
-.page-container {
-    width: 100%;
-    max-width: 1440px; /* lock width */
-    margin: 0 auto;
-}
+        /* ---------------- DESKTOP NAVIGATION ---------------- */
+        .desktop-nav {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            flex: 1;
+            padding-right: 10px; /* Reduced padding */
+        }
 
-/* ---------------- HEADER ---------------- */
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: white;
-    color: black;
-    border-bottom: 1px solid black;
-    height: 60px;
-    padding: 0 24px;
-    width: 100%;
-}
+        .desktop-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px; /* Further reduced from 20px to 16px */
+            margin-left: 30px; /* Reduced from 40px */
+        }
 
-/* ---------------- LEFT SIDE ---------------- */
-.logo-hamburger-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
+        .desktop-nav-links a {
+            text-decoration: none;
+            color: #485240;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 200;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            letter-spacing: 0.2px; /* Slight letter-spacing for better readability */
+        }
 
-/* ---------------- HAMBURGER ---------------- */
-.hamburger {
-    width: 24px;
-    height: 18px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background: none;
-    border: none;
-    padding: 0;
-}
+        .desktop-nav-links a:hover {
+            color: #6b7a5c;
+        }
 
-.hamburger span {
-    height: 1.5px;
-    width: 100%;
-    background: black;
-    transition: 0.3s ease;
-}
+        .desktop-account-btn {
+            background: #485240; /* Same color as logo */
+            color: #f8f9fa; /* Text color matching header background */
+            border: 1px solid rgba(72, 82, 64, 0.2);
+            height: 38px;
+            padding: 0 18px; /* Slightly reduced padding */
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 200;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 0;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 0.2px;
+            min-width: 90px; /* Ensures consistent button width */
+        }
 
-.hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
+        .desktop-account-btn:hover {
+            background: rgba(72, 82, 64, 0.8); /* Slightly lighter on hover */
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(72, 82, 64, 0.15);
+        }
 
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
+        /* ---------------- HAMBURGER MENU (Right Side - THIN LINES) ---------------- */
+        .hamburger-menu {
+            display: flex;
+            align-items: center;
+        }
 
-.hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-}
+        .hamburger {
+            width: 28px;
+            height: 18px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: none;
+            border: none;
+            padding: 0;
+            z-index: 1001;
+        }
 
-/* ---------------- LOGO ---------------- */
-.logo {
-    font-family: 'BlackMango', sans-serif;
-    font-size: 1.9rem;
-    letter-spacing: 0.5px;
-}
+        .hamburger span {
+            height: 1.5px; /* THINNER LINES */
+            width: 100%;
+            background: #485240;
+            transition: 0.3s ease;
+        }
 
-/* ---------------- RIGHT SIDE ---------------- */
-.nav-container {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-}
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
 
-.nav-links {
-    display: flex;
-    gap: 28px;
-}
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
 
-.nav-links a {
-    text-decoration: none;
-    color: black;
-    font-size: 1rem;
-    transition: opacity 0.2s ease;
-}
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -4px);
+        }
 
-.nav-links a:hover {
-    opacity: 0.7;
-}
+        /* ---------------- MOBILE MENU (LEFT SIDE NOW) ---------------- */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(255, 254, 248, 0.92);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-right: 1px solid rgba(72, 82, 64, 0.1);
+            box-shadow: 10px 0 40px rgba(72, 82, 64, 0.08);
+            z-index: 999;
+            padding: 100px 30px 30px 30px;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
 
-/* ---------------- BUTTON ---------------- */
-.try-btn {
-    background: black;
-    color: white;
-    border: none;
-    height: 60px;
-    width: 120px;
-    padding: 0 26px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
 
-.try-btn:hover {
-    background: white;
-    color: black;
-    outline: 1px solid black;
-}
+        /* Enhanced glass effect for menu */
+        .mobile-nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(255, 254, 248, 0.7) 0%, 
+                rgba(255, 254, 248, 0.4) 50%, 
+                rgba(72, 82, 64, 0.05) 100%);
+            z-index: -1;
+        }
 
-/* ---------------- RESPONSIVE ---------------- */
-@media (max-width: 768px) {
-    header {
-        height: 56px;
-        padding: 0 16px;
-    }
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
 
-    .nav-links {
-        display: none;
-    }
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: #485240;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 200;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(72, 82, 64, 0.08);
+            transition: all 0.3s ease;
+        }
 
-    .hamburger {
-        display: flex;
-    }
+        .mobile-nav-links a:hover {
+            color: #6b7a5c;
+            padding-left: 5px;
+        }
 
-    .logo {
-        font-size: 1.5rem;
-    }
+        .mobile-nav-btn {
+            margin-top: 30px;
+            background: #485240;
+            backdrop-filter: blur(10px);
+            color: #f8f9fa;
+            border: 1px solid rgba(72, 82, 64, 0.2);
+            height: 48px;
+            width: 100%;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 200;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border-radius: 0;
+        }
 
-    .try-btn {
-        height: 56px;
-        padding: 0 16px;
-        font-size: 0.9rem;
-    }
-}
+        .mobile-nav-btn:hover {
+            background: rgba(72, 82, 64, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(72, 82, 64, 0.1);
+        }
 
-@media (min-width: 769px) {
-    .hamburger {
-        display: none;
-    }
-}
-</style>
+        /* Overlay for when menu is open */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(2px);
+            z-index: 998;
+            display: none;
+        }
 
+        .menu-overlay.active {
+            display: block;
+        }
 
+        /* Spacer to prevent content from hiding behind fixed header */
+        .header-spacer {
+            height: 70px;
+        }
 
+        /* ---------------- RESPONSIVE ---------------- */
+        @media (min-width: 769px) {
+            .desktop-nav {
+                display: flex;
+            }
+            
+            .hamburger-menu {
+                display: none;
+            }
+            
+            .mobile-nav {
+                display: none;
+            }
+        }
 
-<div class="page-wrapper">
-    <div class="page-container">
+        @media (max-width: 768px) {
+            .glass-header {
+                height: 60px;
+                padding: 0 20px;
+            }
+            
+            .logo {
+                font-size: 1.6rem;
+            }
+            
+            .desktop-nav {
+                display: none;
+            }
+            
+            .hamburger {
+                width: 24px;
+                height: 16px;
+            }
+            
+            .hamburger span {
+                height: 1.2px;
+            }
+            
+            .mobile-nav {
+                width: 75%;
+                padding: 80px 25px 25px 25px;
+            }
+            
+            .mobile-nav-links {
+                gap: 15px;
+            }
+            
+            .mobile-nav-links a {
+                font-size: 0.75rem;
+                padding: 7px 0;
+            }
+            
+            .mobile-nav-btn {
+                height: 45px;
+                font-size: 0.9rem;
+            }
+            
+            .header-spacer {
+                height: 60px;
+            }
+        }
 
-        <header>
-            <!-- LEFT -->
-            <div class="logo-hamburger-container">
-                <button class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <div class="logo">gigtabi</div>
+        @media (max-width: 480px) {
+            .glass-header {
+                height: 55px;
+                padding: 0 15px;
+            }
+            
+            .logo {
+                font-size: 1.4rem;
+            }
+            
+            .mobile-nav {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header at the VERY TOP -->
+    <header class="glass-header">
+        <!-- LEFT: Logo -->
+        <div class="logo">gigtabi</div>
+        
+        <!-- CENTER & RIGHT: Desktop Navigation (visible on desktop) -->
+        <nav class="desktop-nav">
+            <!-- Left side: Full navigation links with shorter labels -->
+            <div class="desktop-nav-links">
+                <!-- Shorter, more concise labels -->
+                <a href="#">Post Gig</a>
+                <a href="#">Find Gig</a> <!-- Changed from Browse Jobs -->
+                <a href="#">How It Works</a>
+                <a href="#">Our Fees</a>
+                <a href="#">Contact Us</a>
             </div>
+            
+            <!-- Right side: Account button -->
+            <button class="desktop-account-btn">Account</button>
+        </nav>
 
-            <!-- RIGHT -->
-            <div class="nav-container">
-                <div class="nav-links">
-                    <a href="#">Sign In</a>
-                    <a href="#">Contact</a>
-                </div>
-                <button class="try-btn">Try me</button>
-            </div>
-        </header>
+        <!-- RIGHT: Hamburger menu (visible on mobile) -->
+        <div class="hamburger-menu">
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
 
+    <!-- Spacer to push content down -->
+    <div class="header-spacer"></div>
+
+    <!-- Mobile Navigation Menu (NOW ON LEFT SIDE) -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-links">
+            <!-- Same links with shorter labels for consistency -->
+            <a href="#">Post Gig</a>
+            <a href="#">Find Gig</a>
+            <a href="#">How It Works</a>
+            <a href="#">Our Fees</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <button class="mobile-nav-btn">
+            Account
+        </button>
     </div>
-</div>
 
-<script>
-const hamburger = document.getElementById('hamburger');
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-});
-</script>
+    <!-- Overlay for when menu is open -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        const menuOverlay = document.getElementById('menuOverlay');
+        
+        // Toggle mobile menu
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+        });
+        
+        // Close menu when clicking overlay
+        menuOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileNav.classList.remove('active');
+            menuOverlay.classList.remove('active');
+        });
+        
+        // Close menu when clicking links
+        const mobileLinks = document.querySelectorAll('.mobile-nav-links a, .mobile-nav-btn');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('active');
+                menuOverlay.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

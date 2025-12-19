@@ -64,19 +64,19 @@
             align-items: center;
             justify-content: space-between;
             background: var(--header-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
             color: var(--text-color);
             height: 80px;
             padding: 0 28px;
             width: 100%;
-            position: sticky;
+            position: fixed; /* CHANGED TO FIXED FOR PROPER STICKY */
             top: 0;
             left: 0;
             z-index: 1000;
             box-shadow: 0 4px 30px var(--shadow-color);
             transition: all 0.3s ease;
-            border-bottom: 1px solid var(--border-color);
+            /* Border removed as requested */
         }
 
         /* Enhanced glass effect with gradient */
@@ -105,7 +105,7 @@
         /* ---------------- LOGO - "gigtabi" with Unbounded Font ---------------- */
         .logo {
             font-family: 'Unbounded', sans-serif;
-            font-size: 2.97rem; /* Reduced by 1% from 3.0rem */
+            font-size: 2.97rem;
             font-weight: 900;
             letter-spacing: -0.5px;
             color: var(--text-color);
@@ -181,10 +181,26 @@
             transition: all 0.3s ease;
             white-space: nowrap;
             letter-spacing: 0.2px;
+            position: relative;
+            padding: 8px 12px;
         }
 
         .desktop-nav-links a:hover {
             color: var(--secondary-text);
+        }
+
+        /* NEW: Google Material Icons dropdown arrow */
+        .desktop-nav-links a.with-dropdown::after {
+            content: 'expand_more';
+            font-family: 'Material Icons';
+            font-size: 1rem;
+            margin-left: 4px;
+            vertical-align: middle;
+            transition: transform 0.3s ease;
+        }
+
+        .desktop-nav-links a.with-dropdown:hover::after {
+            transform: rotate(180deg);
         }
 
         .desktop-account-btn {
@@ -251,7 +267,7 @@
             transform: rotate(-45deg) translate(4px, -4px);
         }
 
-        /* ---------------- MOBILE MENU (LEFT SIDE NOW) ---------------- */
+        /* ---------------- MOBILE MENU (LEFT SIDE) ---------------- */
         .mobile-nav {
             position: fixed;
             top: 0;
@@ -259,9 +275,8 @@
             width: 280px;
             height: 100vh;
             background: var(--menu-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-right: 1px solid var(--border-color);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
             box-shadow: 10px 0 40px var(--shadow-color);
             z-index: 999;
             padding: 100px 30px 30px 30px;
@@ -308,14 +323,29 @@
             font-family: 'Unbounded', sans-serif;
             font-size: 0.8rem;
             font-weight: 200;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--border-color);
+            padding: 12px 0;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .mobile-nav-links a:hover {
             color: var(--secondary-text);
             padding-left: 5px;
+        }
+
+        /* NEW: Mobile dropdown arrows */
+        .mobile-nav-links a.with-dropdown::after {
+            content: 'expand_more';
+            font-family: 'Material Icons';
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-nav-links a.with-dropdown:hover::after {
+            transform: rotate(180deg);
         }
 
         .mobile-nav-btn {
@@ -370,6 +400,7 @@
             font-family: 'Unbounded', sans-serif !important;
             font-weight: 600;
             transition: background-color 0.3s ease;
+            margin-top: 80px; /* Added to account for fixed header */
         }
 
         .hero-content {
@@ -380,7 +411,7 @@
         /* Headline - Using Unbounded font like logo */
         .hero-headline {
             font-family: 'Unbounded', sans-serif !important;
-            font-size: 3.564rem; /* Reduced by 1% from 3.6rem */
+            font-size: 3.564rem;
             font-weight: 800;
             color: var(--text-color);
             line-height: 1.1;
@@ -392,7 +423,7 @@
         /* Subheadline */
         .hero-subheadline {
             font-family: 'Unbounded', sans-serif;
-            font-size: 1.188rem; /* Reduced by 1% from 1.2rem */
+            font-size: 1.188rem;
             color: var(--secondary-text);
             line-height: 1.5;
             margin-bottom: 48px;
@@ -419,7 +450,7 @@
             border: none;
             padding: 18px 42px;
             font-family: 'Unbounded', sans-serif;
-            font-size: 1.089rem; /* Reduced by 1% from 1.1rem */
+            font-size: 1.089rem;
             font-weight: 400;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -442,7 +473,7 @@
             border: 2px solid var(--text-color);
             padding: 18px 42px;
             font-family: 'Unbounded', sans-serif;
-            font-size: 1.089rem; /* Reduced by 1% from 1.1rem */
+            font-size: 1.089rem;
             font-weight: 400;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -456,6 +487,39 @@
             background: var(--hover-bg);
             transform: translateY(-2px);
             box-shadow: 0 8px 20px var(--shadow-color);
+        }
+
+        /* ---------------- CONTENT FOR SCROLLING TEST ---------------- */
+        .content-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-section h2 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--secondary-text);
+            margin-bottom: 20px;
+        }
+
+        .content-block {
+            height: 600px;
+            background: var(--hover-bg);
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 2rem;
+            color: var(--text-color);
         }
 
         /* ---------------- RESPONSIVE ---------------- */
@@ -475,7 +539,7 @@
 
         @media (max-width: 1024px) {
             .hero-headline {
-                font-size: 3.168rem; /* Reduced by 1% from 3.2rem */
+                font-size: 3.168rem;
             }
         }
 
@@ -486,7 +550,7 @@
             }
             
             .logo {
-                font-size: 1.782rem; /* Reduced by 1% from 1.8rem */
+                font-size: 1.782rem;
             }
             
             .theme-toggle {
@@ -518,7 +582,7 @@
             
             .mobile-nav-links a {
                 font-size: 0.95rem;
-                padding: 7px 0;
+                padding: 10px 0;
             }
             
             .mobile-nav-btn {
@@ -529,15 +593,16 @@
             .hero-section {
                 min-height: calc(100vh - 60px);
                 padding: 30px 20px;
+                margin-top: 60px;
             }
             
             .hero-headline {
-                font-size: 2.376rem; /* Reduced by 1% from 2.4rem */
+                font-size: 2.376rem;
                 letter-spacing: -0.5px;
             }
             
             .hero-subheadline {
-                font-size: 1.089rem; /* Reduced by 1% from 1.1rem */
+                font-size: 1.089rem;
                 margin-bottom: 40px;
             }
             
@@ -549,8 +614,13 @@
             .hero-primary-cta,
             .hero-secondary-cta {
                 padding: 16px 32px;
-                font-size: 0.99rem; /* Reduced by 1% from 1.0rem */
+                font-size: 0.99rem;
                 min-width: 160px;
+            }
+            
+            .content-section {
+                margin-top: 60px;
+                padding: 40px 20px;
             }
         }
 
@@ -561,7 +631,7 @@
             }
             
             .logo {
-                font-size: 1.584rem; /* Reduced by 1% from 1.6rem */
+                font-size: 1.584rem;
             }
             
             .theme-toggle {
@@ -574,11 +644,11 @@
             }
             
             .hero-headline {
-                font-size: 1.98rem; /* Reduced by 1% from 2.0rem */
+                font-size: 1.98rem;
             }
             
             .hero-subheadline {
-                font-size: 0.99rem; /* Reduced by 1% from 1.0rem */
+                font-size: 0.99rem;
             }
             
             .hero-buttons {
@@ -595,24 +665,36 @@
             }
         }
     </style>
+    <!-- Load Material Icons for Google dropdown arrows -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Fixed Header at the VERY TOP -->
+    <!-- STICKY HEADER - NOW TRULY STICKY -->
     <header class="glass-header">
         <!-- LEFT: Logo -->
         <div class="logo">gigtabi</div>
         
         <!-- CENTER & RIGHT: Desktop Navigation (visible on desktop) -->
         <nav class="desktop-nav">
-            <!-- Left side: Full navigation links with shorter labels -->
+            <!-- Left side: Hierarchical navigation with logical order -->
             <div class="desktop-nav-links">
-                <!-- Shorter, more concise labels -->
-                <a href="#">Post Job</a>
-                <a href="#">Find Gig</a>
+                <!-- HIERARCHICAL ORDER: From most important to least -->
+                <!-- 1. Primary Actions -->
+                <a href="#" class="with-dropdown">Find Gig</a>
+                <a href="#" class="with-dropdown">Post Job</a>
+                
+                <!-- 2. Platform Information -->
                 <a href="#">How It Works</a>
+                
+                <!-- 3. Business Information -->
+                <a href="#" class="with-dropdown">About Us</a>
+                
+                <!-- 4. Financial Information -->
                 <a href="#">Fees</a>
-                <a href="#">Contact</a>
+                
+                <!-- 5. Support & Contact -->
+                <a href="#" class="with-dropdown">Contact</a>
             </div>
             
             <!-- Right side: Theme toggle and Account button -->
@@ -645,17 +727,26 @@
         </div>
     </header>
 
-    <!-- Mobile Navigation Menu (NOW ON LEFT SIDE) -->
+    <!-- Mobile Navigation Menu (LEFT SIDE) -->
     <div class="mobile-nav" id="mobileNav">
         <div class="mobile-nav-links">
-            <!-- Added "About Us" and "Work We Source" for mobile only -->
-            <a href="#">Post Job</a>
-            <a href="#">Find Gig</a>
+            <!-- HIERARCHICAL ORDER FOR MOBILE - Same as desktop -->
+            <!-- 1. Primary Actions -->
+            <a href="#" class="with-dropdown">Find Gig</a>
+            <a href="#" class="with-dropdown">Post Job</a>
+            
+            <!-- 2. Platform Information -->
             <a href="#">How It Works</a>
-            <a href="#">Fees</a>
-            <a href="#">Contact</a>
-            <a href="#">About Us</a>
+            
+            <!-- 3. Business Information -->
+            <a href="#" class="with-dropdown">About Us</a>
             <a href="#">Work We Source</a>
+            
+            <!-- 4. Financial Information -->
+            <a href="#">Fees</a>
+            
+            <!-- 5. Support & Contact -->
+            <a href="#" class="with-dropdown">Contact</a>
         </div>
         <button class="mobile-nav-btn">
             Account
@@ -676,7 +767,7 @@
             
             <!-- Subheadline -->
             <p class="hero-subheadline">
-               Connecting neighbors and businesses through local jobs and gigs, creating opportunities and thriving communities.
+                Connecting neighbors, creating opportunities, and helping communities thrive — safely and fairly.
             </p>
             
             <!-- Buttons Container -->
@@ -691,6 +782,32 @@
                     Join gigtabi
                 </a>
             </div>
+        </div>
+    </section>
+
+    <!-- Content Sections to Test Sticky Header -->
+    <section class="content-section">
+        <h2>Scroll to Test the Sticky Header</h2>
+        <p>The header above should stay fixed at the top of the screen as you scroll down.</p>
+        
+        <div class="content-block">
+            Scroll down to see sticky header in action ↓
+        </div>
+        
+        <div class="content-block">
+            More content to scroll through
+        </div>
+        
+        <div class="content-block">
+            Keep scrolling - header should stay fixed
+        </div>
+        
+        <div class="content-block">
+            Almost at the bottom
+        </div>
+        
+        <div class="content-block">
+            Bottom of the page
         </div>
     </section>
 
@@ -768,15 +885,28 @@
         themeToggle.addEventListener('click', toggleTheme);
         themeToggleMobile.addEventListener('click', toggleTheme);
         
-        // Make header truly sticky
+        // Enhanced sticky header effect
         window.addEventListener('scroll', () => {
             const header = document.querySelector('.glass-header');
-            if (window.scrollY > 10) {
-                header.style.boxShadow = '0 4px 30px var(--shadow-color)';
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 10) {
+                header.style.backdropFilter = 'blur(25px) saturate(180%)';
+                header.style.webkitBackdropFilter = 'blur(25px) saturate(180%)';
+                header.style.boxShadow = '0 8px 32px var(--shadow-color)';
             } else {
+                header.style.backdropFilter = 'blur(20px) saturate(180%)';
+                header.style.webkitBackdropFilter = 'blur(20px) saturate(180%)';
                 header.style.boxShadow = '0 4px 30px var(--shadow-color)';
             }
         });
+
+        // Initialize header
+        window.dispatchEvent(new Event('scroll'));
+
+        // Test function to verify sticky header
+        console.log('Header is FIXED position - will stay at top while scrolling');
+        console.log('Try scrolling to see the header stay in place!');
     </script>
 </body>
 </html>

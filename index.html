@@ -1,4 +1,7 @@
-<meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Gigtabi - Connecting Neighbors</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,14 +21,13 @@
             width: 100%;
             overflow-x: hidden;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: #f8f9fa;
             min-height: 100vh;
         }
 
         /* ---------------- DARK MODE VARIABLES ---------------- */
         :root {
-            --bg-color: #f8f9fa;
-            --header-bg: rgba(255, 254, 248, 0.95);
+            --bg-color: #ffffff;
+            --header-bg: rgba(255, 254, 248, 0.98);
             --text-color: #485240;
             --secondary-text: #6b7a5c;
             --button-bg: #485240;
@@ -33,11 +35,12 @@
             --border-color: rgba(72, 82, 64, 0.1);
             --shadow-color: rgba(72, 82, 64, 0.05);
             --hover-bg: rgba(72, 82, 64, 0.05);
+            --menu-bg: rgba(255, 254, 248, 0.98);
         }
 
         [data-theme="dark"] {
-            --bg-color: #1a1a1a;
-            --header-bg: rgba(26, 26, 26, 0.95);
+            --bg-color: #121212;
+            --header-bg: rgba(26, 26, 26, 0.98);
             --text-color: #f0f0f0;
             --secondary-text: #b0b0b0;
             --button-bg: #f0f0f0;
@@ -45,6 +48,7 @@
             --border-color: rgba(240, 240, 240, 0.1);
             --shadow-color: rgba(0, 0, 0, 0.3);
             --hover-bg: rgba(240, 240, 240, 0.1);
+            --menu-bg: rgba(26, 26, 26, 0.98);
         }
 
         /* Apply theme variables */
@@ -72,6 +76,7 @@
             z-index: 1000;
             box-shadow: 0 4px 30px var(--shadow-color);
             transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
         }
 
         /* Enhanced glass effect with gradient */
@@ -100,7 +105,7 @@
         /* ---------------- LOGO - "gigtabi" with Unbounded Font ---------------- */
         .logo {
             font-family: 'Unbounded', sans-serif;
-            font-size: 3.0rem; /* Increased by 10% from 2.7rem */
+            font-size: 2.97rem; /* Reduced by 1% from 3.0rem */
             font-weight: 900;
             letter-spacing: -0.5px;
             color: var(--text-color);
@@ -253,7 +258,7 @@
             left: 0;
             width: 280px;
             height: 100vh;
-            background: var(--header-bg);
+            background: var(--menu-bg);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             border-right: 1px solid var(--border-color);
@@ -262,6 +267,7 @@
             padding: 100px 30px 30px 30px;
             transform: translateX(-100%);
             transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+            overflow-y: auto;
         }
 
         .mobile-nav.active {
@@ -374,7 +380,7 @@
         /* Headline - Using Unbounded font like logo */
         .hero-headline {
             font-family: 'Unbounded', sans-serif !important;
-            font-size: 3.6rem;
+            font-size: 3.564rem; /* Reduced by 1% from 3.6rem */
             font-weight: 800;
             color: var(--text-color);
             line-height: 1.1;
@@ -386,7 +392,7 @@
         /* Subheadline */
         .hero-subheadline {
             font-family: 'Unbounded', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.188rem; /* Reduced by 1% from 1.2rem */
             color: var(--secondary-text);
             line-height: 1.5;
             margin-bottom: 48px;
@@ -413,7 +419,7 @@
             border: none;
             padding: 18px 42px;
             font-family: 'Unbounded', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.089rem; /* Reduced by 1% from 1.1rem */
             font-weight: 400;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -436,7 +442,7 @@
             border: 2px solid var(--text-color);
             padding: 18px 42px;
             font-family: 'Unbounded', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.089rem; /* Reduced by 1% from 1.1rem */
             font-weight: 400;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -469,7 +475,7 @@
 
         @media (max-width: 1024px) {
             .hero-headline {
-                font-size: 3.2rem;
+                font-size: 3.168rem; /* Reduced by 1% from 3.2rem */
             }
         }
 
@@ -480,7 +486,7 @@
             }
             
             .logo {
-                font-size: 1.8rem; /* Increased proportionally */
+                font-size: 1.782rem; /* Reduced by 1% from 1.8rem */
             }
             
             .theme-toggle {
@@ -502,7 +508,7 @@
             }
             
             .mobile-nav {
-                width: 75%;
+                width: 85%;
                 padding: 80px 25px 25px 25px;
             }
             
@@ -526,12 +532,12 @@
             }
             
             .hero-headline {
-                font-size: 2.4rem;
+                font-size: 2.376rem; /* Reduced by 1% from 2.4rem */
                 letter-spacing: -0.5px;
             }
             
             .hero-subheadline {
-                font-size: 1.1rem;
+                font-size: 1.089rem; /* Reduced by 1% from 1.1rem */
                 margin-bottom: 40px;
             }
             
@@ -543,7 +549,7 @@
             .hero-primary-cta,
             .hero-secondary-cta {
                 padding: 16px 32px;
-                font-size: 1rem;
+                font-size: 0.99rem; /* Reduced by 1% from 1.0rem */
                 min-width: 160px;
             }
         }
@@ -555,7 +561,7 @@
             }
             
             .logo {
-                font-size: 1.6rem; /* Increased proportionally */
+                font-size: 1.584rem; /* Reduced by 1% from 1.6rem */
             }
             
             .theme-toggle {
@@ -564,15 +570,15 @@
             }
             
             .mobile-nav {
-                width: 80%;
+                width: 90%;
             }
             
             .hero-headline {
-                font-size: 2rem;
+                font-size: 1.98rem; /* Reduced by 1% from 2.0rem */
             }
             
             .hero-subheadline {
-                font-size: 1rem;
+                font-size: 0.99rem; /* Reduced by 1% from 1.0rem */
             }
             
             .hero-buttons {
@@ -589,7 +595,8 @@
             }
         }
     </style>
-
+</head>
+<body>
 
     <!-- Fixed Header at the VERY TOP -->
     <header class="glass-header">
@@ -641,12 +648,14 @@
     <!-- Mobile Navigation Menu (NOW ON LEFT SIDE) -->
     <div class="mobile-nav" id="mobileNav">
         <div class="mobile-nav-links">
-            <!-- Same links with shorter labels for consistency -->
+            <!-- Added "About Us" and "Work We Source" for mobile only -->
             <a href="#">Post Job</a>
             <a href="#">Find Gig</a>
             <a href="#">How It Works</a>
             <a href="#">Fees</a>
             <a href="#">Contact</a>
+            <a href="#">About Us</a>
+            <a href="#">Work We Source</a>
         </div>
         <button class="mobile-nav-btn">
             Account
@@ -696,6 +705,9 @@
             hamburger.classList.toggle('active');
             mobileNav.classList.toggle('active');
             menuOverlay.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
         });
         
         // Close menu when clicking overlay
@@ -703,6 +715,7 @@
             hamburger.classList.remove('active');
             mobileNav.classList.remove('active');
             menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
         });
         
         // Close menu when clicking links
@@ -712,7 +725,18 @@
                 hamburger.classList.remove('active');
                 mobileNav.classList.remove('active');
                 menuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
             });
+        });
+
+        // Close menu when pressing Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         });
 
         // Theme toggle functionality
@@ -743,4 +767,16 @@
         // Add event listeners to both theme toggle buttons
         themeToggle.addEventListener('click', toggleTheme);
         themeToggleMobile.addEventListener('click', toggleTheme);
+        
+        // Make header truly sticky
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.glass-header');
+            if (window.scrollY > 10) {
+                header.style.boxShadow = '0 4px 30px var(--shadow-color)';
+            } else {
+                header.style.boxShadow = '0 4px 30px var(--shadow-color)';
+            }
+        });
     </script>
+</body>
+</html>

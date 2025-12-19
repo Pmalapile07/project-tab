@@ -1,935 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Gigtabi - Connecting Neighbors</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Import Unbounded font from Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-    <style>
-        /* ---------------- RESET ---------------- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            width: 100%;
-            overflow-x: hidden;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            min-height: 100vh;
-        }
-
-        /* ---------------- DARK MODE VARIABLES ---------------- */
-        :root {
-            --bg-color: #ffffff;
-            --header-bg: rgba(255, 254, 248, 0.98);
-            --text-color: #000000;
-            --secondary-text: #666666;
-            --button-bg: #000000;
-            --button-text: #ffffff;
-            --border-color: rgba(0, 0, 0, 0.1);
-            --shadow-color: rgba(0, 0, 0, 0.05);
-            --hover-bg: rgba(0, 0, 0, 0.05);
-            --menu-bg: rgba(255, 254, 248, 0.98);
-            --accent-color: #000000;
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #000000;
-            --header-bg: rgba(0, 0, 0, 0.98);
-            --text-color: #ffffff;
-            --secondary-text: #cccccc;
-            --button-bg: #ffffff;
-            --button-text: #000000;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --shadow-color: rgba(255, 255, 255, 0.05);
-            --hover-bg: rgba(255, 255, 255, 0.1);
-            --menu-bg: rgba(0, 0, 0, 0.98);
-            --accent-color: #ffffff;
-        }
-
-        /* Apply theme variables */
-        body {
-            background: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        /* ---------------- GLASSMORPHISM HEADER (ENHANCED) ---------------- */
-        .glass-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--header-bg);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            color: var(--text-color);
-            height: 80px;
-            padding: 0 28px;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 30px var(--shadow-color);
-            transition: all 0.3s ease;
-        }
-
-        /* Enhanced glass effect with gradient */
-        .glass-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.4) 0%, 
-                rgba(255, 254, 248, 0.2) 50%, 
-                rgba(0, 0, 0, 0.05) 100%);
-            z-index: -1;
-            border-radius: 0;
-        }
-
-        [data-theme="dark"] .glass-header::before {
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.1) 0%, 
-                rgba(255, 255, 255, 0.05) 50%, 
-                rgba(255, 255, 255, 0.02) 100%);
-        }
-
-        /* ---------------- LOGO - "gigtabi" with Unbounded Font ---------------- */
-        .logo {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 3.5rem; /* Larger like in screenshot */
-            font-weight: 900;
-            letter-spacing: -1px;
-            color: var(--text-color);
-            transition: color 0.3s ease;
-            line-height: 1;
-        }
-
-        /* ---------------- THEME TOGGLE ---------------- */
-        .theme-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.4rem;
-            color: var(--text-color);
-            padding: 8px;
-            margin-right: 15px;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            background: var(--hover-bg);
-            transform: scale(1.1);
-        }
-
-        .theme-toggle i {
-            transition: transform 0.3s ease;
-        }
-
-        /* Hide/show icons based on theme */
-        .light-icon {
-            display: block;
-        }
-
-        .dark-icon {
-            display: none;
-        }
-
-        [data-theme="dark"] .light-icon {
-            display: none;
-        }
-
-        [data-theme="dark"] .dark-icon {
-            display: block;
-        }
-
-        /* ---------------- DESKTOP NAVIGATION ---------------- */
-        .desktop-nav {
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            flex: 1;
-            padding-right: 10px;
-        }
-
-        .desktop-nav-links {
-            display: flex;
-            align-items: center;
-            gap: 24px; /* Increased spacing */
-            margin-left: 40px;
-        }
-
-        .desktop-nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-family: 'Unbounded', sans-serif;
-            font-size: 0.9rem; /* Slightly larger */
-            font-weight: 400; /* Regular weight */
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            letter-spacing: 0.2px;
-            position: relative;
-            padding: 8px 0;
-        }
-
-        .desktop-nav-links a:hover {
-            color: var(--secondary-text);
-        }
-
-        /* Active state indicator */
-        .desktop-nav-links a.active {
-            font-weight: 500;
-            color: var(--accent-color);
-        }
-
-        .desktop-nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent-color);
-        }
-
-        .desktop-account-btn {
-            background: var(--button-bg);
-            color: var(--button-text);
-            border: 1px solid var(--border-color);
-            height: 42px; /* Taller button */
-            padding: 0 24px; /* Wider button */
-            font-family: 'Unbounded', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500; /* Medium weight */
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 0;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            letter-spacing: 0.5px;
-            min-width: 120px;
-        }
-
-        .desktop-account-btn:hover {
-            background: var(--secondary-text);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px var(--shadow-color);
-        }
-
-        /* ---------------- HAMBURGER MENU (Right Side - THIN LINES) ---------------- */
-        .hamburger-menu {
-            display: flex;
-            align-items: center;
-        }
-
-        .hamburger {
-            width: 28px;
-            height: 18px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background: none;
-            border: none;
-            padding: 0;
-            z-index: 1001;
-        }
-
-        .hamburger span {
-            height: 1.5px;
-            width: 100%;
-            background: var(--text-color);
-            transition: 0.3s ease;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(4px, 4px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(4px, -4px);
-        }
-
-        /* ---------------- MOBILE MENU (LEFT SIDE) ---------------- */
-        .mobile-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 320px; /* Wider menu */
-            height: 100vh;
-            background: var(--menu-bg);
-            backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
-            box-shadow: 10px 0 40px var(--shadow-color);
-            z-index: 999;
-            padding: 120px 30px 40px 30px; /* More padding */
-            transform: translateX(-100%);
-            transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
-            overflow-y: auto;
-        }
-
-        .mobile-nav.active {
-            transform: translateX(0);
-        }
-
-        /* Enhanced glass effect for menu */
-        .mobile-nav::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, 
-                rgba(255, 254, 248, 0.7) 0%, 
-                rgba(255, 254, 248, 0.4) 50%, 
-                rgba(0, 0, 0, 0.05) 100%);
-            z-index: -1;
-        }
-
-        [data-theme="dark"] .mobile-nav::before {
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.1) 0%, 
-                rgba(255, 255, 255, 0.05) 50%, 
-                rgba(255, 255, 255, 0.02) 100%);
-        }
-
-        .mobile-nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0; /* No gap for cleaner look */
-        }
-
-        .mobile-nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-family: 'Unbounded', sans-serif;
-            font-size: 1.1rem; /* Larger text */
-            font-weight: 400;
-            padding: 18px 0; /* More vertical padding */
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border-color); /* Subtle border like screenshot */
-        }
-
-        .mobile-nav-links a:hover {
-            color: var(--secondary-text);
-            padding-left: 5px;
-        }
-
-        /* Last item no border */
-        .mobile-nav-links a:last-child {
-            border-bottom: none;
-        }
-
-        .mobile-nav-btn {
-            margin-top: 40px; /* More spacing from menu items */
-            background: var(--button-bg);
-            color: var(--button-text);
-            border: 1px solid var(--border-color);
-            height: 52px; /* Taller button */
-            width: 100%;
-            font-family: 'Unbounded', sans-serif;
-            font-size: 1.1rem; /* Larger text */
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            border-radius: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mobile-nav-btn:hover {
-            background: var(--hover-bg);
-            color: var(--text-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px var(--shadow-color);
-        }
-
-        /* Overlay for when menu is open */
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.3); /* Darker overlay */
-            backdrop-filter: blur(3px);
-            z-index: 998;
-            display: none;
-        }
-
-        .menu-overlay.active {
-            display: block;
-        }
-
-        /* ---------------- HERO SECTION - SIMPLE ---------------- */
-        .hero-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-            background: var(--bg-color);
-            text-align: center;
-            font-family: 'Unbounded', sans-serif !important;
-            transition: background-color 0.3s ease;
-            margin-top: 0; /* Header is fixed so we need padding-top */
-            padding-top: 100px; /* Add padding instead of margin */
-        }
-
-        .hero-content {
-            max-width: 900px;
-            width: 100%;
-        }
-
-        /* Headline - Using Unbounded font like logo */
-        .hero-headline {
-            font-family: 'Unbounded', sans-serif !important;
-            font-size: 5.5rem; /* Much larger like screenshot */
-            font-weight: 800;
-            color: var(--text-color);
-            line-height: 1.1;
-            margin-bottom: 32px;
-            letter-spacing: -2px;
-            transition: color 0.3s ease;
-        }
-
-        /* Subheadline */
-        .hero-subheadline {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 1.4rem; /* Larger subtitle */
-            color: var(--secondary-text);
-            line-height: 1.5;
-            margin-bottom: 60px;
-            font-weight: 300;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            transition: color 0.3s ease;
-        }
-
-        /* Button Container */
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        /* Primary CTA Button */
-        .hero-primary-cta {
-            background: var(--button-bg);
-            color: var(--button-text) !important;
-            border: none;
-            padding: 22px 48px; /* Larger padding */
-            font-family: 'Unbounded', sans-serif;
-            font-size: 1.2rem; /* Larger text */
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 0;
-            display: inline-block;
-            min-width: 200px;
-            text-decoration: none;
-            letter-spacing: 0.5px;
-        }
-
-        .hero-primary-cta:hover {
-            background: var(--secondary-text);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px var(--shadow-color);
-        }
-
-        /* Secondary CTA Button */
-        .hero-secondary-cta {
-            background: transparent;
-            color: var(--text-color);
-            border: 2px solid var(--text-color);
-            padding: 22px 48px; /* Larger padding */
-            font-family: 'Unbounded', sans-serif;
-            font-size: 1.2rem; /* Larger text */
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 0;
-            display: inline-block;
-            min-width: 200px;
-            text-decoration: none;
-            letter-spacing: 0.5px;
-        }
-
-        .hero-secondary-cta:hover {
-            background: var(--hover-bg);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px var(--shadow-color);
-        }
-
-        /* ---------------- CONTENT FOR SCROLLING TEST ---------------- */
-        .content-section {
-            padding: 100px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .content-section h2 {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            color: var(--text-color);
-        }
-
-        .content-section p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--secondary-text);
-            margin-bottom: 20px;
-        }
-
-        .content-block {
-            height: 600px;
-            background: var(--hover-bg);
-            margin: 30px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Unbounded', sans-serif;
-            font-size: 2rem;
-            color: var(--text-color);
-        }
-
-        /* ---------------- RESPONSIVE ---------------- */
-        @media (min-width: 769px) {
-            .desktop-nav {
-                display: flex;
-            }
-            
-            .hamburger-menu {
-                display: none;
-            }
-            
-            .mobile-nav {
-                display: none;
-            }
-            
-            .hero-section {
-                padding-top: 120px; /* More padding for fixed header */
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .hero-headline {
-                font-size: 4.5rem;
-            }
-            
-            .logo {
-                font-size: 3rem;
-            }
-        }
-
-        @media (max-width: 1024px) {
-            .hero-headline {
-                font-size: 4rem;
-            }
-            
-            .hero-subheadline {
-                font-size: 1.3rem;
-            }
-            
-            .logo {
-                font-size: 2.8rem;
-            }
-            
-            .desktop-nav-links {
-                gap: 20px;
-                margin-left: 30px;
-            }
-        }
-
-        @media (max-width: 900px) {
-            .hero-headline {
-                font-size: 3.5rem;
-                letter-spacing: -1.5px;
-            }
-            
-            .desktop-nav-links a {
-                font-size: 0.85rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .glass-header {
-                height: 70px;
-                padding: 0 20px;
-            }
-            
-            .logo {
-                font-size: 2.5rem;
-            }
-            
-            .theme-toggle {
-                font-size: 1.2rem;
-                margin-right: 10px;
-            }
-            
-            .desktop-nav {
-                display: none;
-            }
-            
-            .hamburger {
-                width: 24px;
-                height: 16px;
-            }
-            
-            .hamburger span {
-                height: 1.2px;
-            }
-            
-            .mobile-nav {
-                width: 85%;
-                padding: 100px 25px 35px 25px;
-            }
-            
-            .mobile-nav-links a {
-                font-size: 1rem;
-                padding: 16px 0;
-            }
-            
-            .mobile-nav-btn {
-                height: 48px;
-                font-size: 1rem;
-                margin-top: 30px;
-            }
-            
-            .hero-section {
-                min-height: calc(100vh - 70px);
-                padding: 30px 20px;
-                padding-top: 90px;
-            }
-            
-            .hero-headline {
-                font-size: 3rem;
-                letter-spacing: -1px;
-                margin-bottom: 24px;
-            }
-            
-            .hero-subheadline {
-                font-size: 1.2rem;
-                margin-bottom: 50px;
-            }
-            
-            .hero-buttons {
-                gap: 15px;
-                margin-bottom: 30px;
-            }
-            
-            .hero-primary-cta,
-            .hero-secondary-cta {
-                padding: 20px 36px;
-                font-size: 1.1rem;
-                min-width: 180px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .hero-headline {
-                font-size: 2.5rem;
-            }
-            
-            .hero-subheadline {
-                font-size: 1.1rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .hero-primary-cta,
-            .hero-secondary-cta {
-                width: 100%;
-                max-width: 300px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .glass-header {
-                height: 65px;
-                padding: 0 15px;
-            }
-            
-            .logo {
-                font-size: 2.2rem;
-            }
-            
-            .theme-toggle {
-                font-size: 1.1rem;
-                margin-right: 8px;
-            }
-            
-            .mobile-nav {
-                width: 90%;
-                padding: 90px 20px 30px 20px;
-            }
-            
-            .hero-headline {
-                font-size: 2.2rem;
-            }
-            
-            .hero-subheadline {
-                font-size: 1rem;
-                margin-bottom: 40px;
-            }
-            
-            .hero-primary-cta,
-            .hero-secondary-cta {
-                padding: 18px 32px;
-                font-size: 1rem;
-                max-width: 280px;
-            }
-        }
-    </style>
-
-
-
-    <!-- STICKY HEADER - NOW TRULY STICKY -->
-    <header class="glass-header">
-        <!-- LEFT: Logo -->
-        <div class="logo">gigtabi</div>
-        
-        <!-- CENTER & RIGHT: Desktop Navigation (visible on desktop) -->
-        <nav class="desktop-nav">
-            <!-- Left side: Hierarchical navigation with logical order -->
-            <div class="desktop-nav-links">
-                <!-- HIERARCHICAL ORDER: From most important to least -->
-                <!-- 1. Primary Actions -->
-                <a href="#" class="active">Find Gig</a>
-                <a href="#">Post Job</a>
-                
-                <!-- 2. Platform Information -->
-                <a href="#">How It Works</a>
-                
-                <!-- 3. Business Information -->
-                <a href="#">About Us</a>
-                
-                <!-- 4. Financial Information -->
-                <a href="#">Fees</a>
-                
-                <!-- 5. Support & Contact -->
-                <a href="#">Contact</a>
-            </div>
-            
-            <!-- Right side: Theme toggle and Account button -->
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <!-- Theme Toggle Button -->
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <i class="fas fa-sun light-icon"></i>
-                    <i class="fas fa-moon dark-icon"></i>
-                </button>
-                
-                <!-- Account button -->
-                <button class="desktop-account-btn">Account</button>
-            </div>
-        </nav>
-
-        <!-- RIGHT: Theme toggle (mobile) and Hamburger menu -->
-        <div class="hamburger-menu">
-            <!-- Theme Toggle Button for Mobile -->
-            <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle theme">
-                <i class="fas fa-sun light-icon"></i>
-                <i class="fas fa-moon dark-icon"></i>
-            </button>
-            
-            <!-- Hamburger Menu -->
-            <button class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
-
-    <!-- Mobile Navigation Menu (LEFT SIDE) -->
-    <div class="mobile-nav" id="mobileNav">
-        <div class="mobile-nav-links">
-            <!-- HIERARCHICAL ORDER FOR MOBILE - Same as desktop -->
-            <!-- 1. Primary Actions -->
-            <a href="#" class="active">Find Gig</a>
-            <a href="#">Post Job</a>
-            
-            <!-- 2. Platform Information -->
-            <a href="#">How It Works</a>
-            
-            <!-- 3. Business Information -->
-            <a href="#">About Us</a>
-            <a href="#">Work We Source</a>
-            
-            <!-- 4. Financial Information -->
-            <a href="#">Fees</a>
-            
-            <!-- 5. Support & Contact -->
-            <a href="#">Contact</a>
-        </div>
-        <button class="mobile-nav-btn">
-            Account
-        </button>
-    </div>
-
-    <!-- Overlay for when menu is open -->
-    <div class="menu-overlay" id="menuOverlay"></div>
-
-    <!-- Hero Section - Simple and Clean -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <!-- Headline - Now using Unbounded font like logo -->
-            <h1 class="hero-headline">
-                Got work? Get it done.<br>
-                Need work? Find it here.
-            </h1>
-            
-            <!-- Subheadline -->
-            <p class="hero-subheadline">
-                Connecting neighbors, creating opportunities, and helping communities thrive — safely and fairly.
-            </p>
-            
-            <!-- Buttons Container -->
-            <div class="hero-buttons">
-                <!-- Primary CTA Button -->
-                <a href="#" class="hero-primary-cta">
-                    How it works
-                </a>
-                
-                <!-- Secondary CTA Button -->
-                <a href="#" class="hero-secondary-cta">
-                    Join gigtabi
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        // Mobile menu functionality
-        const hamburger = document.getElementById('hamburger');
-        const mobileNav = document.getElementById('mobileNav');
-        const menuOverlay = document.getElementById('menuOverlay');
-        
-        // Toggle mobile menu
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            mobileNav.classList.toggle('active');
-            menuOverlay.classList.toggle('active');
-            
-            // Prevent body scroll when menu is open
-            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
-        });
-        
-        // Close menu when clicking overlay
-        menuOverlay.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            mobileNav.classList.remove('active');
-            menuOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-        
-        // Close menu when clicking links
-        const mobileLinks = document.querySelectorAll('.mobile-nav-links a, .mobile-nav-btn');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                mobileNav.classList.remove('active');
-                menuOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-
-        // Close menu when pressing Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
-                hamburger.classList.remove('active');
-                mobileNav.classList.remove('active');
-                menuOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('themeToggle');
-        const themeToggleMobile = document.getElementById('themeToggleMobile');
-        const body = document.body;
-
-        // Check for saved theme or prefer-color-scheme
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-        const currentTheme = localStorage.getItem('theme');
-
-        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
-            body.setAttribute('data-theme', 'dark');
-        }
-
-        // Toggle theme function
-        function toggleTheme() {
-            const currentTheme = body.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                body.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        // Add event listeners to both theme toggle buttons
-        themeToggle.addEventListener('click', toggleTheme);
-        themeToggleMobile.addEventListener('click', toggleTheme);
-        
-        // Enhanced sticky header effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.glass-header');
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > 10) {
-                header.style.backdropFilter = 'blur(25px) saturate(180%)';
-                header.style.webkitBackdropFilter = 'blur(25px) saturate(180%)';
-                header.style.boxShadow = '0 8px 32px var(--shadow-color)';
-            } else {
-                header.style.backdropFilter = 'blur(20px) saturate(180%)';
-                header.style.webkitBackdropFilter = 'blur(20px) saturate(180%)';
-                header.style.boxShadow = '0 4px 30px var(--shadow-color)';
-            }
-        });
-
-        // Initialize header
-        window.dispatchEvent(new Event('scroll'));
-
-        // Navigation active state management
-        const navLinks = document.querySelectorAll('.desktop-nav-links a, .mobile-nav-links a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Remove active class from all links
-                navLinks.forEach(l => l.classList.remove('active'));
-                // Add active class to clicked link
-                this.classList.add('active');
-            });
-        });
-    </script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>Gigtabi - Connecting Neighbors</title>
+
+<!-- Font Awesome (kept, not removed) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Google Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Unbounded Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ================= RESET ================= */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;min-height:100vh}
+
+/* ================= VARIABLES ================= */
+:root{
+--bg-color:#ffffff;
+--header-bg:rgba(255,254,248,0.98);
+--text-color:#000;
+--secondary-text:#666;
+--button-bg:#000;
+--button-text:#fff;
+--border-color:rgba(0,0,0,0.1);
+--shadow-color:rgba(0,0,0,0.05);
+--hover-bg:rgba(0,0,0,0.05);
+--menu-bg:rgba(255,254,248,0.98);
+--accent-color:#000;
+}
+
+[data-theme="dark"]{
+--bg-color:#000;
+--header-bg:rgba(0,0,0,0.98);
+--text-color:#fff;
+--secondary-text:#ccc;
+--button-bg:#fff;
+--button-text:#000;
+--border-color:rgba(255,255,255,0.1);
+--shadow-color:rgba(255,255,255,0.05);
+--hover-bg:rgba(255,255,255,0.1);
+--menu-bg:rgba(0,0,0,0.98);
+--accent-color:#fff;
+}
+
+body{background:var(--bg-color);color:var(--text-color);transition:.3s}
+
+/* ================= HEADER ================= */
+.glass-header{
+display:flex;align-items:center;justify-content:space-between;
+background:var(--header-bg);
+backdrop-filter:blur(20px) saturate(180%);
+height:80px;padding:0 28px;position:fixed;top:0;left:0;width:100%;
+z-index:1000;box-shadow:0 4px 30px var(--shadow-color)
+}
+
+.logo{
+font-family:'Unbounded',sans-serif;
+font-size:3.5rem;font-weight:900;letter-spacing:-1px
+}
+
+/* ================= THEME TOGGLE ================= */
+.theme-toggle{
+background:none;border:none;cursor:pointer;
+font-size:1.4rem;color:var(--text-color);
+width:40px;height:40px;display:flex;align-items:center;justify-content:center
+}
+
+.light-icon{display:block}
+.dark-icon{display:none}
+[data-theme="dark"] .light-icon{display:none}
+[data-theme="dark"] .dark-icon{display:block}
+
+/* ================= DESKTOP NAV ================= */
+.desktop-nav{display:none;align-items:center;flex:1}
+.desktop-nav-links{display:flex;gap:24px;margin-left:40px}
+.desktop-nav-links a{
+text-decoration:none;color:var(--text-color);
+font-family:'Unbounded',sans-serif;font-size:.9rem
+}
+.desktop-nav-links a.active{font-weight:500}
+
+/* ================= ACCOUNT BUTTON ================= */
+.desktop-account-btn{
+background:var(--button-bg);color:var(--button-text);
+border:1px solid var(--border-color);
+height:42px;padding:0 24px;
+font-family:'Unbounded',sans-serif;cursor:pointer
+}
+
+/* ================= HAMBURGER ================= */
+.hamburger-menu{display:flex;align-items:center}
+.hamburger{
+background:none;border:none;cursor:pointer;
+display:flex;align-items:center;justify-content:center
+}
+.hamburger .material-icons{
+font-size:30px;color:var(--text-color)
+}
+
+/* ================= MOBILE NAV ================= */
+.mobile-nav{
+position:fixed;top:0;left:0;width:320px;height:100vh;
+background:var(--menu-bg);padding:120px 30px;
+transform:translateX(-100%);transition:.4s;z-index:999
+}
+.mobile-nav.active{transform:translateX(0)}
+
+.mobile-nav-links a{
+display:flex;justify-content:space-between;align-items:center;
+font-family:'Unbounded',sans-serif;
+text-decoration:none;color:var(--text-color);
+padding:18px 0;border-bottom:1px solid var(--border-color)
+}
+
+/* ================= ICON STYLE ================= */
+.material-icons{
+font-size:22px;line-height:1;color:var(--text-color)
+}
+
+/* ================= OVERLAY ================= */
+.menu-overlay{
+position:fixed;inset:0;background:rgba(0,0,0,.3);
+display:none;z-index:998
+}
+.menu-overlay.active{display:block}
+
+/* ================= HERO ================= */
+.hero-section{
+min-height:100vh;display:flex;align-items:center;justify-content:center;
+padding-top:100px;font-family:'Unbounded',sans-serif
+}
+.hero-headline{font-size:5rem;font-weight:800}
+
+/* ================= RESPONSIVE ================= */
+@media(min-width:769px){
+.desktop-nav{display:flex}
+.hamburger-menu,.mobile-nav{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<header class="glass-header">
+<div class="logo">gigtabi</div>
+
+<nav class="desktop-nav">
+<div class="desktop-nav-links">
+<a href="#" class="active">Find Gig</a>
+<a href="#">Post Job</a>
+<a href="#">How It Works</a>
+<a href="#">About Us</a>
+<a href="#">Fees</a>
+<a href="#">Contact</a>
+</div>
+
+<div style="display:flex;gap:10px">
+<button class="theme-toggle" id="themeToggle">
+<i class="fas fa-sun light-icon"></i>
+<i class="fas fa-moon dark-icon"></i>
+</button>
+<button class="desktop-account-btn">Account</button>
+</div>
+</nav>
+
+<div class="hamburger-menu">
+<button class="theme-toggle" id="themeToggleMobile">
+<i class="fas fa-sun light-icon"></i>
+<i class="fas fa-moon dark-icon"></i>
+</button>
+<button class="hamburger" id="hamburger">
+<span class="material-icons">menu</span>
+</button>
+</div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+<div class="mobile-nav-links">
+<a href="#"><span>Find Gig</span><span class="material-icons">chevron_right</span></a>
+<a href="#"><span>Post Job</span><span class="material-icons">chevron_right</span></a>
+<a href="#"><span>How It Works</span><span class="material-icons">chevron_right</span></a>
+<a href="#"><span>About Us</span><span class="material-icons">chevron_right</span></a>
+<a href="#"><span>Work We Source</span><span class="material-icons">chevron_right</span></a>
+<a href="#"><span>Fees</span><span class="material-icons">chevron_right</span></a>
+<a href="#"><span>Contact</span><span class="material-icons">chevron_right</span></a>
+</div>
+</div>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<section class="hero-section">
+<h1 class="hero-headline">Got work? Get it done.<br>Need work? Find it here.</h1>
+</section>
+
+<script>
+const hamburger=document.getElementById('hamburger');
+const mobileNav=document.getElementById('mobileNav');
+const overlay=document.getElementById('menuOverlay');
+
+hamburger.onclick=()=>{
+mobileNav.classList.toggle('active');
+overlay.classList.toggle('active');
+document.body.style.overflow=mobileNav.classList.contains('active')?'hidden':'';
+}
+
+overlay.onclick=()=>{
+mobileNav.classList.remove('active');
+overlay.classList.remove('active');
+document.body.style.overflow='';
+}
+</script>
+
+</body>
+</html>

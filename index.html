@@ -383,6 +383,133 @@
         background: var(--accent-color);
     }
 
+    /* Post Job Dropdown */
+    .post-job-dropdown {
+        position: relative;
+    }
+
+    .post-job-trigger {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+    }
+
+    .dropdown-arrow {
+        font-size: 0.7rem;
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        color: var(--secondary-text);
+    }
+
+    .post-job-dropdown.active .dropdown-arrow {
+        transform: rotate(180deg);
+        color: var(--accent-color);
+    }
+
+    .post-job-options {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: var(--menu-bg);
+        backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid var(--border-color);
+        min-width: 280px;
+        z-index: 1002;
+        box-shadow: 0 10px 30px var(--shadow-color);
+        display: none;
+    }
+
+    .post-job-dropdown.active .post-job-options {
+        display: block;
+    }
+
+    .post-job-option {
+        padding: 0;
+        border-bottom: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+    }
+
+    .post-job-option:last-child {
+        border-bottom: none;
+    }
+
+    .post-job-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 20px;
+        cursor: pointer;
+        font-family: 'Unbounded', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-color);
+        transition: all 0.3s ease;
+    }
+
+    .post-job-header:hover {
+        background: var(--hover-bg);
+        color: var(--accent-color);
+    }
+
+    .post-job-header i {
+        font-size: 0.8rem;
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        color: var(--secondary-text);
+    }
+
+    .post-job-option.active .post-job-header i {
+        transform: rotate(180deg);
+        color: var(--accent-color);
+    }
+
+    .post-job-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        background: rgba(0, 0, 0, 0.02);
+    }
+
+    [data-theme="dark"] .post-job-content {
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .post-job-option.active .post-job-content {
+        max-height: 300px;
+    }
+
+    .post-job-content-inner {
+        padding: 20px;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .post-job-content p {
+        font-family: 'Unbounded', sans-serif;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        color: var(--secondary-text);
+        margin-bottom: 15px;
+    }
+
+    .post-job-btn {
+        background: var(--button-bg);
+        color: var(--button-text);
+        border: none;
+        padding: 10px 20px;
+        font-family: 'Unbounded', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        text-align: center;
+    }
+
+    .post-job-btn:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
     .desktop-account-btn {
         background: var(--button-bg);
         color: var(--button-text);
@@ -514,6 +641,90 @@
     .mobile-nav-links a:hover {
         color: var(--secondary-text);
         padding-left: 5px;
+    }
+
+    /* Mobile Post Job Dropdown */
+    .mobile-post-job-options {
+        display: none;
+        flex-direction: column;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .mobile-post-job-options.active {
+        display: flex;
+    }
+
+    .mobile-post-job-option {
+        padding-left: 20px;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .mobile-post-job-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        cursor: pointer;
+        font-family: 'Unbounded', sans-serif;
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--text-color);
+        transition: all 0.3s ease;
+    }
+
+    .mobile-post-job-header:hover {
+        color: var(--accent-color);
+    }
+
+    .mobile-post-job-header i {
+        font-size: 0.9rem;
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        color: var(--secondary-text);
+    }
+
+    .mobile-post-job-option.active .mobile-post-job-header i {
+        transform: rotate(180deg);
+        color: var(--accent-color);
+    }
+
+    .mobile-post-job-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        padding: 0;
+    }
+
+    .mobile-post-job-option.active .mobile-post-job-content {
+        max-height: 300px;
+        padding-bottom: 15px;
+    }
+
+    .mobile-post-job-content p {
+        font-family: 'Unbounded', sans-serif;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: var(--secondary-text);
+        margin-bottom: 15px;
+        padding: 0 5px;
+    }
+
+    .mobile-post-job-btn {
+        background: var(--button-bg);
+        color: var(--button-text);
+        border: none;
+        padding: 12px 20px;
+        font-family: 'Unbounded', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .mobile-post-job-btn:hover {
+        opacity: 0.9;
     }
 
     /* Last item no border */
@@ -702,105 +913,6 @@
         box-shadow: 0 8px 20px var(--shadow-color);
     }
 
-    /* ---------------- COLLAPSIBLE SECTION FOR POST JOB ---------------- */
-    .collapsible-section {
-        max-width: 800px;
-        margin: 50px auto;
-        padding: 0 20px;
-        display: none; /* Hidden by default */
-    }
-
-    .collapsible-section.active {
-        display: block;
-    }
-
-    .collapsible-container {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .collapsible-item {
-        border: 1px solid var(--border-color);
-        background: var(--header-bg);
-        backdrop-filter: blur(10px);
-        transition: all 0.3s ease;
-    }
-
-    .collapsible-item.active {
-        border-color: var(--accent-color);
-        box-shadow: 0 4px 20px var(--shadow-color);
-    }
-
-    .collapsible-header {
-        padding: 24px 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-        font-family: 'Unbounded', sans-serif;
-        font-size: 1.2rem;
-        font-weight: 500;
-        color: var(--text-color);
-    }
-
-    .collapsible-header:hover {
-        background: var(--hover-bg);
-    }
-
-    .collapsible-icon {
-        transition: transform 0.3s ease;
-        font-size: 1rem;
-        color: var(--secondary-text);
-    }
-
-    .collapsible-item.active .collapsible-icon {
-        transform: rotate(180deg);
-        color: var(--accent-color);
-    }
-
-    .collapsible-content {
-        padding: 0 30px;
-        max-height: 0;
-        overflow: hidden;
-        transition: all 0.3s ease;
-        border-top: 1px solid transparent;
-    }
-
-    .collapsible-item.active .collapsible-content {
-        padding: 30px 30px;
-        max-height: 500px;
-        border-top-color: var(--border-color);
-    }
-
-    .collapsible-content p {
-        font-family: 'Unbounded', sans-serif;
-        font-size: 1rem;
-        line-height: 1.6;
-        color: var(--secondary-text);
-        margin-bottom: 20px;
-    }
-
-    .collapsible-content .action-btn {
-        background: var(--button-bg);
-        color: var(--button-text);
-        border: none;
-        padding: 12px 30px;
-        font-family: 'Unbounded', sans-serif;
-        font-size: 0.95rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: inline-block;
-        text-decoration: none;
-    }
-
-    .collapsible-content .action-btn:hover {
-        opacity: 0.9;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px var(--shadow-color);
-    }
-
     /* ---------------- RESPONSIVE ---------------- */
     @media (min-width: 769px) {
         .desktop-nav {
@@ -959,23 +1071,6 @@
             font-size: 0.9rem;
             padding: 12px;
         }
-        
-        .collapsible-section {
-            margin: 30px auto;
-        }
-        
-        .collapsible-header {
-            padding: 20px 25px;
-            font-size: 1.1rem;
-        }
-        
-        .collapsible-content {
-            padding: 0 25px;
-        }
-        
-        .collapsible-item.active .collapsible-content {
-            padding: 25px;
-        }
     }
 
     @media (max-width: 600px) {
@@ -996,27 +1091,6 @@
         .hero-secondary-cta {
             width: 100%;
             max-width: 300px;
-        }
-        
-        .collapsible-container {
-            gap: 15px;
-        }
-        
-        .collapsible-header {
-            padding: 18px 20px;
-            font-size: 1rem;
-        }
-        
-        .collapsible-content {
-            padding: 0 20px;
-        }
-        
-        .collapsible-item.active .collapsible-content {
-            padding: 20px;
-        }
-        
-        .collapsible-content p {
-            font-size: 0.95rem;
         }
     }
 
@@ -1063,6 +1137,10 @@
         .advanced-filters {
             grid-template-columns: 1fr;
             padding: 15px;
+        }
+        
+        .post-job-options {
+            min-width: 250px;
         }
     }
 </style>
@@ -1135,8 +1213,44 @@
         <div class="desktop-nav-links">
             <!-- HIERARCHICAL ORDER: From most important to least -->
             <!-- 1. Primary Actions -->
-            <a href="#" class="active" id="findGigLink">Find Gig</a>
-            <a href="#" id="postJobLink">Post Job</a>
+            <a href="#" class="active">Find Gig</a>
+            
+            <!-- Post Job with Dropdown -->
+            <div class="post-job-dropdown" id="postJobDropdown">
+                <div class="post-job-trigger" id="postJobTrigger">
+                    <span>Post Job</span>
+                    <i class="fas fa-chevron-down dropdown-arrow"></i>
+                </div>
+                
+                <!-- Post Job Options -->
+                <div class="post-job-options">
+                    <div class="post-job-option" id="businessOption">
+                        <div class="post-job-header">
+                            <span>I am a Business</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="post-job-content">
+                            <div class="post-job-content-inner">
+                                <p>Looking for reliable professionals to handle your business needs? From one-time projects to ongoing support, find verified service providers in your area.</p>
+                                <button class="post-job-btn">Post Business Job</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="post-job-option" id="householdOption">
+                        <div class="post-job-header">
+                            <span>I am a Household / Individual</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="post-job-content">
+                            <div class="post-job-content-inner">
+                                <p>Need help around the house or with personal projects? Connect with trusted local helpers for everything from cleaning and repairs to gardening and moving.</p>
+                                <button class="post-job-btn">Post Household Job</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <!-- 2. Platform Information -->
             <a href="#">How It Works</a>
@@ -1196,8 +1310,33 @@
     <div class="mobile-nav-links">
         <!-- HIERARCHICAL ORDER FOR MOBILE - Same as desktop -->
         <!-- 1. Primary Actions -->
-        <a href="#" class="active" id="mobileFindGigLink">Find Gig</a>
-        <a href="#" id="mobilePostJobLink">Post Job</a>
+        <a href="#" class="active">Find Gig</a>
+        <a href="#" id="mobilePostJobTrigger">Post Job <i class="fas fa-chevron-down"></i></a>
+        
+        <!-- Mobile Post Job Options -->
+        <div class="mobile-post-job-options" id="mobilePostJobOptions">
+            <div class="mobile-post-job-option" id="mobileBusinessOption">
+                <div class="mobile-post-job-header">
+                    <span>I am a Business</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-post-job-content">
+                    <p>Looking for reliable professionals to handle your business needs? From one-time projects to ongoing support, find verified service providers in your area.</p>
+                    <button class="mobile-post-job-btn">Post Business Job</button>
+                </div>
+            </div>
+            
+            <div class="mobile-post-job-option" id="mobileHouseholdOption">
+                <div class="mobile-post-job-header">
+                    <span>I am a Household / Individual</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-post-job-content">
+                    <p>Need help around the house or with personal projects? Connect with trusted local helpers for everything from cleaning and repairs to gardening and moving.</p>
+                    <button class="mobile-post-job-btn">Post Household Job</button>
+                </div>
+            </div>
+        </div>
         
         <!-- 2. Platform Information -->
         <a href="#">How It Works</a>
@@ -1251,33 +1390,6 @@
         <p class="hero-tagline">
             <strong>Zero-risk secure payments</strong> • Made for your local community • Trusted by neighbors
         </p>
-    </div>
-</section>
-
-<!-- Collapsible Section for Post Job (Hidden by default) -->
-<section class="collapsible-section" id="postJobSection">
-    <div class="collapsible-container">
-        <div class="collapsible-item" id="businessCollapsible">
-            <div class="collapsible-header">
-                <span>I am a Business</span>
-                <i class="fas fa-chevron-down collapsible-icon"></i>
-            </div>
-            <div class="collapsible-content">
-                <p>Looking for reliable professionals to handle your business needs? From one-time projects to ongoing support, find verified service providers in your area.</p>
-                <button class="action-btn">Post Business Job</button>
-            </div>
-        </div>
-        
-        <div class="collapsible-item" id="householdCollapsible">
-            <div class="collapsible-header">
-                <span>I am a Household / Individual</span>
-                <i class="fas fa-chevron-down collapsible-icon"></i>
-            </div>
-            <div class="collapsible-content">
-                <p>Need help around the house or with personal projects? Connect with trusted local helpers for everything from cleaning and repairs to gardening and moving.</p>
-                <button class="action-btn">Post Household Job</button>
-            </div>
-        </div>
     </div>
 </section>
 
@@ -1406,6 +1518,11 @@
             searchBar.classList.remove('active');
             advancedFilters.classList.remove('active');
         }
+        
+        // Close post job dropdown if clicking outside
+        if (!document.getElementById('postJobDropdown').contains(e.target)) {
+            document.getElementById('postJobDropdown').classList.remove('active');
+        }
     });
     
     // Apply filters
@@ -1453,76 +1570,109 @@
         }
     });
     
-    // Collapsible functionality for Post Job section
-    const businessCollapsible = document.getElementById('businessCollapsible');
-    const householdCollapsible = document.getElementById('householdCollapsible');
-    const postJobSection = document.getElementById('postJobSection');
+    // Desktop Post Job Dropdown Functionality
+    const postJobDropdown = document.getElementById('postJobDropdown');
+    const postJobTrigger = document.getElementById('postJobTrigger');
+    const businessOption = document.getElementById('businessOption');
+    const householdOption = document.getElementById('householdOption');
     
-    // Toggle collapsible items
-    function toggleCollapsible(item) {
-        const isActive = item.classList.contains('active');
+    // Toggle dropdown
+    postJobTrigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        postJobDropdown.classList.toggle('active');
         
-        // Close all collapsibles
-        businessCollapsible.classList.remove('active');
-        householdCollapsible.classList.remove('active');
+        // Close other dropdowns
+        searchBar.classList.remove('active');
+        advancedFilters.classList.remove('active');
+    });
+    
+    // Toggle individual collapsibles
+    function toggleCollapsible(option) {
+        const isActive = option.classList.contains('active');
+        
+        // Close all collapsibles first
+        businessOption.classList.remove('active');
+        householdOption.classList.remove('active');
         
         // Open clicked one if it wasn't active
         if (!isActive) {
-            item.classList.add('active');
+            option.classList.add('active');
         }
     }
     
-    businessCollapsible.querySelector('.collapsible-header').addEventListener('click', () => {
-        toggleCollapsible(businessCollapsible);
+    businessOption.querySelector('.post-job-header').addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleCollapsible(businessOption);
     });
     
-    householdCollapsible.querySelector('.collapsible-header').addEventListener('click', () => {
-        toggleCollapsible(householdCollapsible);
+    householdOption.querySelector('.post-job-header').addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleCollapsible(householdOption);
     });
     
-    // Show/Hide Post Job section based on navigation
-    const postJobLink = document.getElementById('postJobLink');
-    const mobilePostJobLink = document.getElementById('mobilePostJobLink');
-    const findGigLink = document.getElementById('findGigLink');
-    const mobileFindGigLink = document.getElementById('mobileFindGigLink');
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!postJobDropdown.contains(e.target)) {
+            postJobDropdown.classList.remove('active');
+        }
+    });
     
-    function showPostJobSection() {
-        postJobSection.classList.add('active');
-        // Scroll to section
-        postJobSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Mobile Post Job Functionality
+    const mobilePostJobTrigger = document.getElementById('mobilePostJobTrigger');
+    const mobilePostJobOptions = document.getElementById('mobilePostJobOptions');
+    const mobileBusinessOption = document.getElementById('mobileBusinessOption');
+    const mobileHouseholdOption = document.getElementById('mobileHouseholdOption');
+    
+    // Toggle mobile post job options
+    mobilePostJobTrigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        mobilePostJobOptions.classList.toggle('active');
+        
+        // Rotate arrow
+        const arrow = mobilePostJobTrigger.querySelector('i');
+        arrow.style.transform = mobilePostJobOptions.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
+    });
+    
+    // Toggle mobile collapsibles
+    function toggleMobileCollapsible(option) {
+        const isActive = option.classList.contains('active');
+        
+        // Close all mobile collapsibles first
+        mobileBusinessOption.classList.remove('active');
+        mobileHouseholdOption.classList.remove('active');
+        
+        // Open clicked one if it wasn't active
+        if (!isActive) {
+            option.classList.add('active');
+        }
     }
     
-    function hidePostJobSection() {
-        postJobSection.classList.remove('active');
-    }
-    
-    postJobLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        showPostJobSection();
+    mobileBusinessOption.querySelector('.mobile-post-job-header').addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMobileCollapsible(mobileBusinessOption);
     });
     
-    mobilePostJobLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        showPostJobSection();
-        // Close mobile menu
-        hamburger.classList.remove('active');
-        mobileNav.classList.remove('active');
-        menuOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+    mobileHouseholdOption.querySelector('.mobile-post-job-header').addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMobileCollapsible(mobileHouseholdOption);
     });
     
-    findGigLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        hidePostJobSection();
-    });
-    
-    mobileFindGigLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        hidePostJobSection();
-        // Close mobile menu
-        hamburger.classList.remove('active');
-        mobileNav.classList.remove('active');
-        menuOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+    // Close mobile menu when clicking post job buttons
+    const postJobBtns = document.querySelectorAll('.post-job-btn, .mobile-post-job-btn');
+    postJobBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Post Job button clicked');
+            // Implement post job functionality here
+            
+            // Close menus
+            postJobDropdown.classList.remove('active');
+            hamburger.classList.remove('active');
+            mobileNav.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
     });
 </script>

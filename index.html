@@ -595,7 +595,7 @@
         transform: rotate(-45deg) translate(4px, -4px);
     }
 
-    /* ---------------- MOBILE MENU (LEFT SIDE) ---------------- */
+    /* ---------------- MOBILE MENU (LEFT SIDE) - KEEP ORIGINAL LINKS ---------------- */
     .mobile-nav {
         position: fixed;
         top: 0;
@@ -876,7 +876,7 @@
         flex-wrap: wrap;
     }
 
-    /* Hero Tagline */
+    /* Hero Tagline - UPDATED */
     .hero-tagline {
         font-family: 'Unbounded', sans-serif;
         font-size: 1rem;
@@ -1259,7 +1259,7 @@
     <nav class="desktop-nav">
         <!-- Left side: Hierarchical navigation with logical order -->
         <div class="desktop-nav-links">
-            <!-- CLEANED UP NAVIGATION: Removed Find Gig and Fees -->
+            <!-- DESKTOP: Simplified navigation (removed Find Gig and Fees) -->
             <!-- 1. Primary Action -->
             <div class="post-gig-dropdown" id="postGigDropdown">
                 <div class="post-gig-trigger" id="postGigTrigger">
@@ -1337,7 +1337,7 @@
     </div>
 </header>
 
-<!-- Mobile Navigation Menu (LEFT SIDE) -->
+<!-- Mobile Navigation Menu (LEFT SIDE) - KEEP ORIGINAL LINKS -->
 <div class="mobile-nav" id="mobileNav">
     <!-- Mobile Search -->
     <div class="mobile-search">
@@ -1350,8 +1350,11 @@
     </div>
     
     <div class="mobile-nav-links">
-        <!-- CLEANED UP MOBILE NAVIGATION -->
-        <!-- 1. Primary Action -->
+        <!-- MOBILE: KEEP ORIGINAL NAVIGATION LINKS (with Find Gig and Fees) -->
+        <!-- 1. Primary Actions -->
+        <a href="#" class="active">Find Gig</a>
+        
+        <!-- Post Gig with Dropdown -->
         <a href="#" id="mobilePostGigTrigger">Post Gig <i class="fas fa-chevron-down"></i></a>
         
         <!-- Mobile Post Gig Options -->
@@ -1384,8 +1387,12 @@
         
         <!-- 3. Business Information -->
         <a href="#">About Us</a>
+        <a href="#">Work We Source</a>
         
-        <!-- 4. Support & Contact -->
+        <!-- 4. Financial Information -->
+        <a href="#">Fees</a>
+        
+        <!-- 5. Support & Contact -->
         <a href="#">Contact</a>
     </div>
     <button class="mobile-nav-btn">
@@ -1423,9 +1430,9 @@
             </a>
         </div>
         
-        <!-- Hero Tagline -->
+        <!-- Hero Tagline - UPDATED -->
         <p class="hero-tagline">
-            <strong>Zero-risk secure payments</strong> • Made for your local community • Trusted by neighbors
+            <strong>Risk-free</strong> • Made for your community • Trusted by neighbours & businesses
         </p>
     </div>
 </section>
@@ -1532,6 +1539,20 @@
             if (!this.classList.contains('post-gig-trigger')) {
                 // Remove active class from all links
                 navLinks.forEach(l => l.classList.remove('active'));
+                // Add active class to clicked link
+                this.classList.add('active');
+            }
+        });
+    });
+
+    // Mobile navigation active state
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a:not(#mobilePostGigTrigger)');
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Only for regular links, not dropdown triggers
+            if (!this.id.includes('mobilePostGig')) {
+                // Remove active class from all links
+                mobileNavLinks.forEach(l => l.classList.remove('active'));
                 // Add active class to clicked link
                 this.classList.add('active');
             }

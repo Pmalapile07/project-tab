@@ -36,6 +36,7 @@
         --accent-color: #000000;
         --search-bg: rgba(255, 255, 255, 0.9);
         --search-border: rgba(0, 0, 0, 0.15);
+        --border-radius: 8px; /* Added border-radius variable */
     }
 
     [data-theme="dark"] {
@@ -52,6 +53,7 @@
         --accent-color: #ffffff;
         --search-bg: rgba(30, 30, 30, 0.9);
         --search-border: rgba(255, 255, 255, 0.15);
+        --border-radius: 8px; /* Added border-radius variable */
     }
 
     /* Apply theme variables */
@@ -128,7 +130,7 @@
         align-items: center;
         background: var(--search-bg);
         border: 1px solid var(--search-border);
-        border-radius: 0;
+        border-radius: var(--border-radius); /* Added border-radius */
         padding: 0;
         height: 42px;
         transition: all 0.3s ease;
@@ -186,6 +188,7 @@
         transition: all 0.3s ease;
         border-left: 1px solid var(--border-color);
         white-space: nowrap;
+        border-radius: 0 var(--border-radius) var(--border-radius) 0; /* Rounded right corners */
     }
 
     .advanced-filter-btn:hover {
@@ -213,6 +216,7 @@
         z-index: 1001;
         box-shadow: 0 10px 30px var(--shadow-color);
         min-width: 400px;
+        border-radius: var(--border-radius); /* Added border-radius */
     }
 
     .advanced-filters.active {
@@ -243,6 +247,7 @@
         outline: none;
         transition: border-color 0.3s ease;
         width: 100%;
+        border-radius: var(--border-radius); /* Added border-radius */
     }
 
     .filter-group select:focus,
@@ -271,6 +276,7 @@
         cursor: pointer;
         transition: all 0.3s ease;
         white-space: nowrap;
+        border-radius: var(--border-radius); /* Added border-radius */
     }
 
     .search-btn:hover {
@@ -289,6 +295,7 @@
         cursor: pointer;
         transition: all 0.3s ease;
         white-space: nowrap;
+        border-radius: var(--border-radius); /* Added border-radius */
     }
 
     .reset-btn:hover {
@@ -434,6 +441,7 @@
         z-index: 1002;
         box-shadow: 0 10px 30px var(--shadow-color);
         display: none;
+        border-radius: var(--border-radius); /* Added border-radius */
     }
 
     .post-gig-dropdown.active .post-gig-options {
@@ -464,6 +472,7 @@
         border: none;
         width: 100%;
         text-align: left;
+        border-radius: 0; /* Reset border-radius for headers */
     }
 
     .post-gig-header:hover {
@@ -523,6 +532,7 @@
         width: 100%;
         text-align: center;
         display: block;
+        border-radius: var(--border-radius); /* Added border-radius */
     }
 
     .post-gig-btn:hover {
@@ -542,7 +552,7 @@
         font-weight: 500;
         cursor: pointer;
         transition: all 0.3s ease;
-        border-radius: 0;
+        border-radius: var(--border-radius); /* Added border-radius */
         white-space: nowrap;
         display: flex;
         align-items: center;
@@ -752,6 +762,7 @@
         text-align: center;
         margin-top: 10px;
         display: block;
+        border-radius: var(--border-radius); /* Added border-radius */
     }
 
     .mobile-post-gig-btn:hover {
@@ -775,7 +786,7 @@
         font-weight: 500;
         cursor: pointer;
         transition: all 0.4s ease;
-        border-radius: 0;
+        border-radius: var(--border-radius); /* Added border-radius */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -788,20 +799,28 @@
         box-shadow: 0 4px 15px var(--shadow-color);
     }
 
-    /* Mobile Search */
+    /* Mobile Search - UPDATED FOR SYMMETRICAL ALIGNMENT AND INCREASED WIDTH */
     .mobile-search {
-        padding: 0 30px 20px;
+        padding: 0 0 20px 0; /* Changed from 30px to 0 for symmetrical alignment */
         border-bottom: 1px solid var(--border-color);
         margin-bottom: 20px;
         display: none;
+        width: 100%; /* Full width */
     }
 
     .mobile-search .search-bar {
         height: 48px;
+        width: 100%; /* Full width */
+        border-radius: var(--border-radius); /* Added border-radius */
     }
 
     .mobile-search .search-input {
         font-size: 1rem;
+    }
+
+    /* Mobile Advanced Search Button */
+    .mobile-search .advanced-filter-btn {
+        display: flex;
     }
 
     /* Overlay for when menu is open */
@@ -907,7 +926,7 @@
         font-weight: 500;
         cursor: pointer;
         transition: all 0.3s ease;
-        border-radius: 0;
+        border-radius: var(--border-radius); /* Added border-radius */
         display: inline-block;
         min-width: 200px;
         text-decoration: none;
@@ -931,7 +950,7 @@
         font-weight: 500;
         cursor: pointer;
         transition: all 0.3s ease;
-        border-radius: 0;
+        border-radius: var(--border-radius); /* Added border-radius */
         display: inline-block;
         min-width: 200px;
         text-decoration: none;
@@ -1110,6 +1129,11 @@
             min-width: 350px;
             grid-template-columns: repeat(2, 1fr);
         }
+        
+        /* Mobile search adjustments for symmetry */
+        .mobile-search {
+            padding: 0 0 20px 0;
+        }
     }
 
     @media (max-width: 600px) {
@@ -1189,6 +1213,11 @@
         
         .post-gig-options {
             min-width: 280px;
+        }
+        
+        /* Mobile search adjustments for smaller screens */
+        .mobile-search .search-bar {
+            height: 44px;
         }
     }
 </style>
@@ -1339,13 +1368,58 @@
 
 <!-- Mobile Navigation Menu (LEFT SIDE) - KEEP ORIGINAL LINKS -->
 <div class="mobile-nav" id="mobileNav">
-    <!-- Mobile Search -->
+    <!-- Mobile Search - UPDATED WITH ADVANCED FEATURES -->
     <div class="mobile-search">
         <div class="search-bar" id="mobileSearchBar">
             <div class="search-icon">
                 <i class="fas fa-search"></i>
             </div>
             <input type="text" class="search-input" placeholder="Search gigs, jobs, services...">
+            <button class="advanced-filter-btn" id="mobileAdvancedFilterBtn">
+                <i class="fas fa-sliders-h"></i>
+                <span>Advanced</span>
+            </button>
+        </div>
+        
+        <!-- Mobile Advanced Filters Dropdown -->
+        <div class="advanced-filters" id="mobileAdvancedFilters">
+            <div class="filter-group">
+                <label for="mobileProvince">Province</label>
+                <select id="mobileProvince">
+                    <option value="">Select Province</option>
+                    <option value="gauteng">Gauteng</option>
+                    <option value="western-cape">Western Cape</option>
+                    <option value="kwazulu-natal">KwaZulu-Natal</option>
+                    <option value="eastern-cape">Eastern Cape</option>
+                    <option value="free-state">Free State</option>
+                    <option value="limpopo">Limpopo</option>
+                    <option value="mpumalanga">Mpumalanga</option>
+                    <option value="north-west">North West</option>
+                    <option value="northern-cape">Northern Cape</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="mobileCity">City/Town</label>
+                <input type="text" id="mobileCity" placeholder="Enter city or town">
+            </div>
+            
+            <div class="filter-group">
+                <label for="mobileDistance">Distance (km)</label>
+                <select id="mobileDistance">
+                    <option value="">Any distance</option>
+                    <option value="5">Within 5 km</option>
+                    <option value="10">Within 10 km</option>
+                    <option value="25">Within 25 km</option>
+                    <option value="50">Within 50 km</option>
+                    <option value="100">Within 100 km</option>
+                </select>
+            </div>
+            
+            <div class="search-actions">
+                <button class="reset-btn" id="mobileResetFilters">Reset</button>
+                <button class="search-btn" id="mobileApplyFilters">Apply Filters</button>
+            </div>
         </div>
     </div>
     
@@ -1720,6 +1794,85 @@
         e.preventDefault();
         e.stopPropagation();
         toggleMobileCollapsible(mobileHouseholdOption);
+    });
+    
+    // Mobile Advanced Search Functionality
+    const mobileSearchBar = document.getElementById('mobileSearchBar');
+    const mobileAdvancedFilterBtn = document.getElementById('mobileAdvancedFilterBtn');
+    const mobileAdvancedFilters = document.getElementById('mobileAdvancedFilters');
+    const mobileApplyFiltersBtn = document.getElementById('mobileApplyFilters');
+    const mobileResetFiltersBtn = document.getElementById('mobileResetFilters');
+    const mobileSearchInput = mobileSearchBar.querySelector('.search-input');
+    
+    // Toggle mobile advanced filters
+    mobileAdvancedFilterBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mobileSearchBar.classList.toggle('active');
+        mobileAdvancedFilters.classList.toggle('active');
+        
+        // Close mobile post gig dropdown if open
+        mobilePostGigOptions.classList.remove('active');
+        const arrow = mobilePostGigTrigger.querySelector('i');
+        arrow.style.transform = 'rotate(0)';
+    });
+    
+    // Close mobile filters when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!mobileSearchBar.contains(e.target) && !mobileAdvancedFilters.contains(e.target)) {
+            mobileSearchBar.classList.remove('active');
+            mobileAdvancedFilters.classList.remove('active');
+        }
+    });
+    
+    // Apply mobile filters
+    mobileApplyFiltersBtn.addEventListener('click', () => {
+        const province = document.getElementById('mobileProvince').value;
+        const city = document.getElementById('mobileCity').value;
+        const distance = document.getElementById('mobileDistance').value;
+        
+        // For now, just log the filters
+        console.log('Applying mobile filters:', { province, city, distance });
+        
+        // Close filters
+        mobileSearchBar.classList.remove('active');
+        mobileAdvancedFilters.classList.remove('active');
+        
+        // Update search input placeholder to show active filters
+        let filterText = [];
+        if (province) filterText.push(province);
+        if (city) filterText.push(city);
+        if (distance) filterText.push(`${distance}km`);
+        
+        if (filterText.length > 0) {
+            mobileSearchInput.placeholder = `Search in ${filterText.join(', ')}...`;
+        } else {
+            mobileSearchInput.placeholder = 'Search gigs, jobs, services...';
+        }
+    });
+    
+    // Reset mobile filters
+    mobileResetFiltersBtn.addEventListener('click', () => {
+        document.getElementById('mobileProvince').value = '';
+        document.getElementById('mobileCity').value = '';
+        document.getElementById('mobileDistance').value = '';
+        mobileSearchInput.placeholder = 'Search gigs, jobs, services...';
+    });
+    
+    // Mobile search input functionality
+    mobileSearchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            const searchTerm = mobileSearchInput.value.trim();
+            if (searchTerm) {
+                console.log('Mobile searching for:', searchTerm);
+                // Implement search functionality here
+                
+                // Close mobile menu after search
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
     });
     
     // Close mobile menu when clicking post gig buttons

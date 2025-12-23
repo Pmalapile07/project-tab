@@ -19,7 +19,7 @@
         overflow-x: hidden;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
         min-height: 100vh;
-        zoom: 80%; /* Added zoom to 80% */
+        /* Removed zoom: 80% */
     }
 
     /* ---------------- DARK MODE VARIABLES ---------------- */
@@ -233,6 +233,7 @@
         border: 1px solid var(--border-color);
         margin-top: 10px;
         border-radius: var(--border-radius);
+        border-bottom: none; /* Removed bottom border */
     }
 
     .mobile-advanced-filters.active {
@@ -634,7 +635,7 @@
         transform: rotate(-45deg) translate(4px, -4px);
     }
 
-    /* ---------------- MOBILE MENU (LEFT SIDE) - KEEP ORIGINAL LINKS ---------------- */
+    /* ---------------- MOBILE MENU (LEFT SIDE) - UPDATED FOR SCROLLABLE ---------------- */
     .mobile-nav {
         position: fixed;
         top: 0;
@@ -649,7 +650,9 @@
         padding: 120px 30px 40px 30px;
         transform: translateX(-100%);
         transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
-        overflow-y: auto;
+        overflow-y: auto; /* Made scrollable */
+        display: flex;
+        flex-direction: column;
     }
 
     .mobile-nav.active {
@@ -678,10 +681,19 @@
             rgba(255, 255, 255, 0.02) 100%);
     }
 
+    /* Mobile Nav Content Container */
+    .mobile-nav-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto; /* Scrollable content */
+    }
+
     .mobile-nav-links {
         display: flex;
         flex-direction: column;
         gap: 0;
+        flex: 1;
     }
 
     .mobile-nav-links a {
@@ -819,6 +831,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-shrink: 0; /* Prevent button from shrinking */
     }
 
     .mobile-nav-btn:hover {
@@ -828,13 +841,13 @@
         box-shadow: 0 4px 15px var(--shadow-color);
     }
 
-    /* Mobile Search - UPDATED WITH ICON-ONLY ADVANCED BUTTON */
+    /* Mobile Search - UPDATED WITH REMOVED BORDER */
     .mobile-search {
         padding: 0 0 20px 0;
-        border-bottom: 1px solid var(--border-color);
         margin-bottom: 20px;
         display: none;
         width: 100%;
+        border-bottom: none; /* Removed bottom border */
     }
 
     .mobile-search .search-bar {
@@ -850,11 +863,11 @@
     /* Mobile Advanced Search Button - ICON ONLY */
     .mobile-search .advanced-filter-btn {
         display: flex;
-        padding: 0 12px; /* Reduced padding for icon-only */
+        padding: 0 12px;
     }
 
     .mobile-search .advanced-filter-btn span {
-        display: none; /* Hide the "Advanced" text on mobile */
+        display: none;
     }
 
     /* Overlay for when menu is open */
@@ -1165,10 +1178,6 @@
             min-width: 350px;
             grid-template-columns: repeat(2, 1fr);
         }
-        
-        .mobile-search {
-            padding: 0 0 20px 0;
-        }
     }
 
     @media (max-width: 600px) {
@@ -1400,9 +1409,9 @@
     </div>
 </header>
 
-<!-- Mobile Navigation Menu (LEFT SIDE) - KEEP ORIGINAL LINKS -->
+<!-- Mobile Navigation Menu (LEFT SIDE) - UPDATED HIERARCHY -->
 <div class="mobile-nav" id="mobileNav">
-    <!-- Mobile Search - UPDATED WITH COLLAPSIBLE ADVANCED FILTERS -->
+    <!-- Mobile Search Container -->
     <div class="mobile-search">
         <div class="search-bar" id="mobileSearchBar">
             <div class="search-icon">
@@ -1457,52 +1466,57 @@
         </div>
     </div>
     
-    <div class="mobile-nav-links">
-        <!-- MOBILE: KEEP ORIGINAL NAVIGATION LINKS (with Find Gig and Fees) -->
-        <!-- 1. Primary Actions -->
-        <a href="#" class="active">Find Gig</a>
-        
-        <!-- Post Gig with Dropdown -->
-        <a href="#" id="mobilePostGigTrigger">Post Gig <i class="fas fa-chevron-down"></i></a>
-        
-        <!-- Mobile Post Gig Options -->
-        <div class="mobile-post-gig-options" id="mobilePostGigOptions">
-            <div class="mobile-post-gig-option" id="mobileBusinessOption">
-                <button class="mobile-post-gig-header">
-                    <span>I am a Business</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="mobile-post-gig-content">
-                    <p>Looking for reliable professionals to handle your business needs? From one-time projects to ongoing support, find verified service providers in your area.</p>
-                    <button class="mobile-post-gig-btn">Post Business Gig</button>
+    <!-- Mobile Nav Content - Scrollable Area -->
+    <div class="mobile-nav-content">
+        <div class="mobile-nav-links">
+            <!-- MOBILE: UPDATED HIERARCHY (About Us under Work We Source) -->
+            <!-- 1. Primary Actions -->
+            <a href="#" class="active">Find Gig</a>
+            
+            <!-- Post Gig with Dropdown -->
+            <a href="#" id="mobilePostGigTrigger">Post Gig <i class="fas fa-chevron-down"></i></a>
+            
+            <!-- Mobile Post Gig Options -->
+            <div class="mobile-post-gig-options" id="mobilePostGigOptions">
+                <div class="mobile-post-gig-option" id="mobileBusinessOption">
+                    <button class="mobile-post-gig-header">
+                        <span>I am a Business</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="mobile-post-gig-content">
+                        <p>Looking for reliable professionals to handle your business needs? From one-time projects to ongoing support, find verified service providers in your area.</p>
+                        <button class="mobile-post-gig-btn">Post Business Gig</button>
+                    </div>
+                </div>
+                
+                <div class="mobile-post-gig-option" id="mobileHouseholdOption">
+                    <button class="mobile-post-gig-header">
+                        <span>I am a Household / Individual</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="mobile-post-gig-content">
+                        <p>Need help around the house or with personal projects? Connect with trusted local helpers for everything from cleaning and repairs to gardening and moving.</p>
+                        <button class="mobile-post-gig-btn">Post Household Gig</button>
+                    </div>
                 </div>
             </div>
             
-            <div class="mobile-post-gig-option" id="mobileHouseholdOption">
-                <button class="mobile-post-gig-header">
-                    <span>I am a Household / Individual</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="mobile-post-gig-content">
-                    <p>Need help around the house or with personal projects? Connect with trusted local helpers for everything from cleaning and repairs to gardening and moving.</p>
-                    <button class="mobile-post-gig-btn">Post Household Gig</button>
-                </div>
-            </div>
+            <!-- 2. Platform Information -->
+            <a href="#">How It Works</a>
+            
+            <!-- 3. Business Information - UPDATED HIERARCHY -->
+            <a href="#">Work We Source</a>
+            <a href="#" style="padding-left: 30px; font-size: 1rem; color: var(--secondary-text);">About Us</a>
+            
+            <!-- 4. Financial Information -->
+            <a href="#">Fees</a>
+            
+            <!-- 5. Support & Contact -->
+            <a href="#">Contact</a>
         </div>
-        
-        <!-- 2. Platform Information -->
-        <a href="#">How It Works</a>
-        
-        <!-- 3. Business Information -->
-        <a href="#">About Us</a>
-        <a href="#">Work We Source</a>
-        
-        <!-- 4. Financial Information -->
-        <a href="#">Fees</a>
-        
-        <!-- 5. Support & Contact -->
-        <a href="#">Contact</a>
     </div>
+    
+    <!-- Account Button - Outside scrollable area -->
     <button class="mobile-nav-btn">
         Account
     </button>

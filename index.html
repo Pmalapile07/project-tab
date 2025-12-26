@@ -15,7 +15,7 @@
             /* Colors - Light Theme */
             --color-white: #ffffff;
             --color-black: #000000;
-            --color-blue: #296CB2; /* Added blue color */
+            --color-blue: #296CB2;
             --color-gray-100: #f8f9fa;
             --color-gray-200: #e9ecef;
             --color-gray-300: #dee2e6;
@@ -40,10 +40,10 @@
             --search-bg: rgba(255, 255, 255, 0.9);
             --search-border: rgba(0, 0, 0, 0.15);
             
-            /* Layout */
+            /* Layout - INCREASED HEADER HEIGHT */
             --border-radius: 8px;
-            --header-height: 80px;
-            --mobile-header-height: 70px;
+            --header-height: 100px; /* Increased from 80px */
+            --mobile-header-height: 85px; /* Increased from 70px */
             --container-padding: 28px;
             --mobile-container-padding: 20px;
             
@@ -108,7 +108,7 @@
             transition: background-color var(--transition-normal), color var(--transition-normal);
         }
 
-        /* 3. IMPROVED GLASS HEADER */
+        /* 3. IMPROVED GLASS HEADER - TALLER */
         .glass-header {
             position: fixed;
             top: 0;
@@ -150,13 +150,13 @@
                 rgba(255, 255, 255, 0.02) 100%);
         }
 
-        /* 4. UPDATED LOGO WITH BLUE COLOR */
+        /* 4. RESTORED ORIGINAL LOGO COLOR */
         .logo {
             font-family: 'Unbounded', sans-serif;
             font-size: clamp(2.2rem, 5vw, 3.5rem);
             font-weight: 900;
             letter-spacing: -0.5px;
-            color: var(--color-blue); /* Changed to blue */
+            color: var(--text-color); /* Restored to original color */
             line-height: 1;
             user-select: none;
             transition: color var(--transition-normal);
@@ -377,7 +377,7 @@
         .desktop-nav {
             display: none;
             align-items: center;
-            gap: 20px;
+            gap: 15px; /* Reduced gap */
             margin-left: auto;
         }
 
@@ -390,8 +390,8 @@
         .desktop-nav-links {
             display: flex;
             align-items: center;
-            gap: 32px;
-            margin-right: 20px;
+            gap: 28px; /* Reduced gap */
+            margin-right: 15px; /* Reduced margin */
         }
 
         .desktop-nav-links a {
@@ -577,12 +577,12 @@
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 1.4rem;
+            font-size: 1.3rem; /* Slightly smaller */
             color: var(--text-color);
             padding: 8px;
             border-radius: 50%;
-            width: 44px;
-            height: 44px;
+            width: 42px; /* Adjusted */
+            height: 42px; /* Adjusted */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -601,10 +601,16 @@
         [data-theme="dark"] .light-icon { display: none; }
         [data-theme="dark"] .dark-icon { display: block; }
 
-        /* 10. LANGUAGE SELECTOR */
+        /* 10. LANGUAGE SELECTOR - MOBILE HIDDEN */
         .language-selector {
             position: relative;
             margin-right: 5px;
+        }
+
+        @media (max-width: 900px) {
+            .language-selector {
+                display: none !important; /* Hidden on mobile */
+            }
         }
 
         .language-btn {
@@ -675,13 +681,13 @@
 
         .language-option:hover {
             background: var(--hover-bg);
-            color: var(--color-blue);
+            color: var(--accent-color);
         }
 
         .language-option.active {
-            color: var(--color-blue);
+            color: var(--accent-color);
             font-weight: 500;
-            background: rgba(41, 108, 178, 0.1);
+            background: var(--hover-bg);
         }
 
         .language-option.active .check-icon {
@@ -690,17 +696,17 @@
 
         .check-icon {
             display: none;
-            color: var(--color-blue);
+            color: var(--accent-color);
             font-size: 0.8rem;
         }
 
-        /* Language Tooltip */
+        /* Language Tooltip - POINTS TO LANGUAGE SELECTOR */
         .language-tooltip {
             position: fixed;
             top: calc(var(--header-height) + 10px);
-            right: 20px;
-            background: var(--color-blue);
-            color: white;
+            right: 190px; /* Adjusted to point to language selector */
+            background: var(--accent-color);
+            color: var(--button-text);
             padding: 12px 16px;
             border-radius: var(--border-radius);
             font-family: 'Unbounded', sans-serif;
@@ -710,16 +716,18 @@
             box-shadow: var(--shadow-xl);
             animation: fadeIn 0.3s ease-out;
             display: none;
+            max-width: 180px;
+            text-align: center;
         }
 
         .language-tooltip::after {
             content: '';
             position: absolute;
             top: -8px;
-            right: 20px;
+            right: 20px; /* Arrow positioned to point at language selector */
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
-            border-bottom: 8px solid var(--color-blue);
+            border-bottom: 8px solid var(--accent-color);
         }
 
         @keyframes fadeIn {
@@ -817,7 +825,7 @@
             -webkit-backdrop-filter: blur(25px) saturate(180%);
             box-shadow: var(--shadow-xl);
             z-index: var(--z-mobile-nav);
-            padding: 100px 30px 40px; /* Reduced top padding */
+            padding: 100px 30px 40px; /* Adjusted for taller header */
             transform: translateX(-100%);
             transition: transform var(--transition-slow);
             display: flex;
@@ -851,8 +859,8 @@
         }
 
         .mobile-search {
-            padding: 0 0 16px 0; /* Reduced bottom padding */
-            margin-bottom: 16px; /* Reduced margin */
+            padding: 0 0 16px 0;
+            margin-bottom: 16px;
             display: none;
             width: 100%;
             border-bottom: none !important; /* Removed border bottom */
@@ -1061,8 +1069,8 @@
             padding: 40px 20px;
             background: var(--bg-color);
             text-align: center;
-            margin-top: var(--header-height);
-            padding-top: 40px;
+            margin-top: var(--header-height); /* Adjusted for taller header */
+            padding-top: 60px; /* Increased for taller header */
         }
 
         .hero-content {
@@ -1107,7 +1115,7 @@
             flex-wrap: wrap;
         }
 
-        /* Updated hero primary CTA with blue background */
+        /* Restored original hero button colors */
         .hero-primary-cta,
         .hero-secondary-cta {
             padding: 22px 48px;
@@ -1125,12 +1133,12 @@
         }
 
         .hero-primary-cta {
-            background: var(--color-blue); /* Changed to blue */
-            color: var(--color-white); /* White text for contrast */
+            background: var(--button-bg); /* Restored original */
+            color: var(--button-text); /* Restored original */
         }
 
         .hero-primary-cta:hover {
-            background: #1e5a9e; /* Darker blue on hover */
+            opacity: 0.9; /* Restored original hover */
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
@@ -1174,8 +1182,8 @@
             }
             
             .desktop-nav-links {
-                gap: 28px;
-                margin-right: 15px;
+                gap: 24px;
+                margin-right: 10px;
             }
         }
 
@@ -1185,13 +1193,17 @@
             }
             
             .desktop-nav-links {
-                gap: 24px;
-                margin-right: 10px;
+                gap: 20px;
+                margin-right: 5px;
             }
             
             .search-container {
                 max-width: 350px;
                 margin: 0 20px;
+            }
+            
+            .language-tooltip {
+                right: 170px; /* Adjusted for smaller screens */
             }
         }
 
@@ -1206,11 +1218,23 @@
             
             .hero-section {
                 margin-top: var(--mobile-header-height);
+                padding-top: 50px; /* Adjusted for mobile */
             }
             
             .mobile-nav {
                 width: 85%;
-                padding: 90px 25px 35px; /* Adjusted padding */
+                padding: 95px 25px 35px; /* Adjusted for taller mobile header */
+            }
+            
+            .language-tooltip {
+                right: 20px; /* Centered on mobile */
+                left: 20px;
+                max-width: none;
+            }
+            
+            .language-tooltip::after {
+                right: 50%;
+                transform: translateX(50%);
             }
         }
 
@@ -1300,7 +1324,7 @@
             
             .mobile-nav {
                 width: 90%;
-                padding: 85px 20px 30px; /* Adjusted padding */
+                padding: 90px 20px 30px;
             }
             
             .hero-headline {
@@ -1455,8 +1479,8 @@
                 <a href="#">Contact</a>
             </div>
             
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <!-- Language Selector -->
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <!-- Language Selector - Only on Desktop -->
                 <div class="language-selector" id="languageSelector">
                     <button class="language-btn" id="languageBtn">
                         <span id="currentLanguage">EN</span>
@@ -1829,16 +1853,18 @@
             DOM.themeToggle.addEventListener('click', toggleTheme);
             DOM.themeToggleMobile.addEventListener('click', toggleTheme);
             
-            // Language selector
-            DOM.languageBtn.addEventListener('click', toggleLanguageDropdown);
-            
-            // Language options
-            const languageOptions = document.querySelectorAll('.language-option');
-            languageOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    setLanguage(option.dataset.lang);
+            // Language selector (desktop only)
+            if (DOM.languageBtn) {
+                DOM.languageBtn.addEventListener('click', toggleLanguageDropdown);
+                
+                // Language options
+                const languageOptions = document.querySelectorAll('.language-option');
+                languageOptions.forEach(option => {
+                    option.addEventListener('click', () => {
+                        setLanguage(option.dataset.lang);
+                    });
                 });
-            });
+            }
             
             // Desktop search
             DOM.advancedFilterBtn.addEventListener('click', toggleDesktopFilters);
@@ -2127,7 +2153,7 @@
             }
             
             // Close language dropdown when clicking outside
-            if (!DOM.languageSelector.contains(e.target)) {
+            if (DOM.languageSelector && !DOM.languageSelector.contains(e.target)) {
                 state.isLanguageOpen = false;
                 DOM.languageSelector.classList.remove('active');
             }

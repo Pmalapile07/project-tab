@@ -15,6 +15,7 @@
             /* Colors - Light Theme */
             --color-white: #ffffff;
             --color-black: #000000;
+            --color-blue: #296CB2; /* Added blue color */
             --color-gray-100: #f8f9fa;
             --color-gray-200: #e9ecef;
             --color-gray-300: #dee2e6;
@@ -63,6 +64,7 @@
             --z-header: 1000;
             --z-dropdown: 1001;
             --z-dropdown-high: 1002;
+            --z-tooltip: 1003;
         }
 
         [data-theme="dark"] {
@@ -148,13 +150,13 @@
                 rgba(255, 255, 255, 0.02) 100%);
         }
 
-        /* 4. OPTIMIZED LOGO */
+        /* 4. UPDATED LOGO WITH BLUE COLOR */
         .logo {
             font-family: 'Unbounded', sans-serif;
             font-size: clamp(2.2rem, 5vw, 3.5rem);
             font-weight: 900;
             letter-spacing: -0.5px;
-            color: var(--text-color);
+            color: var(--color-blue); /* Changed to blue */
             line-height: 1;
             user-select: none;
             transition: color var(--transition-normal);
@@ -375,7 +377,7 @@
         .desktop-nav {
             display: none;
             align-items: center;
-            gap: 40px;
+            gap: 20px;
             margin-left: auto;
         }
 
@@ -389,7 +391,7 @@
             display: flex;
             align-items: center;
             gap: 32px;
-            margin-right: 40px;
+            margin-right: 20px;
         }
 
         .desktop-nav-links a {
@@ -570,6 +572,167 @@
             box-shadow: var(--shadow-md);
         }
 
+        /* 9. OPTIMIZED THEME TOGGLE & LANGUAGE SELECTOR */
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.4rem;
+            color: var(--text-color);
+            padding: 8px;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-normal);
+            flex-shrink: 0;
+        }
+
+        .theme-toggle:hover {
+            background: var(--hover-bg);
+            transform: scale(1.1);
+        }
+
+        .light-icon { display: block; }
+        .dark-icon { display: none; }
+
+        [data-theme="dark"] .light-icon { display: none; }
+        [data-theme="dark"] .dark-icon { display: block; }
+
+        /* 10. LANGUAGE SELECTOR */
+        .language-selector {
+            position: relative;
+            margin-right: 5px;
+        }
+
+        .language-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: var(--border-radius);
+            transition: all var(--transition-normal);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .language-btn:hover {
+            background: var(--hover-bg);
+        }
+
+        .language-btn i {
+            font-size: 0.8rem;
+            transition: transform var(--transition-normal);
+        }
+
+        .language-selector.active .language-btn i {
+            transform: rotate(180deg);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--menu-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-color);
+            min-width: 200px;
+            z-index: var(--z-dropdown);
+            box-shadow: var(--shadow-xl);
+            display: none;
+            border-radius: var(--border-radius);
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .language-selector.active .language-dropdown {
+            display: block;
+        }
+
+        .language-option {
+            padding: 12px 16px;
+            cursor: pointer;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-color);
+            transition: all var(--transition-normal);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .language-option:last-child {
+            border-bottom: none;
+        }
+
+        .language-option:hover {
+            background: var(--hover-bg);
+            color: var(--color-blue);
+        }
+
+        .language-option.active {
+            color: var(--color-blue);
+            font-weight: 500;
+            background: rgba(41, 108, 178, 0.1);
+        }
+
+        .language-option.active .check-icon {
+            display: block;
+        }
+
+        .check-icon {
+            display: none;
+            color: var(--color-blue);
+            font-size: 0.8rem;
+        }
+
+        /* Language Tooltip */
+        .language-tooltip {
+            position: fixed;
+            top: calc(var(--header-height) + 10px);
+            right: 20px;
+            background: var(--color-blue);
+            color: white;
+            padding: 12px 16px;
+            border-radius: var(--border-radius);
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            z-index: var(--z-tooltip);
+            box-shadow: var(--shadow-xl);
+            animation: fadeIn 0.3s ease-out;
+            display: none;
+        }
+
+        .language-tooltip::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: 20px;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid var(--color-blue);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .desktop-account-btn {
             background: var(--button-bg);
             color: var(--button-text);
@@ -596,37 +759,7 @@
             box-shadow: var(--shadow-md);
         }
 
-        /* 9. OPTIMIZED THEME TOGGLE */
-        .theme-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.4rem;
-            color: var(--text-color);
-            padding: 8px;
-            margin-right: 15px;
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--transition-normal);
-            flex-shrink: 0;
-        }
-
-        .theme-toggle:hover {
-            background: var(--hover-bg);
-            transform: scale(1.1);
-        }
-
-        .light-icon { display: block; }
-        .dark-icon { display: none; }
-
-        [data-theme="dark"] .light-icon { display: none; }
-        [data-theme="dark"] .dark-icon { display: block; }
-
-        /* 10. ENHANCED MOBILE MENU */
+        /* 11. ENHANCED MOBILE MENU */
         .hamburger-menu {
             display: flex;
             align-items: center;
@@ -684,7 +817,7 @@
             -webkit-backdrop-filter: blur(25px) saturate(180%);
             box-shadow: var(--shadow-xl);
             z-index: var(--z-mobile-nav);
-            padding: 120px 30px 40px;
+            padding: 100px 30px 40px; /* Reduced top padding */
             transform: translateX(-100%);
             transition: transform var(--transition-slow);
             display: flex;
@@ -718,10 +851,11 @@
         }
 
         .mobile-search {
-            padding: 0 0 24px 0;
-            margin-bottom: 24px;
+            padding: 0 0 16px 0; /* Reduced bottom padding */
+            margin-bottom: 16px; /* Reduced margin */
             display: none;
             width: 100%;
+            border-bottom: none !important; /* Removed border bottom */
         }
 
         @media (max-width: 900px) {
@@ -918,7 +1052,7 @@
             opacity: 1;
         }
 
-        /* 11. IMPROVED HERO SECTION */
+        /* 12. IMPROVED HERO SECTION */
         .hero-section {
             min-height: 100vh;
             display: flex;
@@ -947,6 +1081,11 @@
             transition: color var(--transition-normal);
         }
 
+        /* Target specific words in the headline */
+        .hero-headline span.blue-text {
+            color: var(--color-blue);
+        }
+
         .hero-subheadline {
             font-family: 'Unbounded', sans-serif;
             font-size: clamp(1.1rem, 2vw, 1.4rem);
@@ -968,6 +1107,7 @@
             flex-wrap: wrap;
         }
 
+        /* Updated hero primary CTA with blue background */
         .hero-primary-cta,
         .hero-secondary-cta {
             padding: 22px 48px;
@@ -985,12 +1125,12 @@
         }
 
         .hero-primary-cta {
-            background: var(--button-bg);
-            color: var(--button-text);
+            background: var(--color-blue); /* Changed to blue */
+            color: var(--color-white); /* White text for contrast */
         }
 
         .hero-primary-cta:hover {
-            background: var(--secondary-text);
+            background: #1e5a9e; /* Darker blue on hover */
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
@@ -1026,7 +1166,7 @@
             color: var(--text-color);
         }
 
-        /* 12. RESPONSIVE IMPROVEMENTS */
+        /* 13. RESPONSIVE IMPROVEMENTS */
         @media (max-width: 1200px) {
             .search-container {
                 max-width: 400px;
@@ -1035,7 +1175,7 @@
             
             .desktop-nav-links {
                 gap: 28px;
-                margin-right: 30px;
+                margin-right: 15px;
             }
         }
 
@@ -1046,7 +1186,7 @@
             
             .desktop-nav-links {
                 gap: 24px;
-                margin-right: 20px;
+                margin-right: 10px;
             }
             
             .search-container {
@@ -1070,7 +1210,7 @@
             
             .mobile-nav {
                 width: 85%;
-                padding: 100px 25px 35px;
+                padding: 90px 25px 35px; /* Adjusted padding */
             }
         }
 
@@ -1081,7 +1221,6 @@
             
             .theme-toggle {
                 font-size: 1.2rem;
-                margin-right: 10px;
             }
             
             .mobile-nav-links a {
@@ -1157,12 +1296,11 @@
             
             .theme-toggle {
                 font-size: 1.1rem;
-                margin-right: 8px;
             }
             
             .mobile-nav {
                 width: 90%;
-                padding: 90px 20px 30px;
+                padding: 85px 20px 30px; /* Adjusted padding */
             }
             
             .hero-headline {
@@ -1185,7 +1323,7 @@
             }
         }
 
-        /* 13. ACCESSIBILITY IMPROVEMENTS */
+        /* 14. ACCESSIBILITY IMPROVEMENTS */
         @media (prefers-reduced-motion: reduce) {
             *,
             *::before,
@@ -1208,7 +1346,7 @@
             border: 0;
         }
 
-        /* 14. PERFORMANCE OPTIMIZATIONS */
+        /* 15. PERFORMANCE OPTIMIZATIONS */
         .will-change {
             will-change: transform, opacity;
         }
@@ -1318,6 +1456,44 @@
             </div>
             
             <div style="display: flex; align-items: center; gap: 10px;">
+                <!-- Language Selector -->
+                <div class="language-selector" id="languageSelector">
+                    <button class="language-btn" id="languageBtn">
+                        <span id="currentLanguage">EN</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-dropdown" id="languageDropdown">
+                        <div class="language-option active" data-lang="en">
+                            <span>English</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="af">
+                            <span>Afrikaans</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="nso">
+                            <span>Sesotho sa Leboa (Sepedi)</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="zu">
+                            <span>isiZulu</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="ve">
+                            <span>Tshivenda</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="ts">
+                            <span>Xitsonga</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="xh">
+                            <span>isiXhosa</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-sun light-icon"></i>
                     <i class="fas fa-moon dark-icon"></i>
@@ -1341,6 +1517,11 @@
             </button>
         </div>
     </header>
+
+    <!-- Language Tooltip -->
+    <div class="language-tooltip" id="languageTooltip">
+        Change language here
+    </div>
 
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
@@ -1448,8 +1629,8 @@
     <section class="hero-section">
         <div class="hero-content">
             <h1 class="hero-headline">
-                Got work? Get it done.<br>
-                Need work? Find it here.
+                Got work? Get it <span class="blue-text">done</span>.<br>
+                Need work? Find it <span class="blue-text">here</span>.
             </h1>
             
             <p class="hero-subheadline">
@@ -1502,7 +1683,12 @@
             mobilePostGigTrigger: document.getElementById('mobilePostGigTrigger'),
             mobilePostGigOptions: document.getElementById('mobilePostGigOptions'),
             mobileBusinessOption: document.getElementById('mobileBusinessOption'),
-            mobileHouseholdOption: document.getElementById('mobileHouseholdOption')
+            mobileHouseholdOption: document.getElementById('mobileHouseholdOption'),
+            languageSelector: document.getElementById('languageSelector'),
+            languageBtn: document.getElementById('languageBtn'),
+            languageDropdown: document.getElementById('languageDropdown'),
+            languageTooltip: document.getElementById('languageTooltip'),
+            currentLanguage: document.getElementById('currentLanguage')
         };
 
         // 2. STATE MANAGEMENT
@@ -1510,11 +1696,22 @@
             isMobileMenuOpen: false,
             isDesktopFiltersOpen: false,
             isMobileFiltersOpen: false,
+            isLanguageOpen: false,
             theme: localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
             activeFilters: {
                 province: '',
                 city: '',
                 distance: ''
+            },
+            currentLang: 'en',
+            languages: {
+                en: 'English',
+                af: 'Afrikaans',
+                nso: 'Sesotho sa Leboa (Sepedi)',
+                zu: 'isiZulu',
+                ve: 'Tshivenda',
+                ts: 'Xitsonga',
+                xh: 'isiXhosa'
             }
         };
 
@@ -1532,10 +1729,69 @@
             // Initialize navigation
             initNavigation();
             
+            // Show language tooltip on page load
+            showLanguageTooltip();
+            
             console.log('Gigtabi initialized successfully');
         }
 
-        // 4. SCROLL EFFECT OPTIMIZATION
+        // 4. LANGUAGE TOOLTIP FUNCTIONALITY
+        function showLanguageTooltip() {
+            // Show tooltip after a short delay
+            setTimeout(() => {
+                DOM.languageTooltip.style.display = 'block';
+                
+                // Hide tooltip after 5 seconds
+                setTimeout(() => {
+                    DOM.languageTooltip.style.display = 'none';
+                }, 5000);
+                
+                // Hide tooltip when user interacts with language selector
+                DOM.languageBtn.addEventListener('click', () => {
+                    DOM.languageTooltip.style.display = 'none';
+                }, { once: true });
+            }, 1000);
+        }
+
+        // 5. LANGUAGE SELECTOR FUNCTIONS
+        function toggleLanguageDropdown(e) {
+            if (e) e.stopPropagation();
+            state.isLanguageOpen = !state.isLanguageOpen;
+            DOM.languageSelector.classList.toggle('active', state.isLanguageOpen);
+            
+            // Close other dropdowns
+            if (state.isLanguageOpen) {
+                DOM.postGigDropdown.classList.remove('active');
+                state.isDesktopFiltersOpen = false;
+                DOM.searchBar.classList.remove('active');
+                DOM.advancedFilters.classList.remove('active');
+            }
+        }
+
+        function setLanguage(langCode) {
+            if (state.languages[langCode]) {
+                state.currentLang = langCode;
+                DOM.currentLanguage.textContent = langCode.toUpperCase();
+                
+                // Update active state in dropdown
+                const languageOptions = document.querySelectorAll('.language-option');
+                languageOptions.forEach(option => {
+                    option.classList.remove('active');
+                    if (option.dataset.lang === langCode) {
+                        option.classList.add('active');
+                    }
+                });
+                
+                // Here you would implement actual language translation
+                console.log(`Language changed to: ${state.languages[langCode]}`);
+                
+                // Close dropdown
+                state.isLanguageOpen = false;
+                DOM.languageSelector.classList.remove('active');
+            }
+        }
+
+        // 6. SCROLL EFFECT OPTIMIZATION
         function setupScrollEffect() {
             let ticking = false;
             const header = document.querySelector('.glass-header');
@@ -1563,7 +1819,7 @@
             });
         }
 
-        // 5. EVENT LISTENER MANAGEMENT
+        // 7. EVENT LISTENER MANAGEMENT
         function setupEventListeners() {
             // Mobile menu
             DOM.hamburger.addEventListener('click', toggleMobileMenu);
@@ -1572,6 +1828,17 @@
             // Theme toggles
             DOM.themeToggle.addEventListener('click', toggleTheme);
             DOM.themeToggleMobile.addEventListener('click', toggleTheme);
+            
+            // Language selector
+            DOM.languageBtn.addEventListener('click', toggleLanguageDropdown);
+            
+            // Language options
+            const languageOptions = document.querySelectorAll('.language-option');
+            languageOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    setLanguage(option.dataset.lang);
+                });
+            });
             
             // Desktop search
             DOM.advancedFilterBtn.addEventListener('click', toggleDesktopFilters);
@@ -1612,7 +1879,7 @@
             });
         }
 
-        // 6. MOBILE MENU FUNCTIONS
+        // 8. MOBILE MENU FUNCTIONS
         function toggleMobileMenu(e) {
             e.stopPropagation();
             state.isMobileMenuOpen = !state.isMobileMenuOpen;
@@ -1639,7 +1906,7 @@
             closeMobileFilters();
         }
 
-        // 7. THEME FUNCTIONS
+        // 9. THEME FUNCTIONS
         function toggleTheme() {
             const currentTheme = DOM.body.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -1649,7 +1916,7 @@
             state.theme = newTheme;
         }
 
-        // 8. SEARCH FUNCTIONS
+        // 10. SEARCH FUNCTIONS
         function toggleDesktopFilters(e) {
             e.stopPropagation();
             state.isDesktopFiltersOpen = !state.isDesktopFiltersOpen;
@@ -1657,8 +1924,10 @@
             DOM.searchBar.classList.toggle('active', state.isDesktopFiltersOpen);
             DOM.advancedFilters.classList.toggle('active', state.isDesktopFiltersOpen);
             
-            // Close post gig dropdown if open
+            // Close other dropdowns if open
             DOM.postGigDropdown.classList.remove('active');
+            state.isLanguageOpen = false;
+            DOM.languageSelector.classList.remove('active');
         }
 
         function toggleMobileFilters(e) {
@@ -1759,7 +2028,7 @@
             }
         }
 
-        // 9. POST GIG FUNCTIONS
+        // 11. POST GIG FUNCTIONS
         function toggleDesktopPostGig(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -1768,6 +2037,8 @@
             state.isDesktopFiltersOpen = false;
             DOM.searchBar.classList.remove('active');
             DOM.advancedFilters.classList.remove('active');
+            state.isLanguageOpen = false;
+            DOM.languageSelector.classList.remove('active');
         }
 
         function toggleMobilePostGig(e) {
@@ -1816,7 +2087,7 @@
             closeMobileMenu();
         }
 
-        // 10. NAVIGATION FUNCTIONS
+        // 12. NAVIGATION FUNCTIONS
         function initNavigation() {
             // Desktop navigation active state
             const desktopLinks = document.querySelectorAll('.desktop-nav-links a');
@@ -1841,7 +2112,7 @@
             });
         }
 
-        // 11. GLOBAL EVENT HANDLERS
+        // 13. GLOBAL EVENT HANDLERS
         function handleGlobalClick(e) {
             // Close desktop filters when clicking outside
             if (!DOM.searchBar.contains(e.target) && !DOM.advancedFilters.contains(e.target)) {
@@ -1853,6 +2124,12 @@
             // Close desktop post gig dropdown when clicking outside
             if (!DOM.postGigDropdown.contains(e.target)) {
                 DOM.postGigDropdown.classList.remove('active');
+            }
+            
+            // Close language dropdown when clicking outside
+            if (!DOM.languageSelector.contains(e.target)) {
+                state.isLanguageOpen = false;
+                DOM.languageSelector.classList.remove('active');
             }
             
             // Close mobile filters when clicking outside (only when menu is open)
@@ -1874,10 +2151,14 @@
                 if (state.isMobileFiltersOpen) {
                     closeMobileFilters();
                 }
+                if (state.isLanguageOpen) {
+                    state.isLanguageOpen = false;
+                    DOM.languageSelector.classList.remove('active');
+                }
             }
         }
 
-        // 12. INITIALIZE APPLICATION
+        // 14. INITIALIZE APPLICATION
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>

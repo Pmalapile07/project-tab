@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"> <!-- Changed from 0.7 to 1.0 -->
+    <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=5.0, user-scalable=yes"> <!-- Changed back to 0.7 -->
     <title>Gigtabi - Connecting Neighbors</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,7 @@
             /* Theme Variables - Light */
             --bg-color: var(--color-white);
             --header-bg: rgba(255, 254, 248, 0.98);
-            --text-color: var(--color-black); /* Text is black */
+            --text-color: var(--color-black);
             --secondary-text: var(--color-gray-500);
             --button-bg: var(--color-black);
             --button-text: var(--color-white);
@@ -68,7 +68,7 @@
         }
 
         [data-theme="dark"] {
-            /* Theme Variables - Dark - Text is white in dark mode */
+            /* Theme Variables - Dark */
             --bg-color: var(--color-black);
             --header-bg: rgba(0, 0, 0, 0.98);
             --text-color: var(--color-white);
@@ -153,7 +153,7 @@
         /* 4. INCREASED LOGO SIZE */
         .logo {
             font-family: 'Unbounded', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem); /* Increased from clamp(2.2rem, 5vw, 3.5rem) */
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 900;
             letter-spacing: -0.5px;
             color: var(--text-color);
@@ -377,7 +377,7 @@
         .desktop-nav {
             display: none;
             align-items: center;
-            gap: 15px;
+            gap: 5px; /* Reduced gap */
             margin-left: auto;
         }
 
@@ -572,15 +572,15 @@
             box-shadow: var(--shadow-md);
         }
 
-        /* 9. OPTIMIZED THEME TOGGLE & LANGUAGE SELECTOR */
+        /* 9. OPTIMIZED THEME TOGGLE & LANGUAGE SELECTOR - WITH BORDERS */
         .theme-toggle {
             background: none;
-            border: none;
+            border: 1px solid var(--border-color);
             cursor: pointer;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--text-color);
             padding: 8px;
-            border-radius: 50%;
+            border-radius: var(--border-radius);
             width: 42px;
             height: 42px;
             display: flex;
@@ -592,7 +592,8 @@
 
         .theme-toggle:hover {
             background: var(--hover-bg);
-            transform: scale(1.1);
+            transform: scale(1.05);
+            border-color: var(--accent-color);
         }
 
         .light-icon { display: block; }
@@ -601,15 +602,14 @@
         [data-theme="dark"] .light-icon { display: none; }
         [data-theme="dark"] .dark-icon { display: block; }
 
-        /* 10. LANGUAGE SELECTOR - VISIBLE ON MOBILE */
+        /* 10. LANGUAGE SELECTOR - WITH BORDER AND SAME SIZE */
         .language-selector {
             position: relative;
-            margin-right: 5px;
         }
 
         .language-btn {
-            background: transparent;
-            border: none;
+            background: none;
+            border: 1px solid var(--border-color);
             color: var(--text-color);
             font-family: 'Unbounded', sans-serif;
             font-size: 0.85rem;
@@ -620,29 +620,31 @@
             transition: all var(--transition-normal);
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
             white-space: nowrap;
             width: 42px;
             height: 42px;
-            justify-content: center;
         }
 
         .language-btn:hover {
             background: var(--hover-bg);
+            transform: scale(1.05);
+            border-color: var(--accent-color);
         }
 
         .language-btn i {
-            font-size: 1.2rem; /* Icon size */
+            font-size: 1.2rem;
             transition: transform var(--transition-normal);
         }
 
         .language-btn span {
-            display: none; /* Hide text on mobile */
+            display: none;
         }
 
         @media (min-width: 901px) {
             .language-btn span {
-                display: inline; /* Show text on desktop */
+                display: inline;
             }
             
             .language-btn {
@@ -651,7 +653,7 @@
             }
             
             .language-btn i {
-                font-size: 0.9rem; /* Smaller icon on desktop */
+                font-size: 0.9rem;
             }
         }
 
@@ -716,11 +718,11 @@
             font-size: 0.8rem;
         }
 
-        /* Language Tooltip - POINTS TO LANGUAGE SELECTOR */
+        /* Language Tooltip */
         .language-tooltip {
             position: fixed;
             top: calc(var(--header-height) + 10px);
-            right: 190px;
+            right: 170px;
             background: var(--accent-color);
             color: var(--button-text);
             padding: 12px 16px;
@@ -783,16 +785,41 @@
             box-shadow: var(--shadow-md);
         }
 
-        /* 11. ENHANCED MOBILE MENU */
+        /* 11. ENHANCED MOBILE MENU - WITH MOVING ICONS */
         .hamburger-menu {
             display: flex;
             align-items: center;
-            gap: 8px; /* Reduced gap for mobile */
+            gap: 4px; /* Very small gap */
+            position: relative;
         }
 
         @media (min-width: 901px) {
             .hamburger-menu {
                 display: none;
+            }
+        }
+
+        /* Hide icons in hamburger menu when menu is closed */
+        .hamburger-menu .theme-toggle,
+        .hamburger-menu .language-selector {
+            display: none;
+        }
+
+        /* Show icons in hamburger menu when menu is open */
+        .mobile-menu-open .hamburger-menu .theme-toggle,
+        .mobile-menu-open .hamburger-menu .language-selector {
+            display: flex;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
@@ -807,6 +834,13 @@
             border: none;
             padding: 0;
             z-index: var(--z-dropdown-high);
+            transition: opacity var(--transition-normal);
+        }
+
+        /* Hide hamburger when menu is open */
+        .mobile-menu-open .hamburger {
+            opacity: 0;
+            pointer-events: none;
         }
 
         .hamburger span {
@@ -817,17 +851,26 @@
             transform-origin: left center;
         }
 
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(2px, -2px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-            transform: translateX(-10px);
-        }
-
+        /* REMOVED X TRANSFORMATION - Keep hamburger lines as is */
+        .hamburger.active span:nth-child(1),
+        .hamburger.active span:nth-child(2),
         .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(2px, 2px);
+            transform: none;
+            opacity: 1;
+        }
+
+        /* Mobile menu icons container */
+        .mobile-menu-icons {
+            display: none;
+            align-items: center;
+            gap: 4px;
+            position: absolute;
+            right: 0;
+        }
+
+        /* Show icons container when menu is open */
+        .mobile-menu-open .mobile-menu-icons {
+            display: flex;
         }
 
         .mobile-nav {
@@ -1098,16 +1141,11 @@
             font-family: 'Unbounded', sans-serif;
             font-size: clamp(2.5rem, 6vw, 5.5rem);
             font-weight: 800;
-            color: var(--text-color); /* Text is black in light mode */
+            color: var(--text-color);
             line-height: 1.1;
             margin-bottom: 32px;
             letter-spacing: -1.5px;
             transition: color var(--transition-normal);
-        }
-
-        /* Target specific words in the headline - removed blue */
-        .hero-headline span.blue-text {
-            color: var(--text-color); /* Changed back to black/white */
         }
 
         .hero-subheadline {
@@ -1131,7 +1169,6 @@
             flex-wrap: wrap;
         }
 
-        /* Restored original hero button colors */
         .hero-primary-cta,
         .hero-secondary-cta {
             padding: 22px 48px;
@@ -1219,7 +1256,7 @@
             }
             
             .language-tooltip {
-                right: 170px;
+                right: 150px;
             }
         }
 
@@ -1256,7 +1293,7 @@
 
         @media (max-width: 768px) {
             .logo {
-                font-size: 2.8rem; /* Increased for mobile */
+                font-size: 2.8rem;
             }
             
             .theme-toggle {
@@ -1331,7 +1368,7 @@
             }
             
             .logo {
-                font-size: 2.5rem; /* Increased for mobile */
+                font-size: 2.5rem;
             }
             
             .theme-toggle {
@@ -1495,8 +1532,8 @@
                 <a href="#">Contact</a>
             </div>
             
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <!-- Language Selector - Visible on both desktop and mobile -->
+            <div style="display: flex; align-items: center; gap: 4px;">
+                <!-- Language Selector - Desktop -->
                 <div class="language-selector" id="languageSelector">
                     <button class="language-btn" id="languageBtn" aria-label="Change language">
                         <i class="fas fa-globe"></i>
@@ -1543,9 +1580,9 @@
             </div>
         </nav>
 
-        <!-- Mobile Menu Toggle - Language selector added -->
+        <!-- Mobile Menu Toggle - Icons will appear when menu is open -->
         <div class="hamburger-menu">
-            <!-- Language Selector on Mobile -->
+            <!-- These icons will appear when menu is open -->
             <div class="language-selector" id="languageSelectorMobile">
                 <button class="language-btn" id="languageBtnMobile" aria-label="Change language">
                     <i class="fas fa-globe"></i>
@@ -1768,7 +1805,9 @@
             currentLanguage: document.getElementById('currentLanguage'),
             languageSelectorMobile: document.getElementById('languageSelectorMobile'),
             languageBtnMobile: document.getElementById('languageBtnMobile'),
-            languageDropdownMobile: document.getElementById('languageDropdownMobile')
+            languageDropdownMobile: document.getElementById('languageDropdownMobile'),
+            glassHeader: document.querySelector('.glass-header'),
+            hamburgerMenu: document.querySelector('.hamburger-menu')
         };
 
         // 2. STATE MANAGEMENT
@@ -1895,7 +1934,7 @@
         // 6. SCROLL EFFECT OPTIMIZATION
         function setupScrollEffect() {
             let ticking = false;
-            const header = document.querySelector('.glass-header');
+            const header = DOM.glassHeader;
             
             window.addEventListener('scroll', () => {
                 if (!ticking) {
@@ -1987,7 +2026,7 @@
             });
         }
 
-        // 8. MOBILE MENU FUNCTIONS
+        // 8. MOBILE MENU FUNCTIONS - UPDATED TO SHOW ICONS
         function toggleMobileMenu(e) {
             e.stopPropagation();
             state.isMobileMenuOpen = !state.isMobileMenuOpen;
@@ -1996,6 +2035,13 @@
             DOM.mobileNav.classList.toggle('active', state.isMobileMenuOpen);
             DOM.menuOverlay.classList.toggle('active', state.isMobileMenuOpen);
             DOM.body.style.overflow = state.isMobileMenuOpen ? 'hidden' : '';
+            
+            // Add/remove mobile-menu-open class to header
+            if (state.isMobileMenuOpen) {
+                DOM.glassHeader.classList.add('mobile-menu-open');
+            } else {
+                DOM.glassHeader.classList.remove('mobile-menu-open');
+            }
             
             // Close filters when closing menu
             if (!state.isMobileMenuOpen) {
@@ -2010,6 +2056,7 @@
             DOM.mobileNav.classList.remove('active');
             DOM.menuOverlay.classList.remove('active');
             DOM.body.style.overflow = '';
+            DOM.glassHeader.classList.remove('mobile-menu-open');
             
             closeMobileFilters();
         }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=5.0, user-scalable=yes"> <!-- Changed back to 0.7 -->
+    <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=5.0, user-scalable=yes">
     <title>Gigtabi - Connecting Neighbors</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -128,6 +128,19 @@
             will-change: transform, backdrop-filter;
         }
 
+        .glass-header.scrolled {
+            backdrop-filter: blur(25px) saturate(200%);
+            -webkit-backdrop-filter: blur(25px) saturate(200%);
+            box-shadow: 0 8px 32px var(--shadow-color);
+            height: 80px;
+        }
+
+        @media (max-width: 900px) {
+            .glass-header.scrolled {
+                height: 70px;
+            }
+        }
+
         .glass-header::before {
             content: '';
             position: absolute;
@@ -159,7 +172,11 @@
             color: var(--text-color);
             line-height: 1;
             user-select: none;
-            transition: color var(--transition-normal);
+            transition: all var(--transition-normal);
+        }
+
+        .glass-header.scrolled .logo {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
         }
 
         /* 5. ENHANCED SEARCH CONTAINER */
@@ -377,7 +394,7 @@
         .desktop-nav {
             display: none;
             align-items: center;
-            gap: 5px; /* Reduced gap */
+            gap: 5px;
             margin-left: auto;
         }
 
@@ -785,41 +802,16 @@
             box-shadow: var(--shadow-md);
         }
 
-        /* 11. ENHANCED MOBILE MENU - WITH MOVING ICONS */
+        /* 11. ENHANCED MOBILE MENU - ICONS VISIBLE ALL THE TIME */
         .hamburger-menu {
             display: flex;
             align-items: center;
-            gap: 4px; /* Very small gap */
-            position: relative;
+            gap: 8px; /* Better spacing */
         }
 
         @media (min-width: 901px) {
             .hamburger-menu {
                 display: none;
-            }
-        }
-
-        /* Hide icons in hamburger menu when menu is closed */
-        .hamburger-menu .theme-toggle,
-        .hamburger-menu .language-selector {
-            display: none;
-        }
-
-        /* Show icons in hamburger menu when menu is open */
-        .mobile-menu-open .hamburger-menu .theme-toggle,
-        .mobile-menu-open .hamburger-menu .language-selector {
-            display: flex;
-            animation: fadeInUp 0.3s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
             }
         }
 
@@ -834,13 +826,8 @@
             border: none;
             padding: 0;
             z-index: var(--z-dropdown-high);
-            transition: opacity var(--transition-normal);
-        }
-
-        /* Hide hamburger when menu is open */
-        .mobile-menu-open .hamburger {
-            opacity: 0;
-            pointer-events: none;
+            transition: all var(--transition-normal);
+            position: relative;
         }
 
         .hamburger span {
@@ -851,26 +838,18 @@
             transform-origin: left center;
         }
 
-        /* REMOVED X TRANSFORMATION - Keep hamburger lines as is */
-        .hamburger.active span:nth-child(1),
-        .hamburger.active span:nth-child(2),
+        /* X icon transformation */
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(2px, -2px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
         .hamburger.active span:nth-child(3) {
-            transform: none;
-            opacity: 1;
-        }
-
-        /* Mobile menu icons container */
-        .mobile-menu-icons {
-            display: none;
-            align-items: center;
-            gap: 4px;
-            position: absolute;
-            right: 0;
-        }
-
-        /* Show icons container when menu is open */
-        .mobile-menu-open .mobile-menu-icons {
-            display: flex;
+            transform: rotate(-45deg) translate(2px, 2px);
         }
 
         .mobile-nav {
@@ -886,7 +865,7 @@
             z-index: var(--z-mobile-nav);
             padding: 100px 30px 40px;
             transform: translateX(-100%);
-            transition: transform var(--transition-slow);
+            transition: transform var(--transition-slow) cubic-bezier(0.22, 0.61, 0.36, 1);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -902,10 +881,11 @@
             overflow-x: hidden;
             padding-right: 10px;
             margin-right: -10px;
+            scroll-behavior: smooth;
         }
 
         .mobile-nav-content::-webkit-scrollbar {
-            width: 4px;
+            width: 5px;
         }
 
         .mobile-nav-content::-webkit-scrollbar-track {
@@ -914,7 +894,11 @@
 
         .mobile-nav-content::-webkit-scrollbar-thumb {
             background: var(--border-color);
-            border-radius: 2px;
+            border-radius: 10px;
+        }
+
+        .mobile-nav-content::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
         }
 
         .mobile-search {
@@ -961,11 +945,30 @@
             align-items: center;
             justify-content: space-between;
             border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mobile-nav-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: var(--accent-color);
+            transform: translateX(-100%);
+            transition: transform var(--transition-normal);
+        }
+
+        .mobile-nav-links a:hover::before {
+            transform: translateX(0);
         }
 
         .mobile-nav-links a:hover {
-            color: var(--secondary-text);
-            padding-left: 8px;
+            color: var(--accent-color);
+            padding-left: 12px;
+            background: var(--hover-bg);
         }
 
         /* FIXED HIERARCHY - About Us after Work We Source, same level */
@@ -1091,6 +1094,23 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mobile-nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .mobile-nav-btn:hover::before {
+            left: 100%;
         }
 
         .mobile-nav-btn:hover {
@@ -1183,11 +1203,28 @@
             text-decoration: none;
             letter-spacing: 0.5px;
             border: none;
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-primary-cta {
             background: var(--button-bg);
             color: var(--button-text);
+        }
+
+        .hero-primary-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .hero-primary-cta:hover::before {
+            left: 100%;
         }
 
         .hero-primary-cta:hover {
@@ -1227,7 +1264,42 @@
             color: var(--text-color);
         }
 
-        /* 13. RESPONSIVE IMPROVEMENTS */
+        /* 13. BACK TO TOP BUTTON */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--button-bg);
+            color: var(--button-text);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition-normal);
+            z-index: 999;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* 14. RESPONSIVE IMPROVEMENTS */
         @media (max-width: 1200px) {
             .search-container {
                 max-width: 400px;
@@ -1288,6 +1360,13 @@
             .language-tooltip::after {
                 right: 50%;
                 transform: translateX(50%);
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
             }
         }
 
@@ -1360,6 +1439,10 @@
                 right: auto;
                 width: 90vw;
             }
+            
+            .hamburger-menu {
+                gap: 6px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1398,9 +1481,16 @@
             .hero-tagline {
                 font-size: 0.85rem;
             }
+            
+            .back-to-top {
+                bottom: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+            }
         }
 
-        /* 14. ACCESSIBILITY IMPROVEMENTS */
+        /* 15. ACCESSIBILITY IMPROVEMENTS */
         @media (prefers-reduced-motion: reduce) {
             *,
             *::before,
@@ -1423,7 +1513,7 @@
             border: 0;
         }
 
-        /* 15. PERFORMANCE OPTIMIZATIONS */
+        /* 16. PERFORMANCE OPTIMIZATIONS */
         .will-change {
             will-change: transform, opacity;
         }
@@ -1580,9 +1670,9 @@
             </div>
         </nav>
 
-        <!-- Mobile Menu Toggle - Icons will appear when menu is open -->
+        <!-- Mobile Menu Toggle - Icons visible all the time -->
         <div class="hamburger-menu">
-            <!-- These icons will appear when menu is open -->
+            <!-- Language Selector on Mobile -->
             <div class="language-selector" id="languageSelectorMobile">
                 <button class="language-btn" id="languageBtnMobile" aria-label="Change language">
                     <i class="fas fa-globe"></i>
@@ -1636,6 +1726,11 @@
     <div class="language-tooltip" id="languageTooltip">
         Change language here
     </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
 
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
@@ -1767,6 +1862,15 @@
         </div>
     </section>
 
+    <!-- Additional sections to enable scrolling -->
+    <section style="height: 200vh; padding: 40px 20px; background: var(--bg-color); color: var(--text-color);">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <h2 style="font-family: 'Unbounded', sans-serif; margin-bottom: 20px;">Scroll Down to Test Header Effects</h2>
+            <p style="margin-bottom: 20px;">This section is just to demonstrate the header scroll effects. Scroll down to see the header shrink and the back-to-top button appear.</p>
+            <div style="height: 1000px;"></div>
+        </div>
+    </section>
+
     <script>
         // ========== IMPROVED JAVASCRIPT ==========
         
@@ -1807,7 +1911,7 @@
             languageBtnMobile: document.getElementById('languageBtnMobile'),
             languageDropdownMobile: document.getElementById('languageDropdownMobile'),
             glassHeader: document.querySelector('.glass-header'),
-            hamburgerMenu: document.querySelector('.hamburger-menu')
+            backToTop: document.getElementById('backToTop')
         };
 
         // 2. STATE MANAGEMENT
@@ -1832,7 +1936,8 @@
                 ve: 'Tshivenda',
                 ts: 'Xitsonga',
                 xh: 'isiXhosa'
-            }
+            },
+            lastScrollTop: 0
         };
 
         // 3. INITIALIZATION
@@ -1840,8 +1945,8 @@
             // Set initial theme
             DOM.body.setAttribute('data-theme', state.theme);
             
-            // Set up scroll effect
-            setupScrollEffect();
+            // Set up scroll effects
+            setupScrollEffects();
             
             // Initialize all event listeners
             setupEventListeners();
@@ -1855,7 +1960,50 @@
             console.log('Gigtabi initialized successfully');
         }
 
-        // 4. LANGUAGE TOOLTIP FUNCTIONALITY
+        // 4. SCROLL EFFECTS - Improved with header shrink
+        function setupScrollEffects() {
+            let ticking = false;
+            const header = DOM.glassHeader;
+            
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        const scrollThreshold = 100;
+                        
+                        // Header shrink effect
+                        if (scrollTop > scrollThreshold) {
+                            header.classList.add('scrolled');
+                        } else {
+                            header.classList.remove('scrolled');
+                        }
+                        
+                        // Back to top button visibility
+                        if (scrollTop > 300) {
+                            DOM.backToTop.classList.add('visible');
+                        } else {
+                            DOM.backToTop.classList.remove('visible');
+                        }
+                        
+                        // Store for next comparison
+                        state.lastScrollTop = scrollTop;
+                        ticking = false;
+                    });
+                    
+                    ticking = true;
+                }
+            });
+        }
+
+        // 5. BACK TO TOP FUNCTIONALITY
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 6. LANGUAGE TOOLTIP FUNCTIONALITY
         function showLanguageTooltip() {
             // Show tooltip after a short delay
             setTimeout(() => {
@@ -1881,7 +2029,7 @@
             }, 1000);
         }
 
-        // 5. LANGUAGE SELECTOR FUNCTIONS
+        // 7. LANGUAGE SELECTOR FUNCTIONS
         function toggleLanguageDropdown(e, isMobile = false) {
             if (e) e.stopPropagation();
             
@@ -1931,39 +2079,14 @@
             }
         }
 
-        // 6. SCROLL EFFECT OPTIMIZATION
-        function setupScrollEffect() {
-            let ticking = false;
-            const header = DOM.glassHeader;
-            
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    window.requestAnimationFrame(() => {
-                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                        
-                        if (scrollTop > 10) {
-                            header.style.backdropFilter = 'blur(25px) saturate(180%)';
-                            header.style.webkitBackdropFilter = 'blur(25px) saturate(180%)';
-                            header.style.boxShadow = '0 8px 32px var(--shadow-color)';
-                        } else {
-                            header.style.backdropFilter = 'blur(20px) saturate(180%)';
-                            header.style.webkitBackdropFilter = 'blur(20px) saturate(180%)';
-                            header.style.boxShadow = '0 4px 30px var(--shadow-color)';
-                        }
-                        
-                        ticking = false;
-                    });
-                    
-                    ticking = true;
-                }
-            });
-        }
-
-        // 7. EVENT LISTENER MANAGEMENT
+        // 8. EVENT LISTENER MANAGEMENT
         function setupEventListeners() {
             // Mobile menu
             DOM.hamburger.addEventListener('click', toggleMobileMenu);
             DOM.menuOverlay.addEventListener('click', closeMobileMenu);
+            
+            // Back to top
+            DOM.backToTop.addEventListener('click', scrollToTop);
             
             // Theme toggles
             DOM.themeToggle.addEventListener('click', toggleTheme);
@@ -2026,7 +2149,7 @@
             });
         }
 
-        // 8. MOBILE MENU FUNCTIONS - UPDATED TO SHOW ICONS
+        // 9. MOBILE MENU FUNCTIONS - X icon restored
         function toggleMobileMenu(e) {
             e.stopPropagation();
             state.isMobileMenuOpen = !state.isMobileMenuOpen;
@@ -2035,13 +2158,6 @@
             DOM.mobileNav.classList.toggle('active', state.isMobileMenuOpen);
             DOM.menuOverlay.classList.toggle('active', state.isMobileMenuOpen);
             DOM.body.style.overflow = state.isMobileMenuOpen ? 'hidden' : '';
-            
-            // Add/remove mobile-menu-open class to header
-            if (state.isMobileMenuOpen) {
-                DOM.glassHeader.classList.add('mobile-menu-open');
-            } else {
-                DOM.glassHeader.classList.remove('mobile-menu-open');
-            }
             
             // Close filters when closing menu
             if (!state.isMobileMenuOpen) {
@@ -2056,12 +2172,11 @@
             DOM.mobileNav.classList.remove('active');
             DOM.menuOverlay.classList.remove('active');
             DOM.body.style.overflow = '';
-            DOM.glassHeader.classList.remove('mobile-menu-open');
             
             closeMobileFilters();
         }
 
-        // 9. THEME FUNCTIONS
+        // 10. THEME FUNCTIONS
         function toggleTheme() {
             const currentTheme = DOM.body.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -2071,7 +2186,7 @@
             state.theme = newTheme;
         }
 
-        // 10. SEARCH FUNCTIONS
+        // 11. SEARCH FUNCTIONS
         function toggleDesktopFilters(e) {
             e.stopPropagation();
             state.isDesktopFiltersOpen = !state.isDesktopFiltersOpen;
@@ -2185,7 +2300,7 @@
             }
         }
 
-        // 11. POST GIG FUNCTIONS
+        // 12. POST GIG FUNCTIONS
         function toggleDesktopPostGig(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -2246,7 +2361,7 @@
             closeMobileMenu();
         }
 
-        // 12. NAVIGATION FUNCTIONS
+        // 13. NAVIGATION FUNCTIONS
         function initNavigation() {
             // Desktop navigation active state
             const desktopLinks = document.querySelectorAll('.desktop-nav-links a');
@@ -2271,7 +2386,7 @@
             });
         }
 
-        // 13. GLOBAL EVENT HANDLERS
+        // 14. GLOBAL EVENT HANDLERS
         function handleGlobalClick(e) {
             // Close desktop filters when clicking outside
             if (!DOM.searchBar.contains(e.target) && !DOM.advancedFilters.contains(e.target)) {
@@ -2326,7 +2441,7 @@
             }
         }
 
-        // 14. INITIALIZE APPLICATION
+        // 15. INITIALIZE APPLICATION
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>

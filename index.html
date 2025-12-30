@@ -12,10 +12,12 @@
         /* ========== CSS IMPROVEMENTS ========== */
         /* 1. OPTIMIZED VARIABLE STRUCTURE */
         :root {
-            /* Colors - Light Theme */
+            /* Colors - Light Theme with Blue */
             --color-white: #ffffff;
             --color-black: #000000;
             --color-blue: #296CB2;
+            --color-blue-light: #4a8fd4;
+            --color-blue-dark: #1a4a7a;
             --color-gray-100: #f8f9fa;
             --color-gray-200: #e9ecef;
             --color-gray-300: #dee2e6;
@@ -25,20 +27,20 @@
             --color-gray-700: #343a40;
             --color-gray-800: #212529;
             
-            /* Theme Variables - Light */
+            /* Theme Variables - Light with Blue Accent */
             --bg-color: var(--color-white);
             --header-bg: rgba(255, 254, 248, 0.98);
             --text-color: var(--color-black);
             --secondary-text: var(--color-gray-500);
-            --button-bg: var(--color-black);
+            --button-bg: var(--color-blue);
             --button-text: var(--color-white);
-            --border-color: rgba(0, 0, 0, 0.1);
-            --shadow-color: rgba(0, 0, 0, 0.05);
-            --hover-bg: rgba(0, 0, 0, 0.05);
+            --border-color: rgba(41, 108, 178, 0.15);
+            --shadow-color: rgba(41, 108, 178, 0.1);
+            --hover-bg: rgba(41, 108, 178, 0.08);
             --menu-bg: rgba(255, 254, 248, 0.98);
-            --accent-color: var(--color-black);
+            --accent-color: var(--color-blue);
             --search-bg: rgba(255, 255, 255, 0.9);
-            --search-border: rgba(0, 0, 0, 0.15);
+            --search-border: rgba(41, 108, 178, 0.2);
             
             /* Layout - INCREASED HEADER HEIGHT */
             --border-radius: 8px;
@@ -68,20 +70,20 @@
         }
 
         [data-theme="dark"] {
-            /* Theme Variables - Dark */
+            /* Theme Variables - Dark with Blue Accent */
             --bg-color: var(--color-black);
             --header-bg: rgba(0, 0, 0, 0.98);
             --text-color: var(--color-white);
             --secondary-text: var(--color-gray-400);
-            --button-bg: var(--color-white);
-            --button-text: var(--color-black);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --shadow-color: rgba(255, 255, 255, 0.05);
-            --hover-bg: rgba(255, 255, 255, 0.1);
+            --button-bg: var(--color-blue-light);
+            --button-text: var(--color-white);
+            --border-color: rgba(74, 143, 212, 0.2);
+            --shadow-color: rgba(74, 143, 212, 0.15);
+            --hover-bg: rgba(74, 143, 212, 0.1);
             --menu-bg: rgba(0, 0, 0, 0.98);
-            --accent-color: var(--color-white);
+            --accent-color: var(--color-blue-light);
             --search-bg: rgba(30, 30, 30, 0.9);
-            --search-border: rgba(255, 255, 255, 0.15);
+            --search-border: rgba(74, 143, 212, 0.25);
         }
 
         /* 2. PERFORMANCE OPTIMIZATIONS */
@@ -151,16 +153,16 @@
             background: linear-gradient(135deg, 
                 rgba(255, 255, 255, 0.4) 0%, 
                 rgba(255, 254, 248, 0.2) 50%, 
-                rgba(0, 0, 0, 0.05) 100%);
+                rgba(41, 108, 178, 0.08) 100%);
             z-index: -1;
             pointer-events: none;
         }
 
         [data-theme="dark"] .glass-header::before {
             background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.1) 0%, 
-                rgba(255, 255, 255, 0.05) 50%, 
-                rgba(255, 255, 255, 0.02) 100%);
+                rgba(74, 143, 212, 0.1) 0%, 
+                rgba(74, 143, 212, 0.05) 50%, 
+                rgba(74, 143, 212, 0.02) 100%);
         }
 
         /* 4. INCREASED LOGO SIZE */
@@ -342,7 +344,7 @@
         .filter-group select:focus,
         .filter-group input:focus {
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 2px rgba(var(--accent-color), 0.1);
+            box-shadow: 0 0 0 2px rgba(41, 108, 178, 0.2);
         }
 
         .search-actions {
@@ -390,7 +392,7 @@
             transform: translateY(-1px);
         }
 
-        /* 7. ENHANCED DESKTOP NAVIGATION */
+        /* 7. ENHANCED DESKTOP NAVIGATION - Account moved to nav links */
         .desktop-nav {
             display: none;
             align-items: center;
@@ -424,7 +426,7 @@
         }
 
         .desktop-nav-links a:hover {
-            color: var(--secondary-text);
+            color: var(--accent-color);
         }
 
         .desktop-nav-links a.active {
@@ -465,7 +467,7 @@
         }
 
         .post-gig-trigger:hover {
-            color: var(--secondary-text);
+            color: var(--accent-color);
         }
 
         .dropdown-arrow {
@@ -544,11 +546,11 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height var(--transition-normal);
-            background: rgba(0, 0, 0, 0.02);
+            background: rgba(41, 108, 178, 0.03);
         }
 
         [data-theme="dark"] .post-gig-content {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(74, 143, 212, 0.05);
         }
 
         .post-gig-option.active .post-gig-content {
@@ -584,12 +586,12 @@
         }
 
         .post-gig-btn:hover {
-            opacity: 0.9;
+            background: var(--color-blue-dark);
             transform: translateY(-1px);
             box-shadow: var(--shadow-md);
         }
 
-        /* 9. OPTIMIZED THEME TOGGLE & LANGUAGE SELECTOR - WITH BORDERS */
+        /* 9. OPTIMIZED THEME TOGGLE & LANGUAGE SELECTOR - Now in navigation */
         .theme-toggle {
             background: none;
             border: 1px solid var(--border-color);
@@ -611,6 +613,7 @@
             background: var(--hover-bg);
             transform: scale(1.05);
             border-color: var(--accent-color);
+            color: var(--accent-color);
         }
 
         .light-icon { display: block; }
@@ -619,7 +622,7 @@
         [data-theme="dark"] .light-icon { display: none; }
         [data-theme="dark"] .dark-icon { display: block; }
 
-        /* 10. LANGUAGE SELECTOR - WITH BORDER AND SAME SIZE */
+        /* 10. LANGUAGE SELECTOR - In navigation */
         .language-selector {
             position: relative;
         }
@@ -648,6 +651,7 @@
             background: var(--hover-bg);
             transform: scale(1.05);
             border-color: var(--accent-color);
+            color: var(--accent-color);
         }
 
         .language-btn i {
@@ -797,16 +801,16 @@
         }
 
         .desktop-account-btn:hover {
-            background: var(--secondary-text);
+            background: var(--color-blue-dark);
             transform: translateY(-1px);
             box-shadow: var(--shadow-md);
         }
 
-        /* 11. ENHANCED MOBILE MENU - ICONS VISIBLE ALL THE TIME */
+        /* 11. ENHANCED MOBILE MENU - Icons moved to bottom */
         .hamburger-menu {
             display: flex;
             align-items: center;
-            gap: 8px; /* Better spacing */
+            gap: 8px;
         }
 
         @media (min-width: 901px) {
@@ -882,6 +886,7 @@
             padding-right: 10px;
             margin-right: -10px;
             scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
 
         .mobile-nav-content::-webkit-scrollbar {
@@ -988,11 +993,11 @@
             display: none;
             flex-direction: column;
             border-bottom: 1px solid var(--border-color);
-            background: rgba(0, 0, 0, 0.02);
+            background: rgba(41, 108, 178, 0.03);
         }
 
         [data-theme="dark"] .mobile-post-gig-options {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(74, 143, 212, 0.05);
         }
 
         .mobile-post-gig-options.active {
@@ -1073,7 +1078,7 @@
         }
 
         .mobile-post-gig-btn:hover {
-            opacity: 0.9;
+            background: var(--color-blue-dark);
             transform: translateY(-1px);
         }
 
@@ -1114,10 +1119,19 @@
         }
 
         .mobile-nav-btn:hover {
-            background: var(--hover-bg);
-            color: var(--text-color);
+            background: var(--color-blue-dark);
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
+        }
+
+        /* Mobile Navigation Icons at Bottom */
+        .mobile-nav-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
         }
 
         .menu-overlay {
@@ -1228,15 +1242,15 @@
         }
 
         .hero-primary-cta:hover {
-            opacity: 0.9;
+            background: var(--color-blue-dark);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
 
         .hero-secondary-cta {
             background: transparent;
-            color: var(--text-color);
-            border: 2px solid var(--text-color);
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
         }
 
         .hero-secondary-cta:hover {
@@ -1261,7 +1275,7 @@
 
         .hero-tagline strong {
             font-weight: 500;
-            color: var(--text-color);
+            color: var(--accent-color);
         }
 
         /* 13. BACK TO TOP BUTTON */
@@ -1294,7 +1308,7 @@
         }
 
         .back-to-top:hover {
-            background: var(--accent-color);
+            background: var(--color-blue-dark);
             transform: translateY(-5px);
             box-shadow: var(--shadow-xl);
         }
@@ -1619,11 +1633,10 @@
                 
                 <a href="#">How It Works</a>
                 <a href="#">About Us</a>
+                <a href="#" class="desktop-account-btn">Account</a>
                 <a href="#">Contact</a>
-            </div>
-            
-            <div style="display: flex; align-items: center; gap: 4px;">
-                <!-- Language Selector - Desktop -->
+                
+                <!-- Icons moved to navigation -->
                 <div class="language-selector" id="languageSelector">
                     <button class="language-btn" id="languageBtn" aria-label="Change language">
                         <i class="fas fa-globe"></i>
@@ -1665,55 +1678,11 @@
                     <i class="fas fa-sun light-icon"></i>
                     <i class="fas fa-moon dark-icon"></i>
                 </button>
-                
-                <button class="desktop-account-btn">Account</button>
             </div>
         </nav>
 
-        <!-- Mobile Menu Toggle - Icons visible all the time -->
+        <!-- Mobile Menu Toggle - Only hamburger visible -->
         <div class="hamburger-menu">
-            <!-- Language Selector on Mobile -->
-            <div class="language-selector" id="languageSelectorMobile">
-                <button class="language-btn" id="languageBtnMobile" aria-label="Change language">
-                    <i class="fas fa-globe"></i>
-                </button>
-                <div class="language-dropdown" id="languageDropdownMobile">
-                    <div class="language-option active" data-lang="en">
-                        <span>English</span>
-                        <i class="fas fa-check check-icon"></i>
-                    </div>
-                    <div class="language-option" data-lang="af">
-                        <span>Afrikaans</span>
-                        <i class="fas fa-check check-icon"></i>
-                    </div>
-                    <div class="language-option" data-lang="nso">
-                        <span>Sesotho sa Leboa (Sepedi)</span>
-                        <i class="fas fa-check check-icon"></i>
-                    </div>
-                    <div class="language-option" data-lang="zu">
-                        <span>isiZulu</span>
-                        <i class="fas fa-check check-icon"></i>
-                    </div>
-                    <div class="language-option" data-lang="ve">
-                        <span>Tshivenda</span>
-                        <i class="fas fa-check check-icon"></i>
-                    </div>
-                    <div class="language-option" data-lang="ts">
-                        <span>Xitsonga</span>
-                        <i class="fas fa-check check-icon"></i>
-                    </div>
-                    <div class="language-option" data-lang="xh">
-                        <span>isiXhosa</span>
-                        <i class="fas fa-check check-icon"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle theme">
-                <i class="fas fa-sun light-icon"></i>
-                <i class="fas fa-moon dark-icon"></i>
-            </button>
-            
             <button class="hamburger" id="hamburger" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
@@ -1823,6 +1792,50 @@
                 <a href="#">How It Works</a>
                 <a href="#">Fees</a>
                 <a href="#">Contact</a>
+            </div>
+            
+            <!-- Mobile Navigation Icons at Bottom -->
+            <div class="mobile-nav-icons">
+                <div class="language-selector" id="languageSelectorMobile">
+                    <button class="language-btn" id="languageBtnMobile" aria-label="Change language">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <div class="language-dropdown" id="languageDropdownMobile">
+                        <div class="language-option active" data-lang="en">
+                            <span>English</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="af">
+                            <span>Afrikaans</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="nso">
+                            <span>Sesotho sa Leboa (Sepedi)</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="zu">
+                            <span>isiZulu</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="ve">
+                            <span>Tshivenda</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="ts">
+                            <span>Xitsonga</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="language-option" data-lang="xh">
+                            <span>isiXhosa</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle theme">
+                    <i class="fas fa-sun light-icon"></i>
+                    <i class="fas fa-moon dark-icon"></i>
+                </button>
             </div>
         </div>
         
@@ -2367,7 +2380,7 @@
             const desktopLinks = document.querySelectorAll('.desktop-nav-links a');
             desktopLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
-                    if (!this.classList.contains('post-gig-trigger')) {
+                    if (!this.classList.contains('post-gig-trigger') && !this.classList.contains('desktop-account-btn')) {
                         desktopLinks.forEach(l => l.classList.remove('active'));
                         this.classList.add('active');
                     }

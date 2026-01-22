@@ -23,35 +23,21 @@
 
     /* ---------------- UPDATED COLOR VARIABLES ---------------- */
     :root {
-        --bg-color: #FFCF5C; /* Updated background color */
-        --header-bg: #096AA8; /* Updated header color */
-        --text-color: #000000;
-        --secondary-text: #666666;
-        --button-bg: #000000;
-        --button-text: #ffffff;
-        --border-color: rgba(0, 0, 0, 0.1);
-        --shadow-color: rgba(0, 0, 0, 0.05);
-        --hover-bg: rgba(0, 0, 0, 0.05);
-        --menu-bg: #096AA8; /* Updated menu background */
-        --accent-color: #000000;
-        --search-bg: rgba(255, 255, 255, 0.9);
-        --search-border: rgba(0, 0, 0, 0.15);
-    }
-
-    [data-theme="dark"] {
-        --bg-color: #000000;
-        --header-bg: #096AA8; /* Keep blue header in dark mode */
-        --text-color: #ffffff;
-        --secondary-text: #cccccc;
-        --button-bg: #ffffff;
-        --button-text: #000000;
-        --border-color: rgba(255, 255, 255, 0.1);
-        --shadow-color: rgba(255, 255, 255, 0.05);
-        --hover-bg: rgba(255, 255, 255, 0.1);
-        --menu-bg: #096AA8; /* Keep blue menu in dark mode */
-        --accent-color: #ffffff;
-        --search-bg: rgba(30, 30, 30, 0.9);
-        --search-border: rgba(255, 255, 255, 0.15);
+        --bg-color: #FFFCF5; /* Cream white background */
+        --header-bg: #096AA8; /* Blue header */
+        --text-color: #096AA8; /* Blue text */
+        --secondary-text: #096AA8; /* Blue secondary text */
+        --button-bg: #096AA8; /* Blue button */
+        --button-text: #FFFFFF; /* White button text */
+        --outline-button-border: #096AA8; /* Blue outline */
+        --outline-button-text: #096AA8; /* Blue text */
+        --border-color: rgba(9, 106, 168, 0.2); /* Light blue border */
+        --shadow-color: rgba(9, 106, 168, 0.1); /* Light blue shadow */
+        --hover-bg: rgba(9, 106, 168, 0.05); /* Light blue hover */
+        --menu-bg: #FFFFFF; /* White menu background */
+        --accent-color: #096AA8; /* Blue accent */
+        --search-bg: rgba(255, 255, 255, 0.95); /* White search background */
+        --search-border: rgba(9, 106, 168, 0.3); /* Blue search border */
     }
 
     /* Apply theme variables */
@@ -61,15 +47,13 @@
         transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    /* ---------------- GLASSMORPHISM HEADER (UPDATED COLORS) ---------------- */
+    /* ---------------- HEADER (UPDATED COLORS) ---------------- */
     .glass-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         background: var(--header-bg);
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        color: #ffffff; /* White text on blue header */
+        color: #ffffff;
         height: 80px;
         padding: 0 28px;
         width: 100%;
@@ -77,11 +61,11 @@
         top: 0;
         left: 0;
         z-index: 1000;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 30px rgba(9, 106, 168, 0.2);
         transition: all 0.3s ease;
     }
 
-    /* Remove gradient for solid blue */
+    /* Solid blue header */
     .glass-header::before {
         content: '';
         position: absolute;
@@ -94,25 +78,20 @@
         border-radius: 0;
     }
 
-    [data-theme="dark"] .glass-header::before {
-        background: #096AA8;
-    }
-
     /* ---------------- LOGO - "gigtabi" with Unbounded Font ---------------- */
     .logo {
         font-family: 'Unbounded', sans-serif;
         font-size: 3.5rem;
         font-weight: 900;
         letter-spacing: -1px;
-        color: #ffffff; /* White logo on blue header */
+        color: #ffffff;
         transition: color 0.3s ease;
         line-height: 1;
     }
 
-    /* ---------------- ADVANCED SEARCH BAR - FIXED ---------------- */
+    /* ---------------- FULL WIDTH SEARCH BAR ---------------- */
     .search-container {
         flex: 1;
-        max-width: 500px;
         margin: 0 40px;
         position: relative;
     }
@@ -120,28 +99,28 @@
     .search-bar {
         display: flex;
         align-items: center;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.95);
         border: 1px solid rgba(255, 255, 255, 0.3);
         border-radius: 0;
         padding: 0;
         height: 42px;
         transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
+        width: 100%;
     }
 
     .search-bar:hover {
         border-color: #ffffff;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .search-bar.active {
         border-color: #ffffff;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .search-icon {
         padding: 0 15px;
-        color: #666666;
+        color: #096AA8;
         font-size: 1rem;
     }
 
@@ -149,25 +128,25 @@
         flex: 1;
         border: none;
         background: transparent;
-        color: #000000;
+        color: #096AA8;
         font-family: 'Unbounded', sans-serif;
         font-size: 0.9rem;
         font-weight: 300;
         padding: 0;
         outline: none;
         height: 100%;
-        min-width: 150px;
+        width: 100%;
     }
 
     .search-input::placeholder {
-        color: #666666;
-        opacity: 0.7;
+        color: #096AA8;
+        opacity: 0.6;
     }
 
     .advanced-filter-btn {
         background: transparent;
         border: none;
-        color: #666666;
+        color: #096AA8;
         padding: 0 15px;
         height: 100%;
         cursor: pointer;
@@ -178,34 +157,33 @@
         font-size: 0.8rem;
         font-weight: 300;
         transition: all 0.3s ease;
-        border-left: 1px solid rgba(0, 0, 0, 0.1);
+        border-left: 1px solid rgba(9, 106, 168, 0.2);
         white-space: nowrap;
     }
 
     .advanced-filter-btn:hover {
-        color: #000000;
-        background: rgba(0, 0, 0, 0.05);
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.2);
     }
 
     .advanced-filter-btn i {
         font-size: 0.9rem;
     }
 
-    /* Advanced Filters Dropdown - FIXED POSITIONING */
+    /* Advanced Filters Dropdown - WHITE BACKGROUND */
     .advanced-filters {
         position: absolute;
         top: calc(100% + 5px);
         left: 0;
         right: 0;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(20px) saturate(180%);
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: #ffffff;
+        border: 1px solid rgba(9, 106, 168, 0.2);
         padding: 20px;
         display: none;
         grid-template-columns: repeat(3, 1fr);
         gap: 15px;
         z-index: 1001;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         min-width: 400px;
     }
 
@@ -223,14 +201,14 @@
         font-family: 'Unbounded', sans-serif;
         font-size: 0.8rem;
         font-weight: 500;
-        color: #000000;
+        color: #096AA8;
     }
 
     .filter-group select,
     .filter-group input {
-        background: rgba(255, 255, 255, 0.9);
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        color: #000000;
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(9, 106, 168, 0.2);
+        color: #096AA8;
         padding: 8px 12px;
         font-family: 'Unbounded', sans-serif;
         font-size: 0.85rem;
@@ -251,7 +229,7 @@
         gap: 10px;
         margin-top: 10px;
         padding-top: 15px;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-top: 1px solid rgba(9, 106, 168, 0.1);
     }
 
     .search-btn {
@@ -274,8 +252,8 @@
 
     .reset-btn {
         background: transparent;
-        color: #000000;
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        color: #096AA8;
+        border: 1px solid rgba(9, 106, 168, 0.2);
         padding: 8px 20px;
         font-family: 'Unbounded', sans-serif;
         font-size: 0.85rem;
@@ -286,51 +264,7 @@
     }
 
     .reset-btn:hover {
-        background: rgba(0, 0, 0, 0.05);
-    }
-
-    /* ---------------- THEME TOGGLE ---------------- */
-    .theme-toggle {
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 1.4rem;
-        color: #ffffff; /* White on blue header */
-        padding: 8px;
-        margin-right: 15px;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-    }
-
-    .theme-toggle:hover {
-        background: rgba(255, 255, 255, 0.1);
-        transform: scale(1.1);
-    }
-
-    .theme-toggle i {
-        transition: transform 0.3s ease;
-    }
-
-    /* Hide/show icons based on theme */
-    .light-icon {
-        display: block;
-    }
-
-    .dark-icon {
-        display: none;
-    }
-
-    [data-theme="dark"] .light-icon {
-        display: none;
-    }
-
-    [data-theme="dark"] .dark-icon {
-        display: block;
+        background: rgba(9, 106, 168, 0.05);
     }
 
     /* ---------------- DESKTOP NAVIGATION - FIXED ---------------- */
@@ -351,7 +285,7 @@
 
     .desktop-nav-links a {
         text-decoration: none;
-        color: #ffffff; /* White text on blue header */
+        color: #ffffff;
         font-family: 'Unbounded', sans-serif;
         font-size: 0.9rem;
         font-weight: 400;
@@ -382,7 +316,7 @@
         background: #ffffff;
     }
 
-    /* Post Gig Dropdown - FIXED */
+    /* Post Gig Dropdown - WHITE BACKGROUND */
     .post-gig-dropdown {
         position: relative;
     }
@@ -395,7 +329,7 @@
         font-family: 'Unbounded', sans-serif;
         font-size: 0.9rem;
         font-weight: 400;
-        color: #ffffff; /* White text on blue header */
+        color: #ffffff;
         padding: 8px 0;
         position: relative;
         white-space: nowrap;
@@ -421,12 +355,11 @@
         top: calc(100% + 10px);
         left: 50%;
         transform: translateX(-50%);
-        background: #096AA8;
-        backdrop-filter: blur(20px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: #ffffff;
+        border: 1px solid rgba(9, 106, 168, 0.2);
         min-width: 300px;
         z-index: 1002;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         display: none;
     }
 
@@ -435,7 +368,7 @@
     }
 
     .post-gig-option {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgba(9, 106, 168, 0.1);
         transition: all 0.3s ease;
     }
 
@@ -452,7 +385,7 @@
         font-family: 'Unbounded', sans-serif;
         font-size: 0.9rem;
         font-weight: 500;
-        color: #ffffff;
+        color: #096AA8;
         transition: all 0.3s ease;
         background: transparent;
         border: none;
@@ -461,26 +394,26 @@
     }
 
     .post-gig-header:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: #ffffff;
+        background: rgba(9, 106, 168, 0.05);
+        color: #096AA8;
     }
 
     .post-gig-header i {
         font-size: 0.8rem;
         transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        color: rgba(255, 255, 255, 0.8);
+        color: #096AA8;
     }
 
     .post-gig-option.active .post-gig-header i {
         transform: rotate(180deg);
-        color: #ffffff;
+        color: #096AA8;
     }
 
     .post-gig-content {
         max-height: 0;
         overflow: hidden;
         transition: all 0.3s ease;
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(9, 106, 168, 0.02);
     }
 
     .post-gig-option.active .post-gig-content {
@@ -489,20 +422,21 @@
 
     .post-gig-content-inner {
         padding: 20px;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        border-top: 1px solid rgba(9, 106, 168, 0.1);
     }
 
     .post-gig-content p {
         font-family: 'Unbounded', sans-serif;
         font-size: 0.85rem;
         line-height: 1.5;
-        color: rgba(255, 255, 255, 0.8);
+        color: #096AA8;
+        opacity: 0.8;
         margin-bottom: 15px;
     }
 
     .post-gig-btn {
-        background: #ffffff;
-        color: #096AA8;
+        background: #096AA8;
+        color: #ffffff;
         border: none;
         padding: 10px 20px;
         font-family: 'Unbounded', sans-serif;
@@ -516,10 +450,9 @@
     }
 
     .post-gig-btn:hover {
-        background: #FFCF5C;
-        color: #000000;
+        opacity: 0.9;
         transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 12px rgba(9, 106, 168, 0.2);
     }
 
     .desktop-account-btn {
@@ -543,13 +476,12 @@
     }
 
     .desktop-account-btn:hover {
-        background: #FFCF5C;
-        color: #000000;
+        background: rgba(255, 255, 255, 0.9);
         transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    /* ---------------- HAMBURGER MENU (Right Side - THIN LINES) ---------------- */
+    /* ---------------- HAMBURGER MENU (Right Side) ---------------- */
     .hamburger-menu {
         display: flex;
         align-items: center;
@@ -571,7 +503,7 @@
     .hamburger span {
         height: 1.5px;
         width: 100%;
-        background: #ffffff; /* White lines on blue header */
+        background: #ffffff;
         transition: 0.3s ease;
     }
 
@@ -587,17 +519,15 @@
         transform: rotate(-45deg) translate(4px, -4px);
     }
 
-    /* ---------------- MOBILE MENU (LEFT SIDE) - KEEP ORIGINAL LINKS ---------------- */
+    /* ---------------- MOBILE MENU (LEFT SIDE) - WHITE BACKGROUND ---------------- */
     .mobile-nav {
         position: fixed;
         top: 0;
         left: 0;
         width: 320px;
         height: 100vh;
-        background: #096AA8;
-        backdrop-filter: blur(25px) saturate(180%);
-        -webkit-backdrop-filter: blur(25px) saturate(180%);
-        box-shadow: 10px 0 40px rgba(0, 0, 0, 0.3);
+        background: #ffffff;
+        box-shadow: 10px 0 40px rgba(0, 0, 0, 0.1);
         z-index: 999;
         padding: 120px 30px 40px 30px;
         transform: translateX(-100%);
@@ -609,17 +539,6 @@
         transform: translateX(0);
     }
 
-    .mobile-nav::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: #096AA8;
-        z-index: -1;
-    }
-
     .mobile-nav-links {
         display: flex;
         flex-direction: column;
@@ -628,7 +547,7 @@
 
     .mobile-nav-links a {
         text-decoration: none;
-        color: #ffffff;
+        color: #096AA8;
         font-family: 'Unbounded', sans-serif;
         font-size: 1.1rem;
         font-weight: 400;
@@ -637,20 +556,21 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgba(9, 106, 168, 0.1);
     }
 
     .mobile-nav-links a:hover {
-        color: rgba(255, 255, 255, 0.8);
+        color: #096AA8;
         padding-left: 5px;
+        background: rgba(9, 106, 168, 0.05);
     }
 
-    /* Mobile Post Gig Dropdown - FIXED */
+    /* Mobile Post Gig Dropdown - WHITE BACKGROUND */
     .mobile-post-gig-options {
         display: none;
         flex-direction: column;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        background: rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(9, 106, 168, 0.1);
+        background: rgba(9, 106, 168, 0.02);
     }
 
     .mobile-post-gig-options.active {
@@ -659,7 +579,7 @@
 
     .mobile-post-gig-option {
         padding-left: 20px;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        border-top: 1px solid rgba(9, 106, 168, 0.1);
     }
 
     .mobile-post-gig-header {
@@ -671,7 +591,7 @@
         font-family: 'Unbounded', sans-serif;
         font-size: 1rem;
         font-weight: 400;
-        color: #ffffff;
+        color: #096AA8;
         transition: all 0.3s ease;
         background: transparent;
         border: none;
@@ -680,18 +600,19 @@
     }
 
     .mobile-post-gig-header:hover {
-        color: rgba(255, 255, 255, 0.8);
+        color: #096AA8;
+        background: rgba(9, 106, 168, 0.05);
     }
 
     .mobile-post-gig-header i {
         font-size: 0.9rem;
         transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        color: rgba(255, 255, 255, 0.8);
+        color: #096AA8;
     }
 
     .mobile-post-gig-option.active .mobile-post-gig-header i {
         transform: rotate(180deg);
-        color: #ffffff;
+        color: #096AA8;
     }
 
     .mobile-post-gig-content {
@@ -710,14 +631,15 @@
         font-family: 'Unbounded', sans-serif;
         font-size: 0.9rem;
         line-height: 1.5;
-        color: rgba(255, 255, 255, 0.8);
+        color: #096AA8;
+        opacity: 0.8;
         margin-bottom: 15px;
         padding: 0 5px;
     }
 
     .mobile-post-gig-btn {
-        background: #ffffff;
-        color: #096AA8;
+        background: #096AA8;
+        color: #ffffff;
         border: none;
         padding: 12px 20px;
         font-family: 'Unbounded', sans-serif;
@@ -732,8 +654,7 @@
     }
 
     .mobile-post-gig-btn:hover {
-        background: #FFCF5C;
-        color: #000000;
+        opacity: 0.9;
     }
 
     /* Last item no border */
@@ -743,9 +664,9 @@
 
     .mobile-nav-btn {
         margin-top: 40px;
-        background: #ffffff;
-        color: #096AA8;
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: #096AA8;
+        color: #ffffff;
+        border: 1px solid rgba(9, 106, 168, 0.2);
         height: 52px;
         width: 100%;
         font-family: 'Unbounded', sans-serif;
@@ -760,16 +681,15 @@
     }
 
     .mobile-nav-btn:hover {
-        background: #FFCF5C;
-        color: #000000;
+        opacity: 0.9;
         transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 15px rgba(9, 106, 168, 0.2);
     }
 
     /* Mobile Search */
     .mobile-search {
         padding: 0 30px 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgba(9, 106, 168, 0.1);
         margin-bottom: 20px;
         display: none;
     }
@@ -799,14 +719,14 @@
         display: block;
     }
 
-    /* ---------------- HERO SECTION - WITH UPDATED COLORS ---------------- */
+    /* ---------------- HERO SECTION - CREAM WHITE BACKGROUND ---------------- */
     .hero-section {
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 40px 20px;
-        background: #FFCF5C; /* Yellow background */
+        background: #FFFCF5; /* Cream white */
         text-align: center;
         font-family: 'Unbounded', sans-serif !important;
         margin-top: 0;
@@ -823,7 +743,7 @@
         font-family: 'Unbounded', sans-serif !important;
         font-size: 5.5rem;
         font-weight: 800;
-        color: #000000;
+        color: #096AA8; /* Blue text */
         line-height: 1.1;
         margin-bottom: 32px;
         letter-spacing: -2px;
@@ -833,7 +753,7 @@
     .hero-subheadline {
         font-family: 'Unbounded', sans-serif;
         font-size: 1.4rem;
-        color: #000000;
+        color: #096AA8; /* Blue text */
         line-height: 1.5;
         margin-bottom: 60px;
         font-weight: 300;
@@ -856,11 +776,11 @@
         margin-right: auto;
     }
 
-    /* Hero Tagline - UPDATED */
+    /* Hero Tagline */
     .hero-tagline {
         font-family: 'Unbounded', sans-serif;
         font-size: 1rem;
-        color: #000000;
+        color: #096AA8; /* Blue text */
         font-weight: 300;
         margin-top: 20px;
         line-height: 1.4;
@@ -868,13 +788,13 @@
         margin-left: auto;
         margin-right: auto;
         padding: 15px;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-top: 1px solid rgba(9, 106, 168, 0.2);
         opacity: 0.8;
     }
 
     .hero-tagline strong {
         font-weight: 500;
-        color: #000000;
+        color: #096AA8;
     }
 
     /* Primary CTA Button - FULL WIDTH */
@@ -897,16 +817,16 @@
     }
 
     .hero-primary-cta:hover {
-        background: #085792;
+        opacity: 0.9;
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 20px rgba(9, 106, 168, 0.2);
     }
 
-    /* Secondary CTA Button - FULL WIDTH */
+    /* Secondary CTA Button - BLUE OUTLINE, TRANSPARENT BACKGROUND - FULL WIDTH */
     .hero-secondary-cta {
         background: transparent;
-        color: #000000;
-        border: 2px solid #000000;
+        color: #096AA8; /* Blue text */
+        border: 2px solid #096AA8; /* Blue border */
         padding: 22px 48px;
         font-family: 'Unbounded', sans-serif;
         font-size: 1.2rem;
@@ -922,9 +842,9 @@
     }
 
     .hero-secondary-cta:hover {
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(9, 106, 168, 0.05); /* Light blue on hover */
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 20px rgba(9, 106, 168, 0.1);
     }
 
     /* ---------------- RESPONSIVE ---------------- */
@@ -964,7 +884,6 @@
         }
         
         .search-container {
-            max-width: 400px;
             margin: 0 30px;
         }
         
@@ -991,7 +910,6 @@
         }
         
         .search-container {
-            max-width: 350px;
             margin: 0 20px;
         }
     }
@@ -1027,11 +945,6 @@
         
         .logo {
             font-size: 2.5rem;
-        }
-        
-        .theme-toggle {
-            font-size: 1.2rem;
-            margin-right: 10px;
         }
         
         .desktop-nav {
@@ -1136,11 +1049,6 @@
             font-size: 2.2rem;
         }
         
-        .theme-toggle {
-            font-size: 1.1rem;
-            margin-right: 8px;
-        }
-        
         .mobile-nav {
             width: 90%;
             padding: 90px 20px 30px 20px;
@@ -1187,7 +1095,7 @@
     <!-- LEFT: Logo -->
     <div class="logo">gigtabi</div>
     
-    <!-- CENTER: Search Bar - FIXED -->
+    <!-- CENTER: Search Bar - FULL WIDTH -->
     <div class="search-container">
         <div class="search-bar" id="searchBar">
             <div class="search-icon">
@@ -1200,7 +1108,7 @@
             </button>
         </div>
         
-        <!-- Advanced Filters Dropdown - FIXED -->
+        <!-- Advanced Filters Dropdown - WHITE BACKGROUND -->
         <div class="advanced-filters" id="advancedFilters">
             <div class="filter-group">
                 <label for="province">Province</label>
@@ -1254,7 +1162,7 @@
                     <i class="fas fa-chevron-down dropdown-arrow"></i>
                 </div>
                 
-                <!-- Post Gig Options -->
+                <!-- Post Gig Options - WHITE BACKGROUND -->
                 <div class="post-gig-options">
                     <div class="post-gig-option" id="businessOption">
                         <button class="post-gig-header">
@@ -1294,27 +1202,15 @@
             <a href="#">Contact</a>
         </div>
         
-        <!-- Right side: Theme toggle and Account button -->
+        <!-- Right side: Account button only (theme toggle removed) -->
         <div style="display: flex; align-items: center; gap: 10px;">
-            <!-- Theme Toggle Button -->
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                <i class="fas fa-sun light-icon"></i>
-                <i class="fas fa-moon dark-icon"></i>
-            </button>
-            
             <!-- Account button -->
             <button class="desktop-account-btn">Account</button>
         </div>
     </nav>
 
-    <!-- RIGHT: Theme toggle (mobile) and Hamburger menu -->
+    <!-- RIGHT: Hamburger menu only (theme toggle removed) -->
     <div class="hamburger-menu">
-        <!-- Theme Toggle Button for Mobile -->
-        <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle theme">
-            <i class="fas fa-sun light-icon"></i>
-            <i class="fas fa-moon dark-icon"></i>
-        </button>
-        
         <!-- Hamburger Menu -->
         <button class="hamburger" id="hamburger">
             <span></span>
@@ -1324,7 +1220,7 @@
     </div>
 </header>
 
-<!-- Mobile Navigation Menu (LEFT SIDE) - KEEP ORIGINAL LINKS -->
+<!-- Mobile Navigation Menu (LEFT SIDE) - WHITE BACKGROUND -->
 <div class="mobile-nav" id="mobileNav">
     <!-- Mobile Search -->
     <div class="mobile-search">
@@ -1344,7 +1240,7 @@
         <!-- Post Gig with Dropdown -->
         <a href="#" id="mobilePostGigTrigger">Post Gig <i class="fas fa-chevron-down"></i></a>
         
-        <!-- Mobile Post Gig Options -->
+        <!-- Mobile Post Gig Options - WHITE BACKGROUND -->
         <div class="mobile-post-gig-options" id="mobilePostGigOptions">
             <div class="mobile-post-gig-option" id="mobileBusinessOption">
                 <button class="mobile-post-gig-header">
@@ -1390,7 +1286,7 @@
 <!-- Overlay for when menu is open -->
 <div class="menu-overlay" id="menuOverlay"></div>
 
-<!-- Hero Section - Simple and Clean -->
+<!-- Hero Section - Cream White Background -->
 <section class="hero-section">
     <div class="hero-content">
         <!-- Headline - Now using Unbounded font like logo -->
@@ -1411,13 +1307,13 @@
                 How it works
             </a>
             
-            <!-- Secondary CTA Button -->
+            <!-- Secondary CTA Button - BLUE OUTLINE -->
             <a href="#" class="hero-secondary-cta">
                 Join gigtabi
             </a>
         </div>
         
-        <!-- Hero Tagline - UPDATED -->
+        <!-- Hero Tagline -->
         <p class="hero-tagline">
             <strong>Risk-free</strong> • Made for your community • Trusted by neighbours & businesses
         </p>
@@ -1469,35 +1365,6 @@
             document.body.style.overflow = '';
         }
     });
-
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('themeToggle');
-    const themeToggleMobile = document.getElementById('themeToggleMobile');
-    const body = document.body;
-
-    // Check for saved theme or prefer-color-scheme
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    const currentTheme = localStorage.getItem('theme');
-
-    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
-        body.setAttribute('data-theme', 'dark');
-    }
-
-    // Toggle theme function
-    function toggleTheme() {
-        const currentTheme = body.getAttribute('data-theme');
-        if (currentTheme === 'dark') {
-            body.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-        } else {
-            body.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-        }
-    }
-
-    // Add event listeners to both theme toggle buttons
-    themeToggle.addEventListener('click', toggleTheme);
-    themeToggleMobile.addEventListener('click', toggleTheme);
     
     // Enhanced sticky header effect
     window.addEventListener('scroll', () => {
@@ -1505,13 +1372,9 @@
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
         if (scrollTop > 10) {
-            header.style.backdropFilter = 'blur(25px) saturate(180%)';
-            header.style.webkitBackdropFilter = 'blur(25px) saturate(180%)';
-            header.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
+            header.style.boxShadow = '0 8px 32px rgba(9, 106, 168, 0.3)';
         } else {
-            header.style.backdropFilter = 'blur(20px) saturate(180%)';
-            header.style.webkitBackdropFilter = 'blur(20px) saturate(180%)';
-            header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.2)';
+            header.style.boxShadow = '0 4px 30px rgba(9, 106, 168, 0.2)';
         }
     });
 
@@ -1546,7 +1409,7 @@
         });
     });
 
-    // Advanced Search Functionality - FIXED
+    // Advanced Search Functionality
     const searchBar = document.getElementById('searchBar');
     const searchInput = document.getElementById('searchInput');
     const advancedFilterBtn = document.getElementById('advancedFilterBtn');
@@ -1564,7 +1427,7 @@
         document.getElementById('postGigDropdown').classList.remove('active');
     });
     
-    // Close filters when clicking outside - FIXED
+    // Close filters when clicking outside
     document.addEventListener('click', (e) => {
         if (!searchBar.contains(e.target) && !advancedFilters.contains(e.target)) {
             searchBar.classList.remove('active');
@@ -1623,13 +1486,13 @@
         }
     });
     
-    // Desktop Post Gig Dropdown Functionality - FIXED
+    // Desktop Post Gig Dropdown Functionality
     const postGigDropdown = document.getElementById('postGigDropdown');
     const postGigTrigger = document.getElementById('postGigTrigger');
     const businessOption = document.getElementById('businessOption');
     const householdOption = document.getElementById('householdOption');
     
-    // Toggle dropdown - FIXED: prevent navigation menu from closing
+    // Toggle dropdown
     postGigTrigger.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -1640,7 +1503,7 @@
         advancedFilters.classList.remove('active');
     });
     
-    // Toggle individual collapsibles - FIXED
+    // Toggle individual collapsibles
     function toggleCollapsible(option) {
         const isActive = option.classList.contains('active');
         
@@ -1666,13 +1529,13 @@
         toggleCollapsible(householdOption);
     });
     
-    // Mobile Post Gig Functionality - FIXED
+    // Mobile Post Gig Functionality
     const mobilePostGigTrigger = document.getElementById('mobilePostGigTrigger');
     const mobilePostGigOptions = document.getElementById('mobilePostGigOptions');
     const mobileBusinessOption = document.getElementById('mobileBusinessOption');
     const mobileHouseholdOption = document.getElementById('mobileHouseholdOption');
     
-    // Toggle mobile post gig options - FIXED
+    // Toggle mobile post gig options
     mobilePostGigTrigger.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -1683,7 +1546,7 @@
         arrow.style.transform = mobilePostGigOptions.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
     });
     
-    // Toggle mobile collapsibles - FIXED
+    // Toggle mobile collapsibles
     function toggleMobileCollapsible(option) {
         const isActive = option.classList.contains('active');
         
